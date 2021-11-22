@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
-import About from '@/views/About.vue'
+import Index from '@/views/Index.vue'
 import ShoppingBag from '@/views/ShoppingBag.vue'
 import Like from '@/views/Like.vue'
 import MyPage from '@/views/MyPage.vue'
@@ -16,9 +16,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
+    path: '/index',
+    name: 'Index',
+    component: Index
   },
   {
     path: '/shoppingbag',
@@ -30,6 +30,7 @@ const routes = [
     name: 'Like',
     component: Like
   },
+  // My Page
   {
     path: '/mypage',
     name: 'MyPage',

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>상품리스트 페이지입니다.</h1>
+    <h3 class="my-5">Category > {{ category }}</h3>
     <ProductList/>
   </div>
 </template>
@@ -12,7 +12,12 @@ export default {
   name: 'Product',
   components: {
     ProductList,
-  }
+  },
+  computed: {
+    category: function() {
+      return this.$store.state.category
+    }
+  },
 }
 </script>
 

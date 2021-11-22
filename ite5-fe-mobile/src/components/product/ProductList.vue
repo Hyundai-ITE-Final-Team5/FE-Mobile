@@ -1,6 +1,11 @@
 <template>
   <div>
-    <ProductListItem/>
+    <ProductListItem
+      v-for="(product, idx) in getProducts"
+      :key="idx"
+      :product="product"
+      :idx="idx"
+    />
   </div>
 </template>
 
@@ -11,7 +16,12 @@ export default {
   name: 'ProductList',
   components: {
     ProductListItem,
-  }
+  },
+  computed: {
+    getProducts: function() {
+      return this.$store.state.products
+    }
+  },
 }
 </script>
 
