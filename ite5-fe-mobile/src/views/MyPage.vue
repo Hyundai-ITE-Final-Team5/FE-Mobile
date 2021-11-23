@@ -1,6 +1,30 @@
 <template>
   <div>
-    <h1>My Page</h1>
+    <div class="d-flex ms-3 justify-content-between">
+      <div class="d-flex">
+        <h3>🏆</h3>
+        <h3>&nbsp;</h3>
+        <h3 style="text-decoration: underline;">username</h3>
+        <h3>&nbsp; 님</h3>
+      </div>
+      <img src="@/assets/question.png" alt="" style="width: 30px; height:26px; opacity: 0.3;">
+    </div>
+    <div class="d-flex justify-content-center">
+      <hr class="col-10">
+    </div>
+    <div class="d-flex  mt-3">
+      <h5 class="ms-5">• 마일리지 :&nbsp;&nbsp;</h5>
+      <h5>12345</h5>
+      <h5>&nbsp;P</h5>
+    </div>
+    <div class="d-flex  mt-3">
+      <h5 class="ms-5">• 이용금액 :&nbsp;&nbsp;</h5>
+      <h5>1000000</h5>
+      <h5>&nbsp;원</h5>
+    </div>
+    <div class="d-flex justify-content-center">
+      <hr class="col-10">
+    </div>
     <div class="d-flex justify-content-center mt-4 text-center">
       <h5 class="col-3" @click="showOrderHistory">주문내역</h5>
       <h5 class="col-3" @click="showUserInfo">내 정보</h5>
