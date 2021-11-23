@@ -58,7 +58,7 @@ export default {
       const userInfoId = document.getElementById('userInfoId')
       const couponId = document.getElementById('couponId')
       const mypageStatusBarId = document.getElementById('mypageStatusBar')
-      if (orderHistoryId.style.display == 'none') {
+      if (couponId.style.display == 'none') {
         orderHistoryId.style.display = 'none'
         userInfoId.style.display = 'none'
         couponId.style.display = 'block'

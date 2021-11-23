@@ -6,6 +6,8 @@ import ShoppingBag from '@/views/ShoppingBag.vue'
 import Like from '@/views/Like.vue'
 import MyPage from '@/views/MyPage.vue'
 import Product from '@/views/Product.vue'
+import ProductDetail from '@/views/ProductDetail.vue'
+import Order from '@/views/Order.vue'
 
 Vue.use(VueRouter)
 
@@ -40,6 +42,16 @@ const routes = [
     path: '/product',
     name: 'Product',
     component: Product
+  },
+  {
+    path: '/productdetail',
+    name: 'ProductDetail',
+    component: ProductDetail
+  },
+  {
+    path: '/order',
+    name: 'Order',
+    component: Order
   },
 ]
 
