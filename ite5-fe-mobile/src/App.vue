@@ -8,20 +8,31 @@
           </div>
           <h4 class="pt-1"><a href="/" class="text-decoration-none">HANDSOME</a></h4>
           <div class="d-flex">
-            <a href="/shoppingbag"><img src="@/assets/shoppingbag.png" alt=""></a>
-            <div style="font-size: 1em; padding-top: 4px;">(0)</div>
+            <a href="/shoppingbag"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.6;"></a>
+            <!-- <div style="font-size: 1em; padding-top: 4px;">(0)</div> -->
           </div>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3">
+              <li>
+                <h3>Search</h3>
+                <form class="d-flex my-3 ">
+                  <input class="form-control me-2" type="search" aria-label="Search">
+                  <button class="btn" type="submit"><img src="@/assets/search.png" alt="" style="width: 24px;"></button>
+                </form>
+              </li>
+              <hr>
               <li class="nav-item">
                 <div @click="closeMenuHome" class="text-decoration-none fs-4" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">Home</div>
               </li>
+              <hr>
               <li class="nav-item">
                 <div @click="closeMenuIndex" class="text-decoration-none fs-4" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">Index</div>
               </li>
+              <hr>
               <li class="nav-item">
-                <div @click="closeMenuMyPage" class="text-decoration-none fs-4" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">MyPage</div>
+                <div @click="closeMenuMyPage" class="text-decoration-none fs-4" data-bs-toggle="collapse"  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">My Page</div>
               </li>
+              <hr>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle fs-4" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Category
@@ -34,21 +45,17 @@
                 </ul>
               </li>
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" aria-label="Search">
-              <button class="btn" type="submit"><img src="@/assets/search.png" alt="" style="width: 24px;"></button>
-            </form>
           </div>
         </div>
       </nav>
     </div>
     <router-view style="margin-top: 70px;"/>
-    <div class="fixed-bottom ps-2 pe-2" id="footerNav">
+    <div class="fixed-bottom ps-1" id="footerNav">
       <button class="btn mb-3" style="color: white;" @click="showFooterNavBar" id="footerNavBarBtn">
         <img src="@/assets/up.png" alt="" id="footerNavBarBtnImg" style="width: 20px; opacity: 0.5;">
       </button>
-      <div id="footerNavBar" style="background-color: white;">
-        <div class="d-flex justify-content-between" id="nav">
+      <div id="footerNavBar" class="">
+        <div class="d-flex justify-content-between pt-1" id="nav">
             <router-link to="/" class="col-3 text-center text-decoration-none">
               <img src="@/assets/home.png" alt="" style="width: 24px;" @click="moveMenuStatusBarHome">
               <h6 class="mt-1" @click="moveMenuStatusBarHome">Home</h6>
@@ -77,9 +84,12 @@
     name: 'App',
     methods: {
       showFooterNavBar: function() {
+        const footerNavId = document.getElementById('footerNav')
         const footerNavBarId = document.getElementById('footerNavBar')
         const footerNavBarBtnId = document.getElementById('footerNavBarBtn')
         const footerNavBarBtnImgId = document.getElementById('footerNavBarBtnImg')
+        console.log("IN")
+        console.log(footerNavId.style.zIndex)
         if (footerNavBarId.classList.contains("showFooterNavBar") == true) {
           footerNavBarId.classList.remove("showFooterNavBar")
           footerNavBarId.classList.add("closeFooterNavBar")
@@ -141,7 +151,12 @@
 </script>
 
 <style>
+hr {
+  opacity: 0.2;
+}
 #app {
+  position: relative;
+  z-index: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -152,30 +167,37 @@
 #app::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
 }
-
 #nav {
   padding: 0px;
   background-color: white;
 }
-
 #nav a {
   color: #2c3e50;
 }
-
 #nav a.router-link-exact-active {
   font-weight: bolder;
 }
+#navbarSupportedContent {
+  background-color: #e9e9e9;
+  padding: 6px;
+  opacity: 0.8;
+}
+#footerNav {
+  bottom: -10vh;
+}
 #footerNavBar {
   position: relative;
-  top: 14vh;
+  background-color: white;
+  height: 70px;
 }
 #footerNavBarBtn {
   position: relative;
-  top: 10vh;
 }
 #footerNav {
   padding: 0px;
   background-color: transparent;
+  /* background-color: skyblue; */
+  
 }
 #footerNav a {
   color: #2c3e50;
@@ -204,7 +226,7 @@
   transition:transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .showFooterNavBar {
-  transform: translate(0vw, -30vw);
+  transform: translate(0vw, -21vw);
   transition:transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .closeFooterNavBar {
