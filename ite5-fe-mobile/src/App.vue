@@ -3,15 +3,16 @@
     <div class="mb-5 fixed-top" id="nav">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-          <div class="navbar-toggler p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-width: 0;">
+          <!-- <div class="navbar-toggler p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-width: 0;">
             <span class="navbar-toggler-icon"></span>
-          </div>
+          </div> -->
+          <img src="@/assets/back.png" alt="" style="opacity: 0.6;" @click="goBack">
           <h4 class="pt-1"><a href="/" class="text-decoration-none">HANDSOME</a></h4>
           <div class="d-flex">
-            <a href="/shoppingbag"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.6;"></a>
+            <a href="/shoppingbag"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.7;"></a>
             <!-- <div style="font-size: 1em; padding-top: 4px;">(0)</div> -->
           </div>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3">
               <li>
                 <h3>Search</h3>
@@ -39,20 +40,18 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="/product" @click="categoryAAAAA">AAAAA</a></li>
-                  <!-- <li><a class="dropdown-item" href="#">BBBBB</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">CCCCC</a></li> -->
                 </ul>
               </li>
             </ul>
-          </div>
+          </div> -->
         </div>
       </nav>
     </div>
     <router-view style="margin-top: 70px;"/>
+    <div style="height: 110px;">&nbsp;</div>
     <div class="fixed-bottom ps-1" id="footerNav">
       <button class="btn mb-3" style="color: white;" @click="showFooterNavBar" id="footerNavBarBtn">
-        <img src="@/assets/up.png" alt="" id="footerNavBarBtnImg" style="width: 20px; opacity: 0.5;">
+        <img src="@/assets/menu.png" alt="" id="footerNavBarBtnImg" style="opacity: 0.7;">
       </button>
       <div id="footerNavBar" class="">
         <div class="d-flex justify-content-between pt-1" id="nav">
@@ -84,18 +83,15 @@
     name: 'App',
     methods: {
       showFooterNavBar: function() {
-        const footerNavId = document.getElementById('footerNav')
         const footerNavBarId = document.getElementById('footerNavBar')
         const footerNavBarBtnId = document.getElementById('footerNavBarBtn')
         const footerNavBarBtnImgId = document.getElementById('footerNavBarBtnImg')
-        console.log("IN")
-        console.log(footerNavId.style.zIndex)
         if (footerNavBarId.classList.contains("showFooterNavBar") == true) {
           footerNavBarId.classList.remove("showFooterNavBar")
           footerNavBarId.classList.add("closeFooterNavBar")
           footerNavBarBtnId.classList.remove("showFooterNavBar")
           footerNavBarBtnId.classList.add("closeFooterNavBar")
-          footerNavBarBtnImgId.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYBAMAAAASWSDLAAAAA3NCSVQICAjb4U/gAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkUExURf///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMcmPmUAAAALdFJOUwAGISQ/f6KxudjjxauaGAAAAAlwSFlzAAAAvAAAALwBzx0kHgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABcSURBVCjPY6AOUEtCsJlX7zKAc6x2716MkNi9Gy5ltXt7NUwKKFEoDpMCSggwQqVAEgwMUCmQBAMDRAoiAZWCSECluiESIKkdDLMhEiCpnQwegTCHiLYwUAYYGABJ9yeVCRLuYQAAAABJRU5ErkJggg=='
+          footerNavBarBtnImgId.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAsQAAALEBxi1JjQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABoSURBVEiJ7c4xCsJQEEXRM+5AcAvBTgR7V2Tv+uwkpLB0Dx/SWZslpHoQwj8w7X1Dt6LwxC3UnwoNp9BAKwy4hgY+oW63NSP+oXsf8As+n2x3W1G44BzqfwszjqGBufDAPTTwCnX3ZAGCWyJ5FGiNNAAAAABJRU5ErkJggg=='
         } else {
           footerNavBarId.classList.remove("closeFooterNavBar")
           footerNavBarId.classList.add("showFooterNavBar")
@@ -146,6 +142,9 @@
         const category = 'AAAAA'
         this.$store.dispatch('getCategoryAAAAA', category)
       },
+      goBack: function() {
+        this.$router.go(-1)
+      }
     },
   }
 </script>
@@ -178,9 +177,7 @@ hr {
   font-weight: bolder;
 }
 #navbarSupportedContent {
-  background-color: #e9e9e9;
   padding: 6px;
-  opacity: 0.8;
 }
 #footerNav {
   bottom: -10vh;
