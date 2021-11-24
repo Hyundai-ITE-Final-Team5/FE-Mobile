@@ -6,6 +6,7 @@
       :product="product"
       :idx="idx"
     />
+
   </div>
 </template>
 
@@ -20,7 +21,7 @@ export default {
   computed: {
     getProducts: function() {
       return this.$store.state.products
-    }
+    },
   },
 }
 </script>
