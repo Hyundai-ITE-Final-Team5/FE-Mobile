@@ -1,6 +1,10 @@
 <template>
   <div>
-    <h3 class="my-5">Category > {{ category }}</h3>
+    <div class="" style="opacity: 0.2; height: 0;">
+      <img src="@/assets/up.png" alt="" class="remoteControllUp" @click="scrollUp">
+      <br>
+      <img src="@/assets/down.png" alt="" class="remoteControllDown" @click="scrollDown">
+    </div>
     <ProductList/>
   </div>
 </template>
@@ -14,13 +18,38 @@ export default {
     ProductList,
   },
   computed: {
-    category: function() {
-      return this.$store.state.category
-    }
+
   },
+  methods: {
+    scrollUp: function() {
+      let position = document.documentElement.scrollTop
+      position -= 770
+      window.scrollTo(0, position)
+    },
+    scrollDown: function() {
+      let position = document.documentElement.scrollTop
+      position += 770
+      window.scrollTo(0, position)
+    },
+  },
+  mounted: function() {
+      document.addEventListener('scroll', function() {
+      })
+  }
 }
 </script>
 
-<style>
-
+<style scoped>
+.remoteControllUp {
+  position: fixed;
+  margin-top: 77vh;
+  margin-left: 89vw;
+  width: 20px;
+}
+.remoteControllDown {
+  position: fixed;
+  margin-top: 80vh;
+  margin-left: 89vw;
+  width: 20px;
+}
 </style>
