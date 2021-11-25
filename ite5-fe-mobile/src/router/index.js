@@ -8,6 +8,8 @@ import MyPage from '@/views/MyPage.vue'
 import Product from '@/views/Product.vue'
 import ProductDetail from '@/views/ProductDetail.vue'
 import Order from '@/views/Order.vue'
+import Login from '@/views/Login.vue'
+import Join from '@/views/Join.vue'
 
 Vue.use(VueRouter)
 
@@ -52,6 +54,16 @@ const routes = [
     path: '/order',
     name: 'Order',
     component: Order
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/join',
+    name: 'Join',
+    component: Join
   },
 ]
 

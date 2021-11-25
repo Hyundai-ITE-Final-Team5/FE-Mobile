@@ -1,12 +1,18 @@
 <template>
   <div>
     <h1>Like</h1>
+    <likeList/>
   </div>
 </template>
 
 <script>
-export default {
+import likeList from '@/components/like/likeList'
 
+export default {
+  name: 'Like',
+  components: {
+    likeList,
+  },
 }
 </script>
 

@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import jwt_decode from "jwt-decode"
+import createPersistedState from "vuex-persistedstate"
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    plugins: [createPersistedState()],
+    userToken: null,
+    // 좋아요 목록
+    likes: [],
     // 로딩상태 표시
     loading: false,
     brandIndex: [],
@@ -25,6 +31,13 @@ export default new Vuex.Store({
     products: [],
   },
   mutations: {
+    SAVE_JWT: function (state, token) {
+      state.userToken = token
+    },
+    DELETE_JWT: function (state) {
+      state.userToken = null
+      //state.userInfo = null
+    },
     GET_BRAND_INDEX: function(state, data) {
       state.brandIndex = data
     },
@@ -68,22 +81,65 @@ export default new Vuex.Store({
     GET_CATEGORY_LS_LIST: function(state, data) {
       state.products = data
     },
-    CHANGE_LIKE_STATUS: function(state, product) {
+    ADD_LIKE: function(state, productId) {
       for (let i = 0; i < state.products.length; i++) {
-        if (state.products[i].pid == product.pid) {
-          state.products[i].like = !product.like
-          break
+        if (state.products[i].pid == productId) {
+          state.products[i].like = true
+          break;
+        }
+      }
+    },
+    DELETE_LIKE: function(state, productId) {
+      for (let i = 0; i < state.products.length; i++) {
+        if (state.products[i].pid == productId) {
+          state.products[i].like = false
+          break;
         }
       }
     },
   },
   actions: {
+    // 로그인
+    getJWT: function(context, credential) {
+      axios({
+        method: 'post',
+        url: 'http://kosa1.iptime.org:50215/login',
+        data: credential
+      })
+      .then((res) => {
+        context.commit('SAVE_JWT', res.data.jwt)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    // 로그아웃
+    deleteJWT: function (context) {
+      context.commit('DELETE_JWT')
+    },
+    // 회원가입
+    signup: function(context, joinCredential) {
+      axios({
+        method: 'post',
+        url: 'http://kosa1.iptime.org:50215/join',
+        data: joinCredential
+      })
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
     // Index Page
     //브랜드 목록 가져오기
     getBrandIndex: function(context) {
       axios({
         method: 'get',
-        url: 'http://localhost:8080/navbar/brandList'
+        url: 'http://kosa1.iptime.org:50222/navbar/brandList',
+        headers: {
+          Authorization: `Bearer ${context.state.userToken}`
+        },
       })
         .then((res) => {
           context.commit('GET_BRAND_INDEX', res.data)
@@ -96,7 +152,10 @@ export default new Vuex.Store({
     getCategoryWOMEN: function(context) {
       axios({
         method: 'get',
-        url: 'http://localhost:8080/navbar/categoryList?depth1=WOMEN'
+        url: 'http://kosa1.iptime.org:50222/navbar/categoryList?depth1=WOMEN',
+        headers: {
+          Authorization: `Bearer ${context.state.userToken}`
+        },
       })
         .then((res) => {
           context.commit('GET_CATEGORY_WOMEN', res.data)
@@ -109,7 +168,10 @@ export default new Vuex.Store({
     getCategoryMEN: function(context) {
       axios({
         method: 'get',
-        url: 'http://localhost:8080/navbar/categoryList?depth1=MEN'
+        url: 'http://kosa1.iptime.org:50222/navbar/categoryList?depth1=MEN',
+        headers: {
+          Authorization: `Bearer ${context.state.userToken}`
+        },
       })
         .then((res) => {
           context.commit('GET_CATEGORY_MEN', res.data)
@@ -122,7 +184,10 @@ export default new Vuex.Store({
     getCategoryKIDS: function(context) {
       axios({
         method: 'get',
-        url: 'http://localhost:8080/navbar/categoryList?depth1=KIDS'
+        url: 'http://kosa1.iptime.org:50222/navbar/categoryList?depth1=KIDS',
+        headers: {
+          Authorization: `Bearer ${context.state.userToken}`
+        },
       })
         .then((res) => {
           context.commit('GET_CATEGORY_KIDS', res.data)
@@ -135,7 +200,10 @@ export default new Vuex.Store({
     getCategoryLS: function(context) {
       axios({
         method: 'get',
-        url: 'http://localhost:8080/navbar/categoryList?depth1=LIFESTYLE'
+        url: 'http://kosa1.iptime.org:50222/navbar/categoryList?depth1=LIFESTYLE',
+        headers: {
+          Authorization: `Bearer ${context.state.userToken}`
+        },
       })
         .then((res) => {
           context.commit('GET_CATEGORY_LS', res.data)
@@ -154,7 +222,10 @@ export default new Vuex.Store({
 
       axios({
         method: 'get',
-        url: `http://localhost:8080/list/brand/${bno}`
+        url: `http://kosa1.iptime.org:50222/list/brand/${bno}`,
+        headers: {
+          Authorization: `Bearer ${context.state.userToken}`
+        },
       })
         .then((res) => {
           context.commit('GET_BRAND_LIST', res.data)
@@ -176,7 +247,10 @@ export default new Vuex.Store({
 
       axios({
         method: 'get',
-        url: `http://localhost:8080/list/category${str}`
+        url: `http://kosa1.iptime.org:50222/list/category${str}`,
+        headers: {
+          Authorization: `Bearer ${context.state.userToken}`
+        },
       })
         .then((res) => {
           context.commit('GET_CATEGORY_WOMEN_LIST', res.data)
@@ -198,7 +272,10 @@ export default new Vuex.Store({
 
       axios({
         method: 'get',
-        url: `http://localhost:8080/list/category${str}`
+        url: `http://kosa1.iptime.org:50222/list/category${str}`,
+        headers: {
+          Authorization: `Bearer ${context.state.userToken}`
+        },
       })
         .then((res) => {
           context.commit('GET_CATEGORY_MEN_LIST', res.data)
@@ -219,7 +296,7 @@ export default new Vuex.Store({
       this.state.loading = true
       axios({
         method: 'get',
-        url: `http://localhost:8080/list/category${str}`
+        url: `http://kosa1.iptime.org:50222/list/category${str}`
       })
         .then((res) => {
           context.commit('GET_CATEGORY_KIDS_LIST', res.data)
@@ -240,7 +317,10 @@ export default new Vuex.Store({
       this.state.loading = true
       axios({
         method: 'get',
-        url: `http://localhost:8080/list/category${str}`
+        url: `http://kosa1.iptime.org:50222/list/category${str}`,
+        headers: {
+          Authorization: `Bearer ${context.state.userToken}`
+        },
       })
         .then((res) => {
           context.commit('GET_CATEGORY_LS_LIST', res.data)
@@ -252,11 +332,49 @@ export default new Vuex.Store({
           this.state.loading = false
         })
     },
-    changeLikeStatus: function(context, product) {
-      context.commit('CHANGE_LIKE_STATUS', product)
-    }
+    addLike: function(context, productId) {
+      axios({
+        method: 'get',
+        url: `http://kosa1.iptime.org:50222/list/addlike/${productId}`,
+        headers: {
+          Authorization: `Bearer ${context.state.userToken}`
+        },
+      })
+        .then((res) => {
+          context.commit('ADD_LIKE', productId)
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    deleteLike: function(context, productId) {
+      axios({
+        method: 'get',
+        url: `http://kosa1.iptime.org:50222/list/dellike/${productId}`,
+        headers: {
+          Authorization: `Bearer ${context.state.userToken}`
+        },
+      })
+        .then((res) => {
+          context.commit('DELETE_LIKE', productId)
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+  
   },
   getters: {
+    decodedToken: function (state) {
+      if (state.userToken) {
+        return jwt_decode(state.userToken)
+      } 
+      else {
+        return null
+      }
+    },
     brandIndex: function(state) {
       return state.brandIndex
     },
