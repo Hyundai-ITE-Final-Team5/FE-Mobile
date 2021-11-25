@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-
+    <h2 v-if="decodedToken != null">{{ decodedToken.mid }}</h2>
+    <button v-if="decodedToken != null" @click="deleteJWT" class="btn btn-dark">로그아웃</button>
   </div>
 </template>
 
@@ -11,8 +12,15 @@
 
 export default {
   name: 'Home',
-  components: {
-
-  }
+  methods: {
+    deleteJWT() {
+      this.$store.dispatch('deleteJWT')
+    },
+  },
+  computed: {
+    decodedToken() {
+      return this.$store.getters.decodedToken
+    },
+  },
 }
 </script>
