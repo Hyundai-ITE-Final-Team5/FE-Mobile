@@ -1,6 +1,6 @@
 <template>
   <div>
-    <likeListItem/>
+    <likeListItem v-for="(like, idx) in likeList" :key="idx" :like="like" :idx="idx"/>
   </div>
 </template>
 
@@ -12,9 +12,12 @@ export default {
   components: {
     likeListItem,
   },
+  created: function() {
+    this.$store.dispatch('getLikeList')
+  },
   computed: {
-    getLikes: function() {
-      return this.$store.state.likes
+    likeList: function() {
+      return this.$store.getters.likeList
     },
   },
 }

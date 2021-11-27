@@ -58,9 +58,9 @@ export default {
     // 상품리스트에 들어오면 메뉴바 닫음
     this.closeFooterNavBar()
   },
-  destroyed: function() {
-    this.$store.state.products = []
-  }
+  // destroyed: function() {
+  //   this.$store.state.products = []
+  // }
 }
 </script>
 

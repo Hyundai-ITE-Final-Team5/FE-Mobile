@@ -56,7 +56,7 @@
             style="height: 7vh;" placeholder="휴대폰 ('-'제외)">
     </div>
     <div class="d-flex justify-content-center">
-      <button @click="signup" type="submit" class="btn btn-lg btn-dark my-4 col-12">가입하기</button>
+      <button @click="signup" type="submit" class="btn btn-lg btn-dark my-3 col-12">가입하기</button>
     </div>
   </div>
 </template>
