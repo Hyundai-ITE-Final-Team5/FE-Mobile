@@ -4,12 +4,16 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <img src="@/assets/back.png" alt="" style="opacity: 0.6;" @click="goBack">
-          <h4 class="pt-1"><router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link></h4>
+          <h4 class="pt-1" @click="moveMenuStatusBarHome">
+            <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
+          </h4>
           <div class="d-flex">
             <!-- 비로그인 -->
-            <router-link to="/login" v-if="decodedJWT == null"><img src="@/assets/user.png" alt="" style="opacity: 0.8; width: 24px;"></router-link>
+            <router-link to="/login" v-if="decodedJWT == null">
+              <img src="@/assets/user.png" alt="" style="opacity: 0.8; width: 24px;" @click="moveMenuStatusBarMyPage">
+            </router-link>
             <!-- 로그인 -->
-            <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.6;"></router-link>
+            <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.9; height: 28px;"></router-link>
             <!-- <div style="font-size: 1em; padding-top: 4px;">(0)</div> -->
           </div>
         </div>
@@ -124,12 +128,12 @@
       },
       goBack: function() {
         this.$router.go(-1)
-      }
+      },
     },
     computed: {
       decodedJWT: function() {
         return this.$store.getters.decodedToken
-      }
+      },
     },
   }
 </script>
@@ -188,7 +192,7 @@ hr {
 }
 #footerNav a {
   color: #2c3e50;
-  opacity: 0.3;
+  opacity: 0.5;
 }
 #footerNav a.router-link-exact-active {
   font-weight: bolder;
@@ -199,15 +203,15 @@ hr {
   transition:transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .moveIndex {
-  transform: translate(24vw, 0vw);
+  transform: translate(25vw, 0vw);
   transition:transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .moveLike {
-  transform: translate(48vw, 0vw);
+  transform: translate(50vw, 0vw);
   transition:transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .moveMyPage {
-  transform: translate(72vw, 0vw);
+  transform: translate(74vw, 0vw);
   transition:transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .showFooterNavBar {

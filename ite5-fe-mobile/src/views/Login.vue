@@ -9,6 +9,7 @@
       <input @keyup.enter="getJWT" v-model="credential.mpassword" type="password" class="form-control border-2 border-top-0 border-start-0 border-end-0"
              style="height: 7vh;" id="floatingPassword" placeholder="비밀번호">
     </div>
+    <h6 v-if="false" class="my-3" style="color: #e4beb3;">X 아이디와 비밀번호를 확인해주세요.</h6>
     <div class="form-check my-2">
       <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
       <label class="form-check-label" for="flexCheckChecked">
@@ -44,13 +45,15 @@ export default {
         this.moveMenuStatusBarHome()
       }
     },
-    decodedJWT: function() {
-      return this.$store.getters.decodedToken
-    },
     moveMenuStatusBarHome: function() {
       const menuStatusBarId = document.getElementById('menuStatusBar')
       menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
       menuStatusBarId.classList.add("moveHome")
+    },
+  },
+  computed: {
+    decodedJWT: function() {
+      return this.$store.getters.decodedToken
     },
   },
 
