@@ -2,9 +2,9 @@
   <div>
     <div class="d-flex ms-3 justify-content-between">
       <div class="d-flex">
-        <h3>🏆</h3>
+        <h3 class="fw-bold">{{ userInfo.mgrade }}</h3>
         <h3>&nbsp;</h3>
-        <h3 style="text-decoration: underline;">username</h3>
+        <h3 v-if="decodedJWT">{{ decodedJWT.mid }}</h3>
         <h3>&nbsp; 님</h3>
       </div>
       <img src="@/assets/question.png" alt="" style="width: 30px; height:26px; opacity: 0.3;">
@@ -14,7 +14,7 @@
     </div>
     <div class="d-flex  mt-3">
       <h5 class="ms-5">• 마일리지 :&nbsp;&nbsp;</h5>
-      <h5>12345</h5>
+      <h5>{{ userInfo.mmileage }}</h5>
       <h5>&nbsp;P</h5>
     </div>
     <div class="d-flex  mt-3">
@@ -49,6 +49,14 @@ export default {
     userInfo,
     coupon,
   },
+  computed: {
+    decodedJWT: function() {
+      return this.$store.getters.decodedToken
+    },
+   userInfo: function() {
+     return this.$store.state.userInfo
+   },
+  },
   methods: {
     showOrderHistory: function() {
       const orderHistoryId = document.getElementById('orderHistoryId')
@@ -62,7 +70,6 @@ export default {
         mypageStatusBarId.classList.remove("moveOrderHistory", "moveUserInfo", "moveCoupon")
         mypageStatusBarId.classList.add("moveOrderHistory")
       }
-      console.log("asdf")
     },
     showUserInfo: function() {
       const orderHistoryId = document.getElementById('orderHistoryId')

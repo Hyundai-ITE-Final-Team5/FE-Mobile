@@ -11,6 +11,8 @@ export default new Vuex.Store({
     plugins: [createPersistedState()],
     // jwt
     userToken: null,
+    // 사용자 정보
+    userInfo: [],
     // 좋아요 목록
     likes: [],
     // 상품 목록
@@ -35,6 +37,8 @@ export default new Vuex.Store({
     // LIFE STYLE
     categoryLS: {},
     categoryLSKeys: [],
+    // 아이디 중복확인
+    midCheck: null,
   },
   mutations: {
     SAVE_JWT: function (state, token) {
@@ -42,8 +46,11 @@ export default new Vuex.Store({
     },
     DELETE_JWT: function (state) {
       state.userToken = null
-      //state.userInfo = null
+      state.userInfo = []
     },
+    GET_USER_INFO: function(state, info) {
+      state.userInfo = info
+    }, 
     GET_BRAND_INDEX: function(state, data) {
       state.brandIndex = data
     },
@@ -113,11 +120,26 @@ export default new Vuex.Store({
       state.likes = likes
     },
     GET_SHOPPINGBAG_LIST: function(state, items) {
+      state.shoppingbag = []
       state.shoppingbag = items
-      console.log(state.shoppingbag)
     },
     GET_PRODUCT_DETAIL: function(state, productDetail) {
       state.productDetail = productDetail
+    },
+    DELETE_SHOPPINGBAG: function(state, psid) {
+      for (let i = 0; i < state.shoppingbag.length; i++) {
+        if (state.shoppingbag[i].psid == psid) {
+          state.shoppingbag.splice(i, 1)
+          break;
+        }
+      }
+    },
+    SHOW_OPTION: function(state, colorsizeInfo) {
+      state.productColorSize = colorsizeInfo
+      console.log(state.productColorSize)
+    },
+    DUPLICATED_MID_CHECK: function(state, data) {
+      state.midCheck = data.result
     },
   },
   actions: {
@@ -416,7 +438,7 @@ export default new Vuex.Store({
     deleteLike: function(context, productId) {
       context.commit('DELETE_LIKE', productId)
       axios({
-        method: 'get',
+        method: 'delete',
         url: `http://kosa1.iptime.org:50222/list/dellike/${productId}`,
         headers: {
           Authorization: `Bearer ${context.state.userToken}`
@@ -455,6 +477,7 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('GET_SHOPPINGBAG_LIST', res.data)
+          console.log(res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -480,12 +503,12 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    // 쇼핑백에 상품 추가
     addShoppingbag: function(context, shoppingbag) {
       let hasToken = ''
       if (context.state.userToken != null) {
         hasToken = 'Bearer ' + context.state.userToken
       }
-      console.log(shoppingbag)
       axios({
         method: 'post',
         url: 'http://kosa1.iptime.org:50215/member/cart/addcart',
@@ -497,6 +520,90 @@ export default new Vuex.Store({
         .then((res) => {
           //context.commit('GET_PRODUCT_DETAIL', res.data)
           console.log(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 쇼핑백에 상품 삭제
+    deleteShoppingbag: function(context, psid) {
+      let hasToken = ''
+      if (context.state.userToken != null) {
+        hasToken = 'Bearer ' + context.state.userToken
+      }
+      axios({
+        method: 'delete',
+        url: 'http://kosa1.iptime.org:50215/member/cart/deletecart',
+        data: {
+          "psid": psid,
+        },
+        headers: {
+          Authorization: hasToken
+        },
+      })
+        .then((res) => {
+          context.commit('DELETE_SHOPPINGBAG', psid)
+          console.log(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 쇼핑백에 상품 옵션 변경하기
+    changeOption: function(context, changeInfo) {
+      let hasToken = ''
+      if (context.state.userToken != null) {
+        hasToken = 'Bearer ' + context.state.userToken
+      }
+      console.log("STORE")
+      console.log(changeInfo)
+      axios({
+        method: 'post',
+        url: 'http://kosa1.iptime.org:50215/member/cart/changecart',
+        data: changeInfo,
+        headers: {
+          Authorization: hasToken
+        },
+      })
+        .then((res) => {
+          context.commit('GET_SHOPPINGBAG_LIST', res.data)
+          console.log(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 회원가입시 아이디 중복 체크
+    duplicatedMidCheck: function(context, mid) {
+      axios({
+        method: 'post',
+        url: 'http://kosa1.iptime.org:50215/idcheck',
+        data: {
+          "mid": mid,
+        }
+      })
+        .then((res) => {
+          context.commit('DUPLICATED_MID_CHECK', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 마이페이지 유저정보 가져오기
+    getUserInfo: function(context) {
+      let hasToken = ''
+      if (context.state.userToken != null) {
+        hasToken = 'Bearer ' + context.state.userToken
+      }
+      axios({
+        method: 'post',
+        url: 'http://kosa1.iptime.org:50215/member/mypage',
+        headers: {
+          Authorization: hasToken
+        },
+      })
+        .then((res) => {
+          context.commit('GET_USER_INFO', res.data)
         })
         .catch((err) => {
           console.log(err)

@@ -44,6 +44,7 @@ export default {
         textSelectId.style.fontWeight = ''
         sizeInfoId.style.display = 'none'
       }
+      this.$emit('changeImgColor', this.colorChip.pcimg1, this.colorChip.pcimg2, this.colorChip.pcimg3)
     },
     sendpsid: function(psid) {
       this.$emit('sendpsid', psid)

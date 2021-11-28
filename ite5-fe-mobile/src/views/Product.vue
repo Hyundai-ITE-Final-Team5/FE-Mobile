@@ -28,12 +28,12 @@ export default {
   methods: {
     scrollUp: function() {
       let position = document.documentElement.scrollTop
-      position -= 770
+      position -= 760
       window.scrollTo(0, position)
     },
     scrollDown: function() {
       let position = document.documentElement.scrollTop
-      position += 770
+      position += 760
       window.scrollTo(0, position)
     },
     closeFooterNavBar: function() {
