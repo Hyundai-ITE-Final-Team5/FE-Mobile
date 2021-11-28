@@ -162,9 +162,10 @@ hr {
 #nav a {
   color: #2c3e50;
 }
-/* #nav a.router-link-exact-active {
-
-} */
+.btn:focus {   
+  box-shadow: 0px 0px 0px transparent;
+  border-color: #a0a0a0;
+}
 #navbarSupportedContent {
   padding: 6px;
 }

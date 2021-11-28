@@ -3,13 +3,16 @@
     <div id="carouselExampleControls" class="carousel slide">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img v-if="getProductDetail" :src="getProductDetail[0].pcimg1" class="d-block w-100" alt="...">
+          <img v-if="getProductDetail && carousel1 == ''" :src="getProductDetail[0].pcimg1" class="d-block w-100" alt="...">
+          <img v-else :src="carousel1" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item" data-interval="false">
-          <img v-if="getProductDetail" :src="getProductDetail[0].pcimg2" class="d-block w-100" alt="...">
+          <img v-if="getProductDetail && carousel2 == ''" :src="getProductDetail[0].pcimg2" class="d-block w-100" alt="...">
+          <img v-else :src="carousel2" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item" data-interval="false">
-          <img v-if="getProductDetail" :src="getProductDetail[0].pcimg3" class="d-block w-100" alt="...">
+          <img v-if="getProductDetail && carousel3 == ''" :src="getProductDetail[0].pcimg3" class="d-block w-100" alt="...">
+          <img v-else :src="carousel3" class="d-block w-100" alt="...">
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -30,7 +33,8 @@
       <hr>
       <h5 class="my-3">COLOR / SIZE</h5>
       <div class="d-flex">
-        <detailColorListItem v-for="(colorChip, cpidx) in getProductDetail" :key="cpidx" :colorChip="colorChip" :cpidx="cpidx" @sendpsid="getpsid"/>
+        <detailColorListItem v-for="(colorChip, cpidx) in getProductDetail" 
+                             :key="cpidx" :colorChip="colorChip" :cpidx="cpidx" @sendpsid="getpsid" @changeImgColor="changeImgColor"/>
       </div>
       <div class="d-flex justify-content-between">
         <h5 class="mt-2 me-3">수량</h5>
@@ -76,6 +80,9 @@ export default {
         psid: '',
         pquantity: 1,
       },
+      carousel1: '',
+      carousel2: '',
+      carousel3: '',
     }
   },
   components: {
@@ -96,6 +103,11 @@ export default {
     getpsid: function(psid) {
       this.addProduct.psid = psid
     },
+    changeImgColor: function(pcimg1, pcimg2, pcimg3) {
+      this.carousel1 = pcimg1
+      this.carousel2 = pcimg2
+      this.carousel3 = pcimg3
+    },
   },
   computed: {
     getProductCommon: function() {
@@ -111,9 +123,9 @@ export default {
   mounted: function() {
     window.scrollTo(0,0)
   },
-  destroyed: function() {
-    this.$store.state.productDetail = []
-  },
+  // destroyed: function() {
+  //   this.$store.state.productDetail = []
+  // },
 }
 </script>
 

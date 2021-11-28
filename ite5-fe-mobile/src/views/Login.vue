@@ -20,7 +20,7 @@
       <button @click="getJWT" type="submit" class="btn btn-lg btn-dark my-4 col-12">로그인</button>
     </div>
     <div class="d-flex justify-content-between px-1">
-      <router-link to="/join" class="text-decoration-none text-dark"><h6>회원가입</h6></router-link>
+      <router-link to="/join" class="text-decoration-none text-dark"><h6 @click="moveMenuStatusBarLike">회원가입</h6></router-link>
       <h6>아이디 • 비밀번호찾기</h6>
     </div>
   </div>
@@ -49,6 +49,11 @@ export default {
       const menuStatusBarId = document.getElementById('menuStatusBar')
       menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
       menuStatusBarId.classList.add("moveHome")
+    },
+    moveMenuStatusBarLike: function() {
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveLike")
     },
   },
   computed: {

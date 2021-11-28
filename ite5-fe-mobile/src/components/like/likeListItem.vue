@@ -5,7 +5,7 @@
         <img :src="like.pcimg1" alt="" style="width: 105px;">
       </div>
       <div class="col-8 mt-2 ms-2">
-        <h5>{{ like.bname }}</h5>
+        <h5 class="fw-bold">{{ like.bname }}</h5>
         <h6>{{ like.pname }}</h6>
         <h6>{{ like.pcprice }}<span> 원</span></h6>
         <div class="d-flex mt-4">
@@ -36,9 +36,8 @@ export default {
       this.$store.dispatch('deleteLike', this.like.pid)
     },
     getProductDetail: function() {
-      console.log(this.like)
-      // this.$store.dispatch('getProductDetail', this.pcid)
-      // this.$router.push('/productdetail')
+      this.$store.dispatch('getProductDetail', this.like.pcid)
+      this.$router.push('/productdetail')
     },
   },
 }

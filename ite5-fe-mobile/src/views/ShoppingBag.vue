@@ -1,7 +1,11 @@
 <template>
   <div>
-    <h1>Shopping Bag</h1>
-    <h2 class="text-center text-muted" style="margin-top: 30vh;" v-if="countShoppinbagList == 0">쇼핑백에 상품이 없습니다.</h2>
+    <div class="d-flex mb-3">
+      <img src="@/assets/shoppingbag.png" alt="" class="me-1" style="width: 30px; height: 32px;">
+      <!-- <h5 class="pt-2 mx-1 fw-bold">{{ countShoppinbagList }}</h5> -->
+      <h5 class="pt-2 text-muted">개 상품이 있습니다.</h5>
+    </div>
+    <!-- <h2 class="text-center text-muted" style="margin-top: 30vh;" v-if="countShoppinbagList == 0">쇼핑백에 상품이 없습니다.</h2> -->
     <shoppingbagList/>
   </div>
 </template>
@@ -28,9 +32,9 @@ export default {
     },
   },
   computed: {
-    countShoppinbagList: function() {
-      return this.$store.state.shoppingbag.length
-    },
+    // countShoppinbagList: function() {
+    //   return this.$store.state.shoppingbag.length
+    // },
   },
   mounted: function() {
     this.closeFooterNavBar()

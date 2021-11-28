@@ -26,6 +26,7 @@ export default {
       if (sizeSelectId.style.borderColor == 'white') {
         sizeSelectId.style.borderColor = '#d3d3d3'
         textSizeSelectId.style.fontWeight = 'bold'
+        console.log(textSizeSelectId.style.fontWeight)
       } else if (sizeSelectId.style.borderColor == 'rgb(211, 211, 211)') {
         sizeSelectId.style.borderColor = 'white'
         textSizeSelectId.style.fontWeight = ''

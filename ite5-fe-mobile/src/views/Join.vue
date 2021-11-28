@@ -9,7 +9,8 @@
       </div>
       <button @click="duplicatedMidCheck" class="btn btn-dark mt-3 ms-3" style="height: 5vh;">확인</button>
     </div>
-    <h6 v-if="midCheck == true" class="ms-2" style="color: #b1d3c5;">V 사용가능한 아이디 입니다.</h6>
+    <h6 v-if="midCheck == 'possible'" class="ms-2" style="color: #b1d3c5;">V 사용가능한 아이디 입니다.</h6>
+    <h6 v-if="midCheck == 'duplicate'" class="ms-2" style="color: #e4beb3;">X 사용중인 아이디 입니다.</h6>
     <!-- 비밀번호 -->
     <div class="form mb-3">
       <input v-model="joinCredential.mpassword" type="password" class="form-control border-2 border-top-0 border-start-0 border-end-0"
@@ -75,13 +76,12 @@ export default {
         mbirth: Date,
         mgender: 0,
       },
-      midCheck: false,
       mpasswordCheck: '',
     }
   },
   methods: {
     duplicatedMidCheck: function() {
-      this.midCheck = true
+      this.$store.dispatch('duplicatedMidCheck', this.joinCredential.mid)
     },
     checkFemale: function() {
       this.joinCredential.mgender = 2
@@ -96,6 +96,11 @@ export default {
         this.$router.push('/login')
       }
     },
+  },
+  computed: {
+    midCheck: function() {
+      return this.$store.state.midCheck
+    }
   },
 }
 </script>
