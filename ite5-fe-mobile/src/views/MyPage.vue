@@ -97,7 +97,10 @@ export default {
         mypageStatusBarId.classList.add("moveCoupon")
       }
     },
-  }
+  },
+  mounted: function() {
+    this.$store.dispatch('getCouponList')
+  },
 
 }
 </script>
