@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 class="mb-4">상품 상세</h1>
     <div id="carouselExampleControls" class="carousel slide">
       <div class="carousel-inner">
         <div class="carousel-item active">

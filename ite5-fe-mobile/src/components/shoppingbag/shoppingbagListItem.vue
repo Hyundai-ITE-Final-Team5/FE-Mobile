@@ -68,18 +68,6 @@
       <button class="btn btn-sm" style="color: #e4beb3; border-color: #e4beb3;" @click="deleteShoppingbag">삭제</button>
       <button @click="showOption" class="btn btn-sm mx-2" style="color: gray; border-color: gray;">옵션</button>
     </div>
-    <!-- <div class="mt-3">
-      <div class="d-flex justify-content-end me-3">
-        <h5>총</h5>
-        <h5 class="mx-2 fw-bold">1</h5>
-        <h5>개 상품</h5>
-      </div>
-      <div class="d-flex justify-content-end me-3">
-        <h5></h5>
-        <h5 class="mx-2 fw-bold">1</h5>
-        <h5>개 상품</h5>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -132,7 +120,6 @@ export default {
     },
     getNewpsid: function(psid) {
       this.changeInfo.newpsid = psid
-      console.log("asdf" + this.changeInfo.newpsid)
     },
     changeOption: function() {
       this.$store.dispatch('changeOption', this.changeInfo)

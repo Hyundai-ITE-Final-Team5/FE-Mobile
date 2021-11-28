@@ -21,6 +21,12 @@ export default new Vuex.Store({
     productDetail: [],
     // 쇼핑백
     shoppingbag: [],
+    // 쇼핑백 가격 합계
+    shoppingbagTotal: 0,
+    // 주문상품 임시보관
+    tempOrderInfo: [],
+    // 보유 쿠폰 목록
+    couponList: [],
     // 로딩상태 표시
     loading: false,
     brandIndex: [],
@@ -39,6 +45,8 @@ export default new Vuex.Store({
     categoryLSKeys: [],
     // 아이디 중복확인
     midCheck: null,
+    // 결제수단 목록
+    paymentList: [],
   },
   mutations: {
     SAVE_JWT: function (state, token) {
@@ -121,7 +129,11 @@ export default new Vuex.Store({
     },
     GET_SHOPPINGBAG_LIST: function(state, items) {
       state.shoppingbag = []
+      state.shoppingbagTotal = 0
       state.shoppingbag = items
+      for (let i = 0; i < state.shoppingbag.length; i++) {
+        state.shoppingbagTotal += state.shoppingbag[i].pcprice * state.shoppingbag[i].pquantity
+      }
     },
     GET_PRODUCT_DETAIL: function(state, productDetail) {
       state.productDetail = productDetail
@@ -133,13 +145,27 @@ export default new Vuex.Store({
           break;
         }
       }
+      state.shoppingbagTotal = 0
+      for (let i = 0; i < state.shoppingbag.length; i++) {
+        state.shoppingbagTotal += state.shoppingbag[i].pcprice * state.shoppingbag[i].pquantity
+      }
     },
     SHOW_OPTION: function(state, colorsizeInfo) {
       state.productColorSize = colorsizeInfo
-      console.log(state.productColorSize)
     },
     DUPLICATED_MID_CHECK: function(state, data) {
       state.midCheck = data.result
+    },
+    MAKE_ORDER: function(state, orderInfo) {
+      state.tempOrderInfo = orderInfo
+    },
+    // 쿠폰목록 가져오기
+    GET_COUPONLIST: function(state, coupon) {
+      state.couponList = coupon
+    },
+    // 결제수단 목록 가져오기
+    GET_PAYMENTLIST: function(state, methods) {
+      state.paymentList = methods
     },
   },
   actions: {
@@ -555,8 +581,6 @@ export default new Vuex.Store({
       if (context.state.userToken != null) {
         hasToken = 'Bearer ' + context.state.userToken
       }
-      console.log("STORE")
-      console.log(changeInfo)
       axios({
         method: 'post',
         url: 'http://kosa1.iptime.org:50215/member/cart/changecart',
@@ -567,7 +591,6 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('GET_SHOPPINGBAG_LIST', res.data)
-          console.log(res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -604,6 +627,50 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('GET_USER_INFO', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 쇼핑백의 상품을 주문페이지로 가져가기위한 임시 저장
+    makeOrder: function(context, orderInfo) {
+      context.commit('MAKE_ORDER', orderInfo)
+    },
+    // 쿠폰 목록 가져오기
+    getCouponList: function(context) {
+      let hasToken = ''
+      if (context.state.userToken != null) {
+        hasToken = 'Bearer ' + context.state.userToken
+      }
+      axios({
+        method: 'get',
+        url: 'http://kosa1.iptime.org:50215/member/coupon/couponlist',
+        headers: {
+          Authorization: hasToken
+        },
+      })
+        .then((res) => {
+          context.commit('GET_COUPONLIST', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 결제수단 목록 가져오기
+    getPaymentList: function(context) {
+      let hasToken = ''
+      if (context.state.userToken != null) {
+        hasToken = 'Bearer ' + context.state.userToken
+      }
+      axios({
+        method: 'get',
+        url: 'http://kosa1.iptime.org:50315/order/paymethodList',
+        headers: {
+          Authorization: hasToken
+        },
+      })
+        .then((res) => {
+          context.commit('GET_PAYMENTLIST', res.data)
         })
         .catch((err) => {
           console.log(err)

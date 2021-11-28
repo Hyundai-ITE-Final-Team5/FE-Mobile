@@ -23,11 +23,6 @@ export default {
   components: {
     shoppingbagColorListItem,
   },
-  computed: {
-    colorList: function() {
-      return this.$store.getters.colorList
-    }
-  },
   methods: {
     sendNewpsid: function(psid) {
       this.$emit('changepsid', psid)
