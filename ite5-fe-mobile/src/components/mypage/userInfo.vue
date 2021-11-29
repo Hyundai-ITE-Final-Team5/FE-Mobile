@@ -1,12 +1,13 @@
 <template>
   <div class="ms-3 mt-4">
+    <h3 class="fw-bold my-3">회원 정보</h3>
     <!-- ID -->
     <div class="d-flex">
       <div class="col-3">
         <h5>아이디</h5>
       </div>
       <div class="col-9">
-        <h5 v-if="userInfo">{{ userInfo.mid }}</h5>
+        <h6 v-if="userInfo">{{ userInfo.mid }}</h6>
       </div>
     </div>
     <!-- PASSWORD -->
@@ -17,7 +18,7 @@
       <div class="col-6">
         <input type="password" class="form-control" value="******">
       </div>
-      <div class="btn btn-outline-secondary">수정</div>
+      <div class="btn btn-dark ms-2">수정</div>
     </div>
     <!-- NAME -->
     <div class="d-flex my-2">
@@ -25,7 +26,7 @@
         <h5>이름</h5>
       </div>
       <div class="col-9">
-        <h5>{{ userInfo.mname }}</h5>
+        <h6>{{ userInfo.mname }}</h6>
       </div>
     </div>
     <!-- GENDER -->
@@ -34,8 +35,8 @@
         <h5>성별</h5>
       </div>
       <div class="col-9">
-        <h5 v-if="userInfo.mgender == 2">여</h5>
-        <h5 v-if="userInfo.mgender == 1">남</h5>
+        <h6 v-if="userInfo.mgender == 2">여</h6>
+        <h6 v-if="userInfo.mgender == 1">남</h6>
       </div>
     </div>
     <!-- 생년월일 -->
@@ -44,7 +45,7 @@
         <h5>생년월일</h5>
       </div>
       <div class="col-9">
-        <h5 v-if="userInfo">{{ birth }}</h5>
+        <h6 v-if="userInfo">{{ birth }}</h6>
       </div>
     </div>
     <!-- EMAIL -->
@@ -53,7 +54,7 @@
         <h5>이메일</h5>
       </div>
       <div class="col-9">
-        <h5>{{ userInfo.memail }}</h5>
+        <h6>{{ userInfo.memail }}</h6>
       </div>
     </div>
     <!-- PHONE -->
@@ -62,7 +63,7 @@
         <h5>휴대폰</h5>
       </div>
       <div class="col-9">
-        <h5 v-if="userInfo">{{ phone }}</h5>
+        <h6 v-if="userInfo">{{ phone }}</h6>
       </div>
     </div>
     <!-- TEL -->
@@ -71,19 +72,55 @@
         <h5>전화번호</h5>
       </div>
       <div class="col-9">
-        <h5 v-if="userInfo.mtel == null" class="ms-3">-</h5>
-        <h5 v-if="userInfo.mtel != null">{{ userInfo.mtel }}</h5>
+        <h6 v-if="userInfo.mtel == null" class="ms-3">-</h6>
+        <h6 v-if="userInfo.mtel != null">{{ userInfo.mtel }}</h6>
       </div>
     </div>
     <hr>
-    <h3>기본 배송지</h3>
+    <h3 class="fw-bold my-3">기본 배송지</h3>
     <!-- ZIPCODE -->
     <div class="d-flex my-2">
       <div class="col-3">
         <h5>우편번호</h5>
       </div>
       <div class="col-9">
-        <h5>12111</h5>
+        <h6>{{ userInfo.mzipcode }}</h6>
+      </div>
+    </div>
+    <!-- 주소1 -->
+    <div class="d-flex my-2">
+      <div class="col-3">
+        <h5>주소</h5>
+      </div>
+      <div class="col-9">
+        <h6>{{ userInfo.maddress1 }}</h6>
+      </div>
+    </div>
+    <!-- 주소2 -->
+    <div class="d-flex my-2">
+      <div class="col-3">
+        <h5>상세주소</h5>
+      </div>
+      <div class="col-9">
+        <h6>{{ userInfo.maddress2 }}</h6>
+      </div>
+    </div>
+    <hr>
+    <h5 class="fw-bold mt-4 mb-3">수신여부 동의</h5>
+    <h6 class="text-muted">더한섬닷컴에서 제공되는 서비스에 대한 수신동의 여부를 확인해주세요.</h6>
+    <h6 class="text-muted">선택 하시면 더한섬갓컴에서 진행하는 공지 및 이벤트 소식을 받아보실 수 있습니다.</h6>
+    <div class="d-flex mt-3">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" style="width: 20px; height: 20px;" checked>
+        <label class="form-check-label" for="agreement">
+          <h6 class="ms-1 mt-1">EMAIL</h6>
+        </label>
+      </div>
+      <div class="form-check mx-3">
+        <input class="form-check-input" type="checkbox" value="" style="width: 20px; height: 20px;">
+        <label class="form-check-label" for="agreement">
+          <h6 class="ms-1 mt-1">SMS</h6>
+        </label>
       </div>
     </div>
   </div>
@@ -105,7 +142,7 @@ export default {
    },
    phone: function() {
      const temp = this.userInfo.mphone
-     let phoneNumber = temp.slice(0, 3) + ' - ' + temp.slice(3, 7) + ' - ' + temp.slice(7, 11)
+     let phoneNumber = temp.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, "$1-$2-$3")
      return phoneNumber
    }
  },

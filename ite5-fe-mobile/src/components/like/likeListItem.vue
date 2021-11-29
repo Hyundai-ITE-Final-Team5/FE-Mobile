@@ -9,8 +9,8 @@
         <h6>{{ like.pname }}</h6>
         <h6>{{ like.pcprice }}<span> 원</span></h6>
         <div class="d-flex mt-4">
-          <button class="btn" style="color: #e4beb3; border-color: #e4beb3;" @click="deleteLike">삭제</button>
-          <button class="btn mx-2" style="color: gray; border-color: gray;" @click="getProductDetail">쇼핑백 담기</button>
+          <button class="btn btn-sm" style="color: #e4beb3; border-color: #e4beb3;" @click="deleteLike">삭제</button>
+          <button class="btn btn-sm mx-2" style="color: gray; border-color: gray;" @click="getProductDetail">쇼핑백 담기</button>
         </div>
       </div>
     </div>

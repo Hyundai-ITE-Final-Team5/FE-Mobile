@@ -1,15 +1,15 @@
 <template>
   <div class="ms-2">
-    <h1>Index</h1>
+    <hr class="my-5">
+    <indexBrandList/>
+    <indexCategoryList/>
+    <h1 class="mt-5">SEARCH</h1>
     <form class="d-flex my-3 ">
       <input class="form-control me-2">
       <button class="btn" type="submit">
         <img src="@/assets/search.png" alt="" style="width: 24px; border: #ced4da; opacity: 0.7;">
       </button>
     </form>
-    <hr class="my-5">
-    <indexBrandList/>
-    <indexCategoryList/>
   </div>
 </template>
 

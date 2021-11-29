@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="d-flex">
-      <h6>{{ coupon.ecoupontitle }}</h6>
-      <h6>&nbsp;&nbsp;-&nbsp;&nbsp;</h6>
-      <h6>{{ coupon.ediscount }}%</h6>
+      <h6>{{ coupon.cpid }}</h6>
     </div>
   </div>
 </template>

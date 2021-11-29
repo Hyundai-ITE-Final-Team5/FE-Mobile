@@ -25,6 +25,8 @@ export default new Vuex.Store({
     shoppingbagTotal: 0,
     // 주문상품 임시보관
     tempOrderInfo: [],
+    // 결제정보 임시보관
+    tempOrderCompleteInfo: [],
     // 보유 쿠폰 목록
     couponList: [],
     // 로딩상태 표시
@@ -166,6 +168,14 @@ export default new Vuex.Store({
     // 결제수단 목록 가져오기
     GET_PAYMENTLIST: function(state, methods) {
       state.paymentList = methods
+    },
+    // 결제완료
+    PAY: function(state, pmInfo) {
+      state.tempOrderCompleteInfo = pmInfo
+      state.shoppingbag = []
+      state.shoppingbagTotal = 0
+      state.tempOrderInfo = []
+      console.log(state.tempOrderCompleteInfo)
     },
   },
   actions: {
@@ -692,7 +702,7 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          //context.commit('GET_PAYMENTLIST', res.data)
+          context.commit('PAY', res.data)
           console.log(res.data)
         })
         .catch((err) => {

@@ -127,7 +127,7 @@
     <h3 class="mt-4 fw-bold">Point</h3>
     <div class="d-flex ms-2">
       <div class="form mb-3">
-        <input v-model="orderUserInfo.ousedmileage" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
+        <input v-model="orderUserInfo.ousedmileage" type="number" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
               style="height: 7vh; width: 65vw;">
       </div>
       <div>
@@ -142,7 +142,7 @@
     <hr>
     <h3 class="my-4 fw-bold">Coupon</h3>
     <div class="d-flex mb-4">
-      <select class="select form-select border-2 border-top-0 border-start-0 border-end-0" aria-label="Default select example" style="width: 250px;">
+      <select v-model="orderUserInfo.cpid" class="select form-select border-2 border-top-0 border-start-0 border-end-0" aria-label="Default select example" style="width: 250px;">
         <option value="">-</option>
         <option>
           <couponListItem v-for="(coupon, cpidx) in couponList" :key="cpidx" :coupon="coupon" :cpidx="cpidx"/>
@@ -152,6 +152,8 @@
         <h5 class="mt-2 ms-3">쿠폰목록</h5>
       </div>
     </div>
+    <h6 v-if="getUsedCouponName != 0" class="ms-2 fw-bold">{{ getUsedCouponName }} - {{ getUsedCoupon }} %</h6>
+    <h6 class="ms-2 mt-3 text-muted">* 쿠폰은 중복으로 사용하실 수 없습니다.</h6>
     <hr>
     <h3 class="my-4 fw-bold">최종 결제금액</h3>
     <div class="ms-4">
@@ -173,23 +175,27 @@
           <h5>원</h5>
         </div>
       </div>
+      <div class="mb-3 me-3 text-end">
+        <h6 v-if="orderUserInfo.ousedmileage != 0" style="color: #e4beb3;">{{ orderUserInfo.ousedmileage }}  Point 적용</h6>
+        <h6 v-if="getUsedCoupon > 0" style="color: #e4beb3;">{{ getUsedCoupon }} % 쿠폰할인</h6>
+      </div>
       <div class="d-flex me-3">
         <div class="d-flex col-5">
           <h5>합계</h5>
         </div>
         <div class="d-flex col-7 justify-content-end">
-          <h5 class="mx-2 fw-bold">{{ shoppingbagTotal }}</h5>
+          <h5 class="mx-2 fw-bold">{{ shoppingbagTotal * (1 - getUsedCoupon / 100) - orderUserInfo.ousedmileage }}</h5>
           <h5>원</h5>
         </div>
       </div>
       <div class="me-3 my-2 d-flex justify-content-end text-muted">
-        <h6 class="fw-bold me-2">{{ shoppingbagTotal * 0.05 }}</h6>
-        <h6>Point 적립</h6>
+        <h6 class="fw-bold me-2">{{ (shoppingbagTotal * (1 - getUsedCoupon / 100) - orderUserInfo.ousedmileage) * 0.05 }}</h6>
+        <h6>Point 적립 (5%)</h6>
       </div>
     </div>
     <hr>
     <h3 class="my-4 fw-bold">결제 수단</h3>
-    <div class="d-flex">
+    <div class="d-flex justify-content-center">
       <paymentListItem v-for="(pm, pmidx) in paymentList" :key="`pm + ${pmidx}`" :pm="pm" :pmidx="pmidx" @selectpm="selectpm"/>
     </div>
     <div class="d-flex ms-5 my-4">
@@ -244,6 +250,8 @@ export default {
         // 비워서보낼 정보
         "oid": '',
         "ozipcode": this.userInfo[0].mzipcode,
+        "oaddress1": this.userInfo[0].maddress1,
+        "oaddress2": this.userInfo[0].maddress2,
         "oreceiver": this.userInfo[0].mname,
         "ophone": this.userInfo[0].mphone,
         "orphone": this.userInfo[0].mphone,
@@ -270,6 +278,12 @@ export default {
       this.agreement = !this.agreement
     },
     pay: function() {
+      // 결제시간 기록
+      this.orderUserInfo.odate = this.getDateTime
+      // 쿠폰적용
+      if (this.orderUserInfo.cpid != '') this.orderUserInfo.oafterprice *= (1 - this.getUsedCoupon / 100)
+      // 포인트적용
+      this.orderUserInfo.oafterprice -= this.orderUserInfo.ousedmileage
       this.$store.dispatch('pay', this.orderUserInfo)
       this.$router.push('/ordercomplete')
     },
@@ -293,6 +307,31 @@ export default {
     shoppingbagTotal: function() {
       return this.$store.state.shoppingbagTotal
     },
+    getUsedCoupon: function() {
+      let discount = 0
+      for (let i = 0; i < this.couponList.length; i++) {
+        if (this.couponList[i].cpid == this.orderUserInfo.cpid) {
+          discount = this.couponList[i].ediscount
+          return discount
+        }
+        
+      }
+      return 0
+    },
+    getUsedCouponName: function() {
+      let name = ''
+      for (let i = 0; i < this.couponList.length; i++) {
+        if (this.couponList[i].cpid == this.orderUserInfo.cpid) {
+          name = this.couponList[i].ecoupontitle
+          return name
+        }
+      }
+      return ''
+    },
+    getDateTime: function() {
+      let time = new Date()
+      return time
+    },
   },
   mounted: function() {
     this.orderUserInfo.obeforeprice = this.shoppingbagTotal
@@ -304,6 +343,10 @@ export default {
 
 <style scoped>
 .btn:focus {
+  box-shadow: 0px 0px 0px transparent;
+  border-color: #a0a0a0;
+}
+.form-select:focus {
   box-shadow: 0px 0px 0px transparent;
   border-color: #a0a0a0;
 }

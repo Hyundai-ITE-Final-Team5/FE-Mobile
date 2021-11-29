@@ -5,7 +5,7 @@
       <h5 class="pt-2 mx-1 fw-bold">{{ shoppingbagCount }}</h5>
       <h5 class="pt-2 text-muted">개 상품이 있습니다.</h5>
     </div>
-    <h2 class="text-center text-muted" style="margin-top: 30vh;" v-if="shoppingbagCount == 0">쇼핑백에 상품이 없습니다.</h2>
+    <h2 class="text-center text-muted" style="margin-top: 40vh;" v-if="shoppingbagCount == 0">쇼핑백에 상품이 없습니다.</h2>
     <shoppingbagListItem v-for="(item, idx) in getShoppingbag" :key="idx" :item="item" :idx="idx"/>
     <div class="mt-3" v-if="shoppingbagCount > 0">
       <hr>
