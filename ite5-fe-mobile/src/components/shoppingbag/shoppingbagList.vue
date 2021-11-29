@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="d-flex justify-content-center mt-5">
-        <button @click="makeOrder" class="btn btn-dark col-10">주문하기</button>
+        <button @click="makeOrder" class="btn btn-lg btn-dark col-10">주문하기</button>
       </div>
     </div>
   </div>
@@ -82,10 +82,16 @@ export default {
     makeOrder: function() {
       const tempList = []
       for (let i = 0; i < this.shoppingbagCount; i++) {
-        this.order.psid = this.getShoppingbag[i].psid
-        this.order.oicount = this.getShoppingbag[i].pquantity
-        this.order.oitotalprice = this.getShoppingbag[i].pquantity * this.getShoppingbag[i].pcprice
-        tempList.push(this.order)
+        let tempObject = {
+          "psid": '',
+          "oid": '',
+          "oicount": 0,
+          "oitotalprice": 0,
+        }
+        tempObject.psid = this.getShoppingbag[i].psid
+        tempObject.oicount = this.getShoppingbag[i].pquantity
+        tempObject.oitotalprice = this.getShoppingbag[i].pquantity * this.getShoppingbag[i].pcprice
+        tempList.push(tempObject)
       }
       this.$store.dispatch('makeOrder', tempList)
       this.$router.push('/order')

@@ -1,7 +1,7 @@
 <template>
   <div class="me-3">
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="pmname" :id="'pmmethod_' + pmidx">
+      <input class="form-check-input" type="radio" name="pmname" :id="'pmmethod_' + pmidx" @click="selectpm">
       <label v-if="pm.pmmethod == 0" class="form-check-label" :for="'pmmethod_' + pmidx">
         신용카드
       </label>
@@ -24,6 +24,11 @@ export default {
     },
     pmidx: {
       type: Number
+    },
+  },
+  methods: {
+    selectpm: function() {
+      this.$emit('selectpm', this.pm.pmcode)
     },
   },
 }

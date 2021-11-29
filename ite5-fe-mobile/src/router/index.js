@@ -8,6 +8,7 @@ import MyPage from '@/views/MyPage.vue'
 import Product from '@/views/Product.vue'
 import ProductDetail from '@/views/ProductDetail.vue'
 import Order from '@/views/Order.vue'
+import OrderComplete from '@/views/OrderComplete.vue'
 import Login from '@/views/Login.vue'
 import Join from '@/views/Join.vue'
 
@@ -54,6 +55,11 @@ const routes = [
     path: '/order',
     name: 'Order',
     component: Order
+  },
+  {
+    path: '/ordercomplete',
+    name: 'OrderComplete',
+    component: OrderComplete
   },
   {
     path: '/login',

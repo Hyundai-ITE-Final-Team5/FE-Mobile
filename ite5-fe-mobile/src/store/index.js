@@ -664,13 +664,36 @@ export default new Vuex.Store({
       }
       axios({
         method: 'get',
-        url: 'http://kosa1.iptime.org:50315/order/paymethodList',
+        url: 'http://byeon.yonghyeok.site:8888/order/paymethodList',
         headers: {
           Authorization: hasToken
         },
       })
         .then((res) => {
           context.commit('GET_PAYMENTLIST', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 결제하기
+    pay: function(context , orderpayInfo) {
+      let hasToken = ''
+      if (context.state.userToken != null) {
+        hasToken = 'Bearer ' + context.state.userToken
+      }
+      console.log(orderpayInfo)
+      axios({
+        method: 'post',
+        url: 'http://byeon.yonghyeok.site:8888/order/carttoorder ',
+        data: orderpayInfo,
+        headers: {
+          Authorization: hasToken
+        },
+      })
+        .then((res) => {
+          //context.commit('GET_PAYMENTLIST', res.data)
+          console.log(res.data)
         })
         .catch((err) => {
           console.log(err)

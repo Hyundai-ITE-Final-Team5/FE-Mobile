@@ -1,28 +1,54 @@
 <template>
-  <div>
+  <div id="orderList">
     <orderListItem v-for="(orderitem, oidx) in getShoppingbag" :key="oidx" :oidx="oidx" :orderitem="orderitem"/>
-    <h3 class="mt-4 fw-bold">주문자 정보</h3>
+    <h3 class="my-4 fw-bold">주문자 정보</h3>
     <!-- 아이디 -->
-    <div class="d-flex ms-2">
+    <div class="d-flex ms-2 my-3">
       <div class="col-3">
-        <h5 class="mt-4">아이디</h5>
+        <h5>아이디</h5>
       </div>
-      <div class="form mb-3">
-        <input v-model="orderUserInfo.mid" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-              style="height: 7vh; width: 65vw;" value="">
-      </div>
+      <h6 class="ms-3">{{ userInfo[0].mid }}</h6>
     </div>
     <!-- 주문자 이름 -->
+    <div class="d-flex ms-2 my-3">
+      <div class="col-3">
+        <h5>이름</h5>
+      </div>
+      <h6 class="ms-3">{{ userInfo[0].mname }}</h6>
+    </div>
+    <!-- 주문자 휴대폰 -->
+    <div class="d-flex ms-2 my-3">
+      <div class="col-3">
+        <h5>휴대폰</h5>
+      </div>
+      <h6 class="ms-3">{{ userInfo[0].mphone }}</h6>
+    </div>
+    <!-- 주문자 전화번호 -->
+    <div class="d-flex ms-2 my-3">
+      <div class="col-3">
+        <h5 >전화번호</h5>
+      </div>
+      <h6 class="ms-3">{{ userInfo[0].mtel }}</h6>
+    </div>
+    <!-- 주문자 이메일 -->
+    <div class="d-flex ms-2 my-3">
+      <div class="col-3">
+        <h5>이메일</h5>
+      </div>
+      <h6 class="ms-3">{{ userInfo[0].memail }}</h6>
+    </div>
+    <h3 class="mt-4 fw-bold">수령인 정보</h3>
+    <!-- 수령인 이름 -->
     <div class="d-flex ms-2">
       <div class="col-3">
         <h5 class="mt-4">이름</h5>
       </div>
       <div class="form mb-3">
-        <input type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-              style="height: 7vh; width: 65vw;" :value="userInfo[0].mname">
+        <input v-model="orderUserInfo.oreceiver" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
+              style="height: 7vh; width: 65vw;">
       </div>
     </div>
-    <!-- 주문자 휴대폰 -->
+    <!-- 수령인 휴대폰 -->
     <div class="d-flex ms-2">
       <div class="col-3">
         <h5 class="mt-4">휴대폰</h5>
@@ -32,7 +58,7 @@
               style="height: 7vh; width: 65vw;" value="">
       </div>
     </div>
-    <!-- 주문자 전화번호 -->
+    <!-- 수령인 전화번호 -->
     <div class="d-flex ms-2">
       <div class="col-3">
         <h5 class="mt-4">전화번호</h5>
@@ -54,26 +80,6 @@
     </div>
     <hr>
     <h3 class="mt-4 fw-bold">배송 정보</h3>
-    <!-- 수령인 이름 -->
-    <div class="d-flex ms-2">
-      <div class="col-3">
-        <h5 class="mt-4">이름</h5>
-      </div>
-      <div class="form mb-3">
-        <input type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-              style="height: 7vh; width: 65vw;" :value="userInfo[0].mname">
-      </div>
-    </div>
-    <!-- 수령인 휴대폰 -->
-    <div class="d-flex ms-2">
-      <div class="col-3">
-        <h5 class="mt-4">휴대폰</h5>
-      </div>
-      <div class="form mb-3">
-        <input v-model="orderUserInfo.orphone" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-              style="height: 7vh; width: 65vw;" value="">
-      </div>
-    </div>
     <!-- 수령인 우편번호 -->
     <div class="d-flex ms-2">
       <div class="col-3">
@@ -125,7 +131,7 @@
               style="height: 7vh; width: 65vw;">
       </div>
       <div>
-        <button class="btn btn-dark ms-2 mt-3">전액사용</button>
+        <button class="btn btn-dark ms-2 mt-3" @click="useMileageAll">전액사용</button>
       </div>
     </div>
     <div class="d-flex">
@@ -137,6 +143,7 @@
     <h3 class="my-4 fw-bold">Coupon</h3>
     <div class="d-flex mb-4">
       <select class="select form-select border-2 border-top-0 border-start-0 border-end-0" aria-label="Default select example" style="width: 250px;">
+        <option value="">-</option>
         <option>
           <couponListItem v-for="(coupon, cpidx) in couponList" :key="cpidx" :coupon="coupon" :cpidx="cpidx"/>
         </option>
@@ -183,7 +190,7 @@
     <hr>
     <h3 class="my-4 fw-bold">결제 수단</h3>
     <div class="d-flex">
-      <paymentListItem v-for="(pm, pmidx) in paymentList" :key="`pm + ${pmidx}`" :pm="pm" :pmidx="pmidx"/>
+      <paymentListItem v-for="(pm, pmidx) in paymentList" :key="`pm + ${pmidx}`" :pm="pm" :pmidx="pmidx" @selectpm="selectpm"/>
     </div>
     <div class="d-flex ms-5 my-4">
       <img src="@/assets/creditcard.png" style="width: 250px;" alt="">
@@ -201,8 +208,8 @@
       <h6>(전자상거래법 제8조 2항)</h6>
     </div>
     <div class="d-flex justify-content-center my-4">
-      <button v-if="agreement" class="btn btn-dark col-10 mt-3">결제하기</button>
-      <button v-if="!agreement" class="btn btn-dark col-10 mt-3" disabled>결제하기</button>
+      <button v-if="agreement" class="btn btn-lg btn-dark col-10 mt-3" @click="pay">결제하기</button>
+      <button v-if="!agreement" class="btn btn-lg btn-dark col-10 mt-3" disabled>결제하기</button>
     </div>
 
   </div>
@@ -234,22 +241,26 @@ export default {
   data: function() {
     return {
       orderUserInfo: {
+        // 비워서보낼 정보
         "oid": '',
         "ozipcode": this.userInfo[0].mzipcode,
-        "oreceiver": '',
+        "oreceiver": this.userInfo[0].mname,
         "ophone": this.userInfo[0].mphone,
         "orphone": this.userInfo[0].mphone,
-        "otel": '',
+        "otel": this.userInfo[0].mtel,
         "omemo": '문앞에 두고 가주세요 :)',
         "oemail": this.userInfo[0].memail,
         "ousedmileage": 0,
         "obeforeprice": 0,
         "oafterprice": 0,
+        // 비워서보낼 정보
         "ostatus": '',
         "mid": this.userInfo[0].mid,
         "pmcode": '',
+        // 비워서보낼 정보
         "odate": '',
-        "oitems": {},
+        "cpid": '',
+        "items": [],
       },
       agreement: false,
     }
@@ -257,6 +268,16 @@ export default {
   methods: {
     checkAgreement: function() {
       this.agreement = !this.agreement
+    },
+    pay: function() {
+      this.$store.dispatch('pay', this.orderUserInfo)
+      this.$router.push('/ordercomplete')
+    },
+    useMileageAll: function() {
+      this.orderUserInfo.ousedmileage = this.userInfo[0].mmileage
+    },
+    selectpm: function(pmcode) {
+      this.orderUserInfo.pmcode = pmcode
     },
   },
   computed: {
@@ -273,6 +294,11 @@ export default {
       return this.$store.state.shoppingbagTotal
     },
   },
+  mounted: function() {
+    this.orderUserInfo.obeforeprice = this.shoppingbagTotal
+    this.orderUserInfo.oafterprice = this.shoppingbagTotal
+    this.orderUserInfo.items = this.getTempOrderInfo
+  },
 }
 </script>
 
@@ -280,5 +306,11 @@ export default {
 .btn:focus {
   box-shadow: 0px 0px 0px transparent;
   border-color: #a0a0a0;
+}
+input:disabled {
+  background-color: transparent;
+}
+#orderList {
+  overflow-x: hidden;
 }
 </style>
