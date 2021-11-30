@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h3>Order History</h3>
+  <div class="ms-3 mt-4">
+    <h3 class="fw-bold my-3">주문 내역</h3>
   </div>
 </template>
 

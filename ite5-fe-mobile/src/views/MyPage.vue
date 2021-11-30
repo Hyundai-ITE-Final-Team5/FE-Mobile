@@ -2,20 +2,52 @@
   <div>
     <div class="d-flex ms-3 justify-content-between">
       <div class="d-flex">
-        <h3 v-if="userInfo.mgrade == 0">🎀</h3>
-        <h3 v-if="userInfo.mgrade == 1">💍</h3>
-        <h3 v-if="userInfo.mgrade >= 2">💎</h3>
+        <img v-if="userInfo.mgrade == 1" src="https://static.solved.ac/tier_small/0.svg" style="width: 24px; heigth: 24px;" alt="">
+        <h3>&nbsp;</h3>
+        <img v-if="userInfo.mgrade == 2" src="https://static.solved.ac/tier_small/10.svg" style="width: 24px; heigth: 24px;" alt="">
+        <h3>&nbsp;</h3>
+        <img v-if="userInfo.mgrade == 3" src="https://static.solved.ac/tier_small/14.svg" style="width: 24px; heigth: 24px;" alt="">
+        <h3>&nbsp;</h3>
+        <img v-if="userInfo.mgrade == 4" src="https://static.solved.ac/tier_small/18.svg" style="width: 24px; heigth: 24px;" alt="">
+        <h3>&nbsp;</h3>
+        <img v-if="userInfo.mgrade == 5" src="https://static.solved.ac/tier_small/22.svg" style="width: 24px; heigth: 24px;" alt="">
+        <h3>&nbsp;</h3>
+        <img v-if="userInfo.mgrade == 6" src="https://static.solved.ac/tier_small/26.svg" style="width: 24px; heigth: 24px;" alt="">
         <h3>&nbsp;</h3>
         <h3 v-if="decodedJWT" class="fw-bold">{{ decodedJWT.mid }}</h3>
         <h3>&nbsp; 님</h3>
       </div>
       <img src="@/assets/question.png" alt="" @click="showRateInfo" class="me-3" style="width: 28px; height:26px; opacity: 0.3;">
     </div>
-    <div id="rateInfo" class="mt-4" style="display: none;">
+    <div>
+
+    </div>
+    <div id="rateInfo" class="ms -3mt-4" style="display: none;">
       <h5 class="ms-2 my-3">등급 안내</h5>
-      <h5 class=" ms-3">🎀 1등급: 월 이용금액 0 ~ 100 만원</h5>
-      <h5 style="margin-left: 20px;">💍 2등급: 월 이용금액 100 ~ 200 만원</h5>
-      <h5 class="ms-3">💎 3등급: 월 이용금액 200 만원 이상</h5>
+      <div class="d-flex">
+        <img class="ms-4" src="https://static.solved.ac/tier_small/0.svg" style="width: 22px; heigth: 22px;" alt="">
+        <h5 class=" ms-3 mt-1">월 이용금액 0 원</h5>
+      </div>
+      <div class="d-flex">
+        <img class="ms-4" src="https://static.solved.ac/tier_small/10.svg" style="width: 22px; heigth: 22px;" alt="">
+        <h5 class="ms-3 mt-1">월 이용금액 0 ~ 100 만원</h5>
+      </div>
+      <div class="d-flex">
+        <img class="ms-4" src="https://static.solved.ac/tier_small/14.svg" style="width: 22px; heigth: 22px;" alt="">
+        <h5 class="ms-3 mt-1">월 이용금액 100 ~ 200 만원</h5>
+      </div>
+      <div class="d-flex">
+        <img class="ms-4" src="https://static.solved.ac/tier_small/18.svg" style="width: 22px; heigth: 22px;" alt="">
+        <h5 class="ms-3 mt-1">월 이용금액 200 ~ 300 만원</h5>
+      </div>
+      <div class="d-flex">
+        <img class="ms-4" src="https://static.solved.ac/tier_small/22.svg" style="width: 22px; heigth: 22px;" alt="">
+        <h5 class="ms-3 mt-1">월 이용금액 300 ~ 400 만원</h5>
+      </div>
+      <div class="d-flex">
+        <img class="ms-4" src="https://static.solved.ac/tier_small/26.svg" style="width: 22px; heigth: 22px;" alt="">
+        <h5 class="ms-3 mt-1">월 이용금액 400 ~ 500 만원</h5>
+      </div>
       <h6 class="mt-4 ms-4 text-muted">* 해당 등급은 매월 초 갱신됩니다.</h6>
     </div>
     <div class="d-flex justify-content-center">
@@ -114,6 +146,8 @@ export default {
   },
   mounted: function() {
     this.$store.dispatch('getCouponList')
+    this.$store.dispatch('getUserInfo')
+    this.$store.dispatch('getOrderHistory')
   },
 
 }

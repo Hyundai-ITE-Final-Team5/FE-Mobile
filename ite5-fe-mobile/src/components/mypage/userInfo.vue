@@ -108,7 +108,7 @@
     <hr>
     <h5 class="fw-bold mt-4 mb-3">수신여부 동의</h5>
     <h6 class="text-muted">더한섬닷컴에서 제공되는 서비스에 대한 수신동의 여부를 확인해주세요.</h6>
-    <h6 class="text-muted">선택 하시면 더한섬갓컴에서 진행하는 공지 및 이벤트 소식을 받아보실 수 있습니다.</h6>
+    <h6 class="text-muted">선택 하시면 더한섬닷컴에서 진행하는 공지 및 이벤트 소식을 받아보실 수 있습니다.</h6>
     <div class="d-flex mt-3">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" style="width: 20px; height: 20px;" checked>
@@ -129,9 +129,6 @@
 <script>
 export default {
  name: 'userInfo',
- created: function() {
-   this.$store.dispatch('getUserInfo')
- },
  computed: {
    userInfo: function() {
      return this.$store.state.userInfo
