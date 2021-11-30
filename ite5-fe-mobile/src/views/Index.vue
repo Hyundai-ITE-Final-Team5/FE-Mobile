@@ -1,8 +1,8 @@
 <template>
-  <div class="ms-2">
-    <hr class="my-5">
+  <div class="ms-2 mb-4">
     <indexBrandList/>
     <indexCategoryList/>
+    <hr class="mt-5">
     <h1 class="mt-5">SEARCH</h1>
     <form class="d-flex my-3 ">
       <input class="form-control me-2">

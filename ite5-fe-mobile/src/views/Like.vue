@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="like">
     <div class="d-flex mb-3">
       <img src="@/assets/heart.png" alt="" style="width: 32px; height: 32px;">
       <h5 class="mx-1 mt-1 fw-bold">{{ countLikeList }}</h5>
@@ -26,6 +26,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+#like {
+  overflow-x: hidden;
+}
 </style>

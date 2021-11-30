@@ -27,6 +27,8 @@ export default new Vuex.Store({
     tempOrderInfo: [],
     // 결제정보 임시보관
     tempOrderCompleteInfo: [],
+    // 주문번호
+    orderNumber: '',
     // 보유 쿠폰 목록
     couponList: [],
     // 로딩상태 표시
@@ -172,10 +174,9 @@ export default new Vuex.Store({
     // 결제완료
     PAY: function(state, pmInfo) {
       state.tempOrderCompleteInfo = pmInfo
-      state.shoppingbag = []
-      state.shoppingbagTotal = 0
-      state.tempOrderInfo = []
-      console.log(state.tempOrderCompleteInfo)
+      // state.shoppingbag = []
+      // state.shoppingbagTotal = 0
+      // state.tempOrderInfo = []
     },
   },
   actions: {
@@ -513,7 +514,6 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('GET_SHOPPINGBAG_LIST', res.data)
-          console.log(res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -608,6 +608,7 @@ export default new Vuex.Store({
     },
     // 회원가입시 아이디 중복 체크
     duplicatedMidCheck: function(context, mid) {
+      console.log(mid)
       axios({
         method: 'post',
         url: 'http://kosa1.iptime.org:50215/idcheck',
@@ -637,6 +638,27 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('GET_USER_INFO', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 마이페이지 주문내역 가져오기
+    getOrderHistory: function(context) {
+      let hasToken = ''
+      if (context.state.userToken != null) {
+        hasToken = 'Bearer ' + context.state.userToken
+      }
+      axios({
+        method: 'post',
+        url: 'http://kosa1.iptime.org:50315/order/orderlist',
+        headers: {
+          Authorization: hasToken
+        },
+      })
+        .then((res) => {
+          //context.commit('GET_USER_INFO', res.data)
+          console.log(res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -674,7 +696,7 @@ export default new Vuex.Store({
       }
       axios({
         method: 'get',
-        url: 'http://byeon.yonghyeok.site:8888/order/paymethodList',
+        url: 'http://kosa1.iptime.org:50315/order/paymethodList',
         headers: {
           Authorization: hasToken
         },
@@ -695,15 +717,15 @@ export default new Vuex.Store({
       console.log(orderpayInfo)
       axios({
         method: 'post',
-        url: 'http://byeon.yonghyeok.site:8888/order/carttoorder ',
+        url: 'http://kosa1.iptime.org:50315/order/carttoorder ',
         data: orderpayInfo,
         headers: {
           Authorization: hasToken
         },
       })
         .then((res) => {
-          context.commit('PAY', res.data)
-          console.log(res.data)
+          context.commit('PAY', orderpayInfo)
+          this.state.orderNumber = res.data.oid
         })
         .catch((err) => {
           console.log(err)

@@ -99,8 +99,8 @@
         <h5 class="mt-4">주소</h5>
       </div>
       <div class="form mb-3">
-        <input type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-              style="height: 7vh; width: 65vw;" :value="this.userInfo[0].maddress1">
+        <input v-model="orderUserInfo.oaddress1" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
+              style="height: 7vh; width: 65vw;" value="">
       </div>
     </div>
     <!-- 수령인 주소2 -->
@@ -109,8 +109,8 @@
         <h5 class="mt-4">상세주소</h5>
       </div>
       <div class="form mb-3">
-        <input type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-              style="height: 7vh; width: 65vw;" :value="this.userInfo[0].maddress2">
+        <input v-model="orderUserInfo.oaddress2" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
+              style="height: 7vh; width: 65vw;" value="">
       </div>
     </div>
     <!-- 메모 -->
@@ -144,9 +144,7 @@
     <div class="d-flex mb-4">
       <select v-model="orderUserInfo.cpid" class="select form-select border-2 border-top-0 border-start-0 border-end-0" aria-label="Default select example" style="width: 250px;">
         <option value="">-</option>
-        <option>
-          <couponListItem v-for="(coupon, cpidx) in couponList" :key="cpidx" :coupon="coupon" :cpidx="cpidx"/>
-        </option>
+        <option v-for="(coupon, cpidx) in availableCouponList" :key="cpidx" :coupon="coupon" :cpidx="cpidx">{{ coupon.cpid }}</option>
       </select>
       <div>
         <h5 class="mt-2 ms-3">쿠폰목록</h5>
@@ -177,7 +175,7 @@
       </div>
       <div class="mb-3 me-3 text-end">
         <h6 v-if="orderUserInfo.ousedmileage != 0" style="color: #e4beb3;">{{ orderUserInfo.ousedmileage }}  Point 적용</h6>
-        <h6 v-if="getUsedCoupon > 0" style="color: #e4beb3;">{{ getUsedCoupon }} % 쿠폰할인</h6>
+        <h6 v-if="getUsedCoupon > 0" style="color: #e4beb3;">{{ orderUserInfo.cpid  }} - {{ getUsedCoupon }} % 쿠폰할인</h6>
       </div>
       <div class="d-flex me-3">
         <div class="d-flex col-5">
@@ -223,14 +221,12 @@
 
 <script>
 import orderListItem from '@/components/order/orderListItem'
-import couponListItem from '@/components/order/couponListItem'
 import paymentListItem from '@/components/order/paymentListItem'
 
 export default {
   name: 'orderList',
   components: {
     orderListItem,
-    couponListItem,
     paymentListItem,
   },
   props: {
@@ -249,9 +245,9 @@ export default {
       orderUserInfo: {
         // 비워서보낼 정보
         "oid": '',
-        "ozipcode": this.userInfo[0].mzipcode,
-        "oaddress1": this.userInfo[0].maddress1,
-        "oaddress2": this.userInfo[0].maddress2,
+        "ozipcode": '',
+        "oaddress1": '',
+        "oaddress2": '',
         "oreceiver": this.userInfo[0].mname,
         "ophone": this.userInfo[0].mphone,
         "orphone": this.userInfo[0].mphone,
@@ -331,6 +327,14 @@ export default {
     getDateTime: function() {
       let time = new Date()
       return time
+    },
+    availableCouponList: function() {
+      let temp = []
+      for (let i = 0; i < this.couponList.length; i++) {
+        if (this.couponList[i].cpstatus == 1)
+        temp.push(this.couponList[i])
+      }
+      return temp
     },
   },
   mounted: function() {

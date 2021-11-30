@@ -9,7 +9,7 @@
         계좌이체
       </label>
       <label v-if="pm.pmmethod == 2" class="form-check-label" :for="'pmmethod_' + pmidx">
-        무통장 입금
+        무통장입금
       </label>
     </div>
   </div>
