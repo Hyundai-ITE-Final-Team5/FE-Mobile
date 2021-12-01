@@ -1,6 +1,7 @@
 <template>
   <div id="orderList">
     <orderListItem v-for="(orderitem, oidx) in getShoppingbag" :key="oidx" :oidx="oidx" :orderitem="orderitem"/>
+    <hr>
     <h3 class="my-4 fw-bold">주문자 정보</h3>
     <!-- 아이디 -->
     <div class="d-flex ms-2 my-3">

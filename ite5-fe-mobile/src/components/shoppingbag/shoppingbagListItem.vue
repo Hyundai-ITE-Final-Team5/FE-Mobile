@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <hr>
+  <div class="my-3">
     <div class="d-flex">
       <div class="col-4 ps-2">
         <img :src="itemInfo.pcimg1" alt="" style="width: 105px;">

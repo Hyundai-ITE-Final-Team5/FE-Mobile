@@ -13,6 +13,8 @@ export default new Vuex.Store({
     userToken: null,
     // 사용자 정보
     userInfo: [],
+    // 이벤트 목록
+    eventList: [],
     // 좋아요 목록
     likes: [],
     // 상품 목록
@@ -29,6 +31,8 @@ export default new Vuex.Store({
     tempOrderCompleteInfo: [],
     // 주문번호
     orderNumber: '',
+    // 주문내역 목록
+    orderHistoryList: [],
     // 보유 쿠폰 목록
     couponList: [],
     // 로딩상태 표시
@@ -177,6 +181,13 @@ export default new Vuex.Store({
       // state.shoppingbag = []
       // state.shoppingbagTotal = 0
       // state.tempOrderInfo = []
+    },
+    GET_ORDER_HISTORY: function(state, orderHistory) {
+      state.orderHistoryList = orderHistory
+    },
+    GET_EVENT_LIST: function(state, eventList) {
+      state.eventList = eventList
+      console.log(state.eventList)
     },
   },
   actions: {
@@ -488,7 +499,14 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    // 좋아요 목록 가져오기
     getLikeList: function(context) {
+      // 로딩중 중복요청 제한
+      if (this.state.loading) {
+        return
+      }
+      this.state.loading = true
+
       axios({
         method: 'post',
         url: 'http://kosa1.iptime.org:50215/member/likes/likelist',
@@ -502,9 +520,18 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err)
         })
+        .finally(() => {
+          this.state.loading = false
+        })
     },
     // 쇼핑백 목록 가져오기
     getShoppingbagList: function(context) {
+      // 로딩중 중복요청 제한
+      if (this.state.loading) {
+        return
+      }
+      this.state.loading = true
+
       axios({
         method: 'post',
         url: 'http://kosa1.iptime.org:50215/member/cart/cartlist',
@@ -517,6 +544,9 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err)
+        })
+        .finally(() => {
+          this.state.loading = false
         })
     },
     // 선택 상품 상세정보 가져오기
@@ -608,7 +638,6 @@ export default new Vuex.Store({
     },
     // 회원가입시 아이디 중복 체크
     duplicatedMidCheck: function(context, mid) {
-      console.log(mid)
       axios({
         method: 'post',
         url: 'http://kosa1.iptime.org:50215/idcheck',
@@ -657,8 +686,7 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          //context.commit('GET_USER_INFO', res.data)
-          console.log(res.data)
+          context.commit('GET_ORDER_HISTORY', res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -714,10 +742,9 @@ export default new Vuex.Store({
       if (context.state.userToken != null) {
         hasToken = 'Bearer ' + context.state.userToken
       }
-      console.log(orderpayInfo)
       axios({
         method: 'post',
-        url: 'http://kosa1.iptime.org:50315/order/carttoorder ',
+        url: 'http://kosa1.iptime.org:50315/order/carttoorder',
         data: orderpayInfo,
         headers: {
           Authorization: hasToken
@@ -726,6 +753,83 @@ export default new Vuex.Store({
         .then((res) => {
           context.commit('PAY', orderpayInfo)
           this.state.orderNumber = res.data.oid
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 주문 취소하기
+    cancelOrder: function(context, oid) {
+      let hasToken = ''
+      if (context.state.userToken != null) {
+        hasToken = 'Bearer ' + context.state.userToken
+      }
+      axios({
+        method: 'get',
+        url: `http://kosa1.iptime.org:50315/order/cancelorder/${oid}`,
+        headers: {
+          Authorization: hasToken
+        },
+      })
+        .then((res) => {
+          //context.commit('PAY', orderpayInfo)
+          console.log(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 이벤트 리스트 가져오기
+    getEventList: function(context) {
+      axios({
+        method: 'get',
+        url: 'http://kosa1.iptime.org:50215/event/eventlist?pageNo=1',
+      })
+        .then((res) => {
+          context.commit('GET_EVENT_LIST', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 베스트상품 리스트 가져오기
+    getBestproduct: function(context) {
+      let hasToken = ''
+      if (context.state.userToken != null) {
+        hasToken = 'Bearer ' + context.state.userToken
+      }
+      console.log(context)
+      axios({
+        method: 'get',
+        url: 'http://kosa1.iptime.org:50415/bestproduct',
+        headers: {
+          Authorization: hasToken
+        },
+      })
+        .then((res) => {
+          //context.commit('GET_EVENT_LIST', res.data)
+          console.log(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 쿠폰다운로드
+    downloadCoupon: function(context, eno) {
+      let hasToken = ''
+      if (context.state.userToken != null) {
+        hasToken = 'Bearer ' + context.state.userToken
+      }
+      axios({
+        method: 'get',
+        url: `http://kosa1.iptime.org:50215/member/coupon/download?eno=${eno}`,
+        headers: {
+          Authorization: hasToken
+        },
+      })
+        .then((res) => {
+          //context.commit('GET_EVENT_LIST', res.data)
+          console.log(res.data)
         })
         .catch((err) => {
           console.log(err)

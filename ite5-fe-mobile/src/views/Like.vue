@@ -5,6 +5,9 @@
       <h5 class="mx-1 mt-1 fw-bold">{{ countLikeList }}</h5>
       <h5 class="mt-1 text-muted">개 상품을 좋아합니다.</h5>
     </div>
+    <div class="d-flex justify-content-center">
+      <div v-if="loading" class="spinner-border my-2" style="color: gray; margin-top: 60vh;"></div>
+    </div>
     <likeList/>
     <h2 class="text-center text-muted" style="margin-top: 30vh;" v-if="countLikeList == 0">좋아요 한 상품이 없습니다.</h2>
   </div>
@@ -21,6 +24,9 @@ export default {
   computed: {
     countLikeList: function() {
       return this.$store.state.likes.length
+    },
+    loading: function() {
+      return this.$store.state.loading
     },
   },
 }
