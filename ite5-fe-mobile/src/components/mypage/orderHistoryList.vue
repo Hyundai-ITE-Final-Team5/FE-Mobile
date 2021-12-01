@@ -22,7 +22,7 @@
       </div>
       <div class="col-8">
         <h6 v-if="order.ostatus != '주문취소'" style="color: #b1d3c5;">{{ order.ostatus }}</h6>
-        <h6 v-if="order.ostatus == '주문취소'" style="color: #e4beb3;">{{ order.ostatus }}</h6>
+        <h6 v-if="order.ostatus == '주문취소'" id="orderStatus" style="color: #e4beb3;">{{ order.ostatus }}</h6>
       </div>
     </div>
     <orderHistoryListItem v-for="(oitem, oiidx) in order.items" :key="oiidx" :oitem="oitem" :oiidx="oiidx"/>
@@ -30,7 +30,7 @@
       <button class="btn btn-sm" style="color: #e4beb3; border-color: #e4beb3;" @click="cancelOrder">주문취소</button>
     </div>
     <div v-if="order.ostatus == '주문취소'" class="d-flex justify-content-end me-3">
-      <button class="btn btn-sm" style="color: #e4beb3; border-color: #e4beb3;" @click="cancelOrder" disabled>주문취소</button>
+      <button class="btn btn-sm" style="color: #e4beb3; border-color: #e4beb3;" disabled>주문취소</button>
     </div>
     <hr>
   </div>
@@ -56,6 +56,10 @@ export default {
     cancelOrder: function() {
       this.$store.dispatch('cancelOrder', this.order.oid)
       this.$store.dispatch('getOrderHistory')
+
+      const orderStatusId = document.getElementById('orderStatus')
+      orderStatusId.style.color = '#e4beb3'
+      orderStatusId.innerHTML = '주문취소'
     }
   },
 }

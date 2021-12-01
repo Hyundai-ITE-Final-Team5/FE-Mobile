@@ -1,6 +1,6 @@
 <template>
   <div class="me-1">
-    <img :src="best.colorinfo[0].pcimg1" style="width: 185px;" alt="">
+    <img :src="best.colorinfo[0].pcimg1" style="width: 185px;" alt="" @click="getProductDetail">
     <div class="d-flex justify-content-between mt-2">
       <h6 class="ms-1 mt-1 fw-bold">{{ best.bname }}</h6>
       <div class="d-flex">
@@ -31,13 +31,16 @@ export default {
   methods: {
     addLike: function() {
       this.$store.dispatch('addLike', this.best.pid)
-      
     },
     deleteLike: function() {
       this.$store.dispatch('deleteLike', this.best.pid)
     },
     goLogin: function() {
       this.$router.push('/login')
+    },
+    getProductDetail: function() {
+      this.$store.dispatch('getProductDetail', this.best.colorinfo[0].pcid)
+      this.$router.push('/productdetail')
     },
   },
   computed: {

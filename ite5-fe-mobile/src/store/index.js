@@ -627,6 +627,28 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    // 마이페이지 정보 수정
+    sendModifyUserInfo: function(context, modifiedInfo) {
+      let hasToken = ''
+      if (context.state.userToken != null) {
+        hasToken = 'Bearer ' + context.state.userToken
+      }
+      axios({
+        method: 'post',
+        url: 'http://kosa1.iptime.org:50215/member/modifyinfo',
+        data: modifiedInfo,
+        headers: {
+          Authorization: hasToken
+        },
+      })
+        .then((res) => {
+          //context.commit('GET_USER_INFO', res.data)
+          console.log(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     // 마이페이지 주문내역 가져오기
     getOrderHistory: function(context) {
       let hasToken = ''

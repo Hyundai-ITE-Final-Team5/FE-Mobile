@@ -59,12 +59,34 @@
         </div>
       </div>
       <div class="d-flex justify-content-center">
-        <button v-if="decodedJWT != null" @click="addShoppingbag" 
-                class="btn btn-lg btn-dark mt-4 mb-2 col-12">쇼핑백 담기</button>
-        <button v-if="decodedJWT == null" class="btn btn-lg btn-dark mt-4 mb-2 col-12" disabled>쇼핑백 담기</button>
+        <button v-if="decodedJWT != null && this.addProduct.psid != ''" @click="addShoppingbag" 
+                class="btn btn-lg btn-dark mt-4 mb-2 col-12" data-bs-toggle="modal" data-bs-target="#shoppingbagAlert">쇼핑백 담기</button>
+        <button v-else class="btn btn-lg btn-dark mt-4 mb-2 col-12" disabled>쇼핑백 담기</button>
       </div>
       <div class="d-flex justify-content-center">
         <button class="btn btn-lg btn-outline-dark mb-4 col-12">바로 주문</button>
+      </div>
+      <!-- 상품담기 Modal -->
+      <!-- Modal -->
+      <div class="modal fade" style="margin-top: 30vh;" id="shoppingbagAlert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="modal-title d-flex" id="exampleModalLabel">
+                <img src="@/assets/problem.png" style="height: 24px;" alt="">
+                <h5 class="mx-2">알림</h5>
+              </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              쇼핑백에 상품이 추가되었습니다.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-outline-dark col-2" data-bs-dismiss="modal">닫기</button>
+              <button type="button" class="btn btn-sm btn-dark col-2" @click="goShoppingbag" data-bs-dismiss="modal">확인</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -108,6 +130,9 @@ export default {
       this.carousel1 = pcimg1
       this.carousel2 = pcimg2
       this.carousel3 = pcimg3
+    },
+    goShoppingbag: function() {
+      this.$router.push('/shoppingbag')
     },
   },
   computed: {

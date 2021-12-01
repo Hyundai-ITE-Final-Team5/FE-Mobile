@@ -91,10 +91,10 @@
     </div>
     <hr>
     <div class="d-flex justify-content-center mt-5">
-      <button class="btn btn-dark col-10" @click="routeIndex">쇼핑 계속하기</button>
+      <button class="btn btn-lg btn-dark col-10" @click="routeIndex">쇼핑 계속하기</button>
     </div>
     <div class="d-flex justify-content-center my-2">
-      <button class="btn btn-outline-dark col-10" @click="routeMypage">쇼핑 내역보기</button>
+      <button class="btn btn-lg btn-outline-dark col-10" @click="routeMypage">쇼핑 내역보기</button>
     </div>
   </div>
 </template>
