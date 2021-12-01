@@ -17,6 +17,11 @@ import ProductList from '@/components/product/ProductList.vue'
 
 export default {
   name: 'Product',
+  data: function() {
+    return {
+      no: 1,
+    }
+  },
   components: {
     ProductList,
   },
@@ -24,17 +29,46 @@ export default {
     loading: function() {
       return this.$store.state.loading
     },
+    getProducts: function() {
+      return this.$store.state.products
+    },
+    brandCallKey: function() {
+      return this.$store.state.brandCallKey
+    },
+    categoryCallKey: function() {
+      return this.$store.state.categoryCallKey
+    },
   },
   methods: {
     scrollUp: function() {
       let position = document.documentElement.scrollTop
-      position -= 772
+      position -= 774
       window.scrollTo(0, position)
     },
     scrollDown: function() {
       let position = document.documentElement.scrollTop
-      position += 772
-      window.scrollTo(0, position)
+      let temp = ''
+      if (this.categoryCallKey == null) {
+        temp += this.brandCallKey
+        temp += '?pageNo='
+        temp += this.no
+        position += 774
+        window.scrollTo(0, position)
+        if (document.documentElement.scrollHeight - position <= 1000) {
+          this.no++
+          this.$store.dispatch('getBrandList', temp)
+        }
+      } else if (this.brandCallKey == null) {
+        temp += this.categoryCallKey
+        temp += '&pageNo='
+        temp += this.no
+        position += 774
+        window.scrollTo(0, position)
+        if (document.documentElement.scrollHeight - position <= 1000) {
+          this.no++
+          this.$store.dispatch('getCategoryList', temp)
+        }
+      }
     },
     closeFooterNavBar: function() {
       const footerNavBarId = document.getElementById('footerNavBar')

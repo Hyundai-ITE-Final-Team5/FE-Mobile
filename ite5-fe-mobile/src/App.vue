@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="mb-5 fixed-top" id="nav" style="margin-bottom: 70px;">
+    <div class="mb-5 fixed-top" id="nav">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <img src="@/assets/back.png" alt="" style="opacity: 0.6;" @click="goBack">
@@ -9,14 +9,14 @@
           </h4>
           <div class="d-flex">
             <router-link to="/login" v-if="decodedJWT == null">
-              <img src="@/assets/login.png" alt="" style="opacity: 0.7; height: 26px;" @click="moveMenuStatusBarMyPage">
+              <img src="@/assets/user.png" alt="" style="opacity: 0.7; height: 26px;" @click="moveMenuStatusBarMyPage">
             </router-link>
             <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.9; height: 28px;"></router-link>
           </div>
         </div>
       </nav>
     </div>
-    <router-view style="margin-top: 55px;"/>
+    <router-view style="margin-top: 60px;"/>
     <div style="height: 110px;">&nbsp;</div>
     <div class="fixed-bottom" id="footerNav">
       <button class="btn mb-3" style="color: white;" @click="showFooterNavBar" id="footerNavBarBtn">
@@ -136,8 +136,6 @@ hr {
   opacity: 0.2;
 }
 #app {
-  position: relative;
-  z-index: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -150,7 +148,7 @@ hr {
 }
 #nav {
   padding: 0px;
-  background-color: transparent;
+  background-color: white;
 }
 #nav a {
   color: #2c3e50;
@@ -168,8 +166,7 @@ hr {
 #footerNavBar {
   position: relative;
   background-color: white;
-  height: 70px;
-  padding-top: 3px;
+  height: 71px;
 }
 #footerNavBarBtn {
   position: relative;

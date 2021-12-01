@@ -19,13 +19,15 @@ export default {
   },
   methods: {
     getCategoryWOMENList: function() {
+      this.$store.dispatch('resetProductList')
       let str = ''
       str += '?depth1=WOMEN'
       str += '&depth2='
       str += this.womenkey
       str += '&depth3='
       str += this.depth3
-      this.$store.dispatch('getCategoryWOMENList', str)
+      this.$store.dispatch('changeCategoryCallKey', str)
+      this.$store.dispatch('getCategoryList', str)
     },
   },
 }

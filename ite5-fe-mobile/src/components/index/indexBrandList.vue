@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="mt-5 d-flex justify-content-between" @click="showBrand">
-      <h1 class="me-5">BRAND</h1>
-      <img src="@/assets/downSmall.png" alt="" class="btn" style="opacity: 0.4; height: 33px;">
+      <h1 class="mt-5 me-5">BRAND</h1>
+      <img src="@/assets/downSmall.png" alt="" class="btn mt-5" style="opacity: 0.4; height: 33px;">
     </div>
     <div id="brandIndex" style="display: none;">
       <indexBrandListItem v-for="(b, idx) in brandIndex" :key="idx" :b="b" :idx="idx" />
