@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="d-flex justify-content-center">
+      <div v-if="loading" class="spinner-border my-2" style="color: gray; margin-top: 60vh;"></div>
+    </div>
     <shoppingbagList/>
   </div>
 </template>
@@ -10,6 +13,11 @@ export default {
   name: 'ShoppingBag',
   components: {
     shoppingbagList,
+  },
+  computed: {
+    loading: function() {
+      return this.$store.state.loading
+    },
   },
   methods: {
     closeFooterNavBar: function() {

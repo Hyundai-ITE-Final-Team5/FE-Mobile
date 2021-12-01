@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my-3">
     <div class="d-flex">
       <div class="col-4 ps-2">
         <img :src="like.pcimg1" alt="" style="width: 105px;">
@@ -14,7 +14,6 @@
         </div>
       </div>
     </div>
-    <hr>
   </div>
 </template>
 
@@ -43,7 +42,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .btn:focus {   
   box-shadow: 0px 0px 0px transparent;
   border-color: #a0a0a0;

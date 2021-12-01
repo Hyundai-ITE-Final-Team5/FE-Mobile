@@ -134,13 +134,13 @@ export default {
      return this.$store.state.userInfo
    },
    birth: function() {
-    const birthDate = this.userInfo.mbirth.substring(0, 10)
+    const birthDate = this.userInfo.mbirth
     return birthDate
    },
    phone: function() {
      const temp = this.userInfo.mphone
-     let phoneNumber = temp.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, "$1-$2-$3")
-     return phoneNumber
+     //let phoneNumber = temp.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, "$1-$2-$3")
+     return temp
    }
  },
 }

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="mb-5 fixed-top" id="nav">
+    <div class="mb-5 fixed-top" id="nav" style="margin-bottom: 70px;">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <img src="@/assets/back.png" alt="" style="opacity: 0.6;" @click="goBack">
@@ -8,20 +8,17 @@
             <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
           </h4>
           <div class="d-flex">
-            <!-- 비로그인 -->
             <router-link to="/login" v-if="decodedJWT == null">
-              <img src="@/assets/user.png" alt="" style="opacity: 0.8; width: 24px;" @click="moveMenuStatusBarMyPage">
+              <img src="@/assets/login.png" alt="" style="opacity: 0.7; height: 26px;" @click="moveMenuStatusBarMyPage">
             </router-link>
-            <!-- 로그인 -->
             <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.9; height: 28px;"></router-link>
-            <!-- <div style="font-size: 1em; padding-top: 4px;">(0)</div> -->
           </div>
         </div>
       </nav>
     </div>
-    <router-view style="margin-top: 70px;"/>
+    <router-view style="margin-top: 55px;"/>
     <div style="height: 110px;">&nbsp;</div>
-    <div class="fixed-bottom ps-1" id="footerNav">
+    <div class="fixed-bottom" id="footerNav">
       <button class="btn mb-3" style="color: white;" @click="showFooterNavBar" id="footerNavBarBtn">
         <img src="@/assets/menu.png" alt="" id="footerNavBarBtnImg" style="opacity: 0.7;">
       </button>
@@ -122,10 +119,6 @@
         menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
         menuStatusBarId.classList.add("moveMyPage")
       },
-      categoryAAAAA: function() {
-        const category = 'AAAAA'
-        this.$store.dispatch('getCategoryAAAAA', category)
-      },
       goBack: function() {
         this.$router.go(-1)
       },
@@ -157,7 +150,7 @@ hr {
 }
 #nav {
   padding: 0px;
-  background-color: white;
+  background-color: transparent;
 }
 #nav a {
   color: #2c3e50;
@@ -176,6 +169,7 @@ hr {
   position: relative;
   background-color: white;
   height: 70px;
+  padding-top: 3px;
 }
 #footerNavBarBtn {
   position: relative;

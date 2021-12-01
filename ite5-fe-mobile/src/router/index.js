@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
+import Event from '@/views/Event.vue'
 import Index from '@/views/Index.vue'
 import ShoppingBag from '@/views/ShoppingBag.vue'
 import Like from '@/views/Like.vue'
@@ -19,6 +20,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/event',
+    name: 'Event',
+    component: Event
   },
   {
     path: '/index',
@@ -75,6 +81,9 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
+  scrollBehavior() { 
+    return { x: 0, y: 0 } 
+  },
   base: process.env.BASE_URL,
   routes
 })
