@@ -52,10 +52,10 @@ export default {
   },
   methods: {
     addLike: function() {
-      return this.$store.dispatch('addLike', this.product.pid)
+      this.$store.dispatch('addLike', this.product.pid)
     },
     deleteLike: function() {
-      return this.$store.dispatch('deleteLike', this.product.pid)
+      this.$store.dispatch('deleteLike', this.product.pid)
     },
     changeColor: function(color) {
       const productImgId = document.getElementById('productImg_' + this.idx)

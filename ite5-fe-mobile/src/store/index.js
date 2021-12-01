@@ -15,10 +15,16 @@ export default new Vuex.Store({
     userInfo: [],
     // 이벤트 목록
     eventList: [],
+    // 베스트 상품 목록
+    bestList: [],
     // 좋아요 목록
     likes: [],
     // 상품 목록
     products: [],
+    // 상품목록 부르는 키
+    brandCallKey: null,
+    // 카테고리목록 부르는 키
+    categoryCallKey: null,
     // 상품 상세
     productDetail: [],
     // 쇼핑백
@@ -66,12 +72,25 @@ export default new Vuex.Store({
     },
     GET_USER_INFO: function(state, info) {
       state.userInfo = info
-    }, 
+    },
+    RESET_PRODUCT_LIST: function(state) {
+      state.products = []
+    },
     GET_BRAND_INDEX: function(state, data) {
       state.brandIndex = data
     },
     GET_BRAND_LIST: function(state, data) {
-      state.products = data
+      for (let i = 0; i < data.length; i++) {
+        state.products.push(data[i])
+      }
+    },
+    CHANGE_BRAND_CALL_KEY: function(state, key) {
+      state.categoryCallKey = null
+      state.brandCallKey = key
+    },
+    CHANGE_CATEGORY_CALL_KEY: function(state, key) {
+      state.brandCallKey = null
+      state.categoryCallKey = key
     },
     // 카테고리
     GET_CATEGORY_WOMEN: function(state, data) {
@@ -98,17 +117,10 @@ export default new Vuex.Store({
       }
       state.categoryLSKeys = Object.keys(state.categoryLS)
     },
-    GET_CATEGORY_WOMEN_LIST: function(state, data) {
-      state.products = data
-    },
-    GET_CATEGORY_MEN_LIST: function(state, data) {
-      state.products = data
-    },
-    GET_CATEGORY_KIDS_LIST: function(state, data) {
-      state.products = data
-    },
-    GET_CATEGORY_LS_LIST: function(state, data) {
-      state.products = data
+    GET_CATEGORY_LIST: function(state, data) {
+      for (let i = 0; i < data.length; i++) {
+        state.products.push(data[i])
+      }
     },
     ADD_LIKE: function(state, productId) {
       for (let i = 0; i < state.products.length; i++) {
@@ -117,11 +129,23 @@ export default new Vuex.Store({
           break;
         }
       }
+      for (let i = 0; i < state.bestList.length; i++) {
+        if (state.bestList[i].pid == productId) {
+          state.bestList[i].like = true
+          break;
+        }
+      }
     },
     DELETE_LIKE: function(state, productId) {
       for (let i = 0; i < state.products.length; i++) {
         if (state.products[i].pid == productId) {
           state.products[i].like = false
+          break;
+        }
+      }
+      for (let i = 0; i < state.bestList.length; i++) {
+        if (state.bestList[i].pid == productId) {
+          state.bestList[i].like = false
           break;
         }
       }
@@ -187,7 +211,9 @@ export default new Vuex.Store({
     },
     GET_EVENT_LIST: function(state, eventList) {
       state.eventList = eventList
-      console.log(state.eventList)
+    },
+    GET_BEST_PRODUCT: function(state, bestList) {
+      state.bestList = bestList
     },
   },
   actions: {
@@ -243,6 +269,14 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err)
         })
+    },
+    // 브랜드 키 전달
+    changeBrandCallKey: function(context, key) {
+      context.commit('CHANGE_BRAND_CALL_KEY', key)
+    },
+    // 브랜드 키 전달
+    changeCategoryCallKey: function(context, key) {
+      context.commit('CHANGE_CATEGORY_CALL_KEY', key)
     },
     // WOMEN카테고리 목록 가져오기
     getCategoryWOMEN: function(context) {
@@ -324,8 +358,11 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    resetProductList: function(context) {
+      context.commit('RESET_PRODUCT_LIST')
+    },
     // 선택한 브랜드 상품리스트 가져오기
-    getBrandList: function(context, bno) {
+    getBrandList: function(context, url) {
       let hasToken = ''
       if (context.state.userToken != null) {
         hasToken = 'Bearer ' + context.state.userToken
@@ -338,13 +375,14 @@ export default new Vuex.Store({
 
       axios({
         method: 'get',
-        url: `http://kosa1.iptime.org:50222/list/brand/${bno}`,
+        url: `http://kosa1.iptime.org:50222/list/brand/${url}`,
         headers: {
           Authorization: hasToken
         },
       })
         .then((res) => {
           context.commit('GET_BRAND_LIST', res.data)
+          console.log(res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -353,8 +391,8 @@ export default new Vuex.Store({
           this.state.loading = false
         })
     },
-    // WOMEN대분류 소속의 상품 리스트 가져오기
-    getCategoryWOMENList: function(context, str) {
+    // 선택한 카테고리 소속의 상품 리스트 가져오기
+    getCategoryList: function(context, str) {
       let hasToken = ''
       if (context.state.userToken != null) {
         hasToken = 'Bearer ' + context.state.userToken
@@ -373,7 +411,7 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          context.commit('GET_CATEGORY_WOMEN_LIST', res.data)
+          context.commit('GET_CATEGORY_LIST', res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -382,91 +420,7 @@ export default new Vuex.Store({
           this.state.loading = false
         })
     },
-    // MEN대분류 소속의 상품 리스트 가져오기
-    getCategoryMENList: function(context, str) {
-      let hasToken = ''
-      if (context.state.userToken != null) {
-        hasToken = 'Bearer ' + context.state.userToken
-      }      
-      // 로딩중 중복요청 제한
-      if (this.state.loading) {
-        return
-      }
-      this.state.loading = true
-
-      axios({
-        method: 'get',
-        url: `http://kosa1.iptime.org:50222/list/category${str}`,
-        headers: {
-          Authorization: hasToken
-        },
-      })
-        .then((res) => {
-          context.commit('GET_CATEGORY_MEN_LIST', res.data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-        .finally(() => {
-          this.state.loading = false
-        })
-    },
-    // KIDS대분류 소속의 상품 리스트 가져오기
-    getCategoryKIDSList: function(context, str) {
-      let hasToken = ''
-      if (context.state.userToken != null) {
-        hasToken = 'Bearer ' + context.state.userToken
-      }      
-      // 로딩중 중복요청 제한
-      if (this.state.loading) {
-        return
-      }
-      this.state.loading = true
-      axios({
-        method: 'get',
-        url: `http://kosa1.iptime.org:50222/list/category${str}`,
-        headers: {
-          Authorization: hasToken
-        },
-      })
-        .then((res) => {
-          context.commit('GET_CATEGORY_KIDS_LIST', res.data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-        .finally(() => {
-          this.state.loading = false
-        })
-    },
-    // LIFE STYLE대분류 소속의 상품 리스트 가져오기
-    getCategoryLSList: function(context, str) {
-      let hasToken = ''
-      if (context.state.userToken != null) {
-        hasToken = 'Bearer ' + context.state.userToken
-      }         
-      // 로딩중 중복요청 제한
-      if (this.state.loading) {
-        return
-      }
-      this.state.loading = true
-      axios({
-        method: 'get',
-        url: `http://kosa1.iptime.org:50222/list/category${str}`,
-        headers: {
-          Authorization: hasToken
-        },
-      })
-        .then((res) => {
-          context.commit('GET_CATEGORY_LS_LIST', res.data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-        .finally(() => {
-          this.state.loading = false
-        })
-    },
+    // 좋아요 추가
     addLike: function(context, productId) {
       axios({
         method: 'get',
@@ -483,6 +437,7 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    // 좋아요 삭제
     deleteLike: function(context, productId) {
       context.commit('DELETE_LIKE', productId)
       axios({
@@ -807,8 +762,7 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          //context.commit('GET_EVENT_LIST', res.data)
-          console.log(res.data)
+          context.commit('GET_BEST_PRODUCT', res.data)
         })
         .catch((err) => {
           console.log(err)

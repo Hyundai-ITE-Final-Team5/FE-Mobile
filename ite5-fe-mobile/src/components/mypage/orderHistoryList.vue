@@ -26,8 +26,11 @@
       </div>
     </div>
     <orderHistoryListItem v-for="(oitem, oiidx) in order.items" :key="oiidx" :oitem="oitem" :oiidx="oiidx"/>
-    <div class="d-flex justify-content-end me-3">
+    <div v-if="order.ostatus != '주문취소'" class="d-flex justify-content-end me-3">
       <button class="btn btn-sm" style="color: #e4beb3; border-color: #e4beb3;" @click="cancelOrder">주문취소</button>
+    </div>
+    <div v-if="order.ostatus == '주문취소'" class="d-flex justify-content-end me-3">
+      <button class="btn btn-sm" style="color: #e4beb3; border-color: #e4beb3;" @click="cancelOrder" disabled>주문취소</button>
     </div>
     <hr>
   </div>

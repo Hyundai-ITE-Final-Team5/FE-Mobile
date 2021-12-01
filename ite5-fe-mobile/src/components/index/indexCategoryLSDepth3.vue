@@ -19,13 +19,15 @@ export default {
   },
   methods: {
     getCategoryLSList: function() {
+      this.$store.dispatch('resetProductList')
       let str = ''
       str += '?depth1=LIFESTYLE'
       str += '&depth2='
       str += this.lskey
       str += '&depth3='
       str += this.depth3
-      this.$store.dispatch('getCategoryLSList', str)
+      this.$store.dispatch('changeCategoryCallKey', str)
+      this.$store.dispatch('getCategoryList', str)
     },
   },
 }

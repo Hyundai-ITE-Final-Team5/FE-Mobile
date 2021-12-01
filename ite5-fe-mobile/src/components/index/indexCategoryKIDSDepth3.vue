@@ -17,15 +17,20 @@ export default {
       type: String
     },
   },
+  computed: {
+
+  },
   methods: {
     getCategoryKIDSList: function() {
+      this.$store.dispatch('resetProductList')
       let str = ''
       str += '?depth1=KIDS'
       str += '&depth2='
       str += this.kidskey
       str += '&depth3='
       str += this.depth3
-      this.$store.dispatch('getCategoryKIDSList', str)
+      this.$store.dispatch('changeCategoryCallKey', str)
+      this.$store.dispatch('getCategoryList', str)
     },
   },
 }

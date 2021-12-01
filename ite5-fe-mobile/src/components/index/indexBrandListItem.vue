@@ -19,7 +19,9 @@ export default {
   },
   methods: {
     getBrandList() {
+      this.$store.dispatch('resetProductList')
       this.$store.dispatch('getBrandList', this.b.bno)
+      this.$store.dispatch('changeBrandCallKey', this.b.bno)
     }
   },
 }

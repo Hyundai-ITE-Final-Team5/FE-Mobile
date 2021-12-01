@@ -15,13 +15,13 @@ import ProductListItem from '@/components/product/ProductListItem.vue'
 
 export default {
   name: 'ProductList',
-  components: {
-    ProductListItem,
-  },
   computed: {
     getProducts: function() {
       return this.$store.state.products
     },
+  },
+  components: {
+    ProductListItem,
   },
 }
 </script>
