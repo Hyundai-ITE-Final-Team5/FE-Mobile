@@ -1,5 +1,5 @@
 <template>
-  <div class="ms-3 mt-4">
+  <div class="ms-1 mt-4">
     <h3 class="fw-bold my-3">주문 내역</h3>
     <div v-if="getOrderHistoryList.length > 0">
       <orderHistoryList v-for="(order, oidx) in getOrderHistoryList" :key="oidx" :order="order" :oidx="oidx"/>

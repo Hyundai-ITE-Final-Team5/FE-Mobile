@@ -20,11 +20,6 @@
 <script>
 export default {
   name: 'likeListItem',
-  // data: function() {
-  //   return {
-  //     pcid: this.product.colorinfo[0].pcid
-  //   }
-  // },
   props: {
     like: {
       type: Object

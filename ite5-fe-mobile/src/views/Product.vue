@@ -19,7 +19,7 @@ export default {
   name: 'Product',
   data: function() {
     return {
-      no: 1,
+      no: 2,
     }
   },
   components: {

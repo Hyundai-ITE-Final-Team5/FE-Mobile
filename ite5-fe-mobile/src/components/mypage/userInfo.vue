@@ -77,32 +77,72 @@
       </div>
     </div>
     <hr>
-    <h3 class="fw-bold my-3">기본 배송지</h3>
-    <!-- ZIPCODE -->
-    <div class="d-flex my-2">
-      <div class="col-3">
-        <h5>우편번호</h5>
+    <div class="d-flex justify-content-between">
+      <h3 class="fw-bold my-3">기본 배송지</h3>
+      <div class="d-flex mt-2">
+        <button class="btn btn-outline-dark me-1" style="height: 40px;" @click="modifyUserInfo">수정</button>
+        <button class="btn btn-dark me-2" style="height: 40px;" @click="sendModifyUserInfo">등록</button>
+      </div>      
+    </div>
+    <div id="defaultInfo" style="display: block;">
+      <!-- ZIPCODE -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>우편번호</h5>
+        </div>
+        <div class="col-9">
+          <h6>{{ userInfo.mzipcode }}</h6>
+        </div>
       </div>
-      <div class="col-9">
-        <h6>{{ userInfo.mzipcode }}</h6>
+      <!-- 주소1 -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>주소</h5>
+        </div>
+        <div class="col-9">
+          <h6>{{ userInfo.maddress1 }}</h6>
+        </div>
+      </div>
+      <!-- 주소2 -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>상세주소</h5>
+        </div>
+        <div class="col-9">
+          <h6>{{ userInfo.maddress2 }}</h6>
+        </div>
       </div>
     </div>
-    <!-- 주소1 -->
-    <div class="d-flex my-2">
-      <div class="col-3">
-        <h5>주소</h5>
+    <div id="changeInfo" style="display: none;">
+      <!-- ZIPCODE -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5 class="mt-3">우편번호</h5>
+        </div>
+        <div class="col-8">
+          <input v-model="info.mzipcode" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
+                 style="height: 5vh;">
+        </div>
       </div>
-      <div class="col-9">
-        <h6>{{ userInfo.maddress1 }}</h6>
+      <!-- 주소1 -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5 class="mt-3">주소</h5>
+        </div>
+        <div class="col-8">
+          <input v-model="info.maddress1" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
+                 style="height: 5vh;">
+        </div>
       </div>
-    </div>
-    <!-- 주소2 -->
-    <div class="d-flex my-2">
-      <div class="col-3">
-        <h5>상세주소</h5>
-      </div>
-      <div class="col-9">
-        <h6>{{ userInfo.maddress2 }}</h6>
+      <!-- 주소2 -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5 class="mt-3">상세주소</h5>
+        </div>
+        <div class="col-8">
+          <input v-model="info.maddress2" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
+                 style="height: 5vh;">
+        </div>
       </div>
     </div>
     <hr>
@@ -129,6 +169,15 @@
 <script>
 export default {
  name: 'userInfo',
+ data: function() {
+   return {
+     info: {
+       "mzipcode": '',
+       "maddress1": '',
+       "maddress2": '',
+     }
+   }
+ },
  computed: {
    userInfo: function() {
      return this.$store.state.userInfo
@@ -141,7 +190,23 @@ export default {
      const temp = this.userInfo.mphone
      //let phoneNumber = temp.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, "$1-$2-$3")
      return temp
-   }
+   },
+ },
+ methods: {
+  modifyUserInfo: function() {
+    const defaultInfoId = document.getElementById('defaultInfo')
+    const changeInfoId = document.getElementById('changeInfo')
+    defaultInfoId.style.display = 'none'
+    changeInfoId.style.display = 'block'
+},
+  sendModifyUserInfo: function() {
+    this.$store.dispatch('sendModifyUserInfo', this.info)
+
+    const defaultInfoId = document.getElementById('defaultInfo')
+    const changeInfoId = document.getElementById('changeInfo')
+    defaultInfoId.style.display = 'block'
+    changeInfoId.style.display = 'none'
+  },
  },
 }
 </script>

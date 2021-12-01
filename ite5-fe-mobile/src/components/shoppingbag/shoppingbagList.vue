@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="shoppingbagCount > 0" class="d-flex mb-3 ms-2">
+    <div class="d-flex mb-3 ms-2">
       <img src="@/assets/shoppingbag.png" alt="" class="me-1" style="width: 30px; height: 32px;">
       <h5 class="pt-2 mx-1 fw-bold">{{ shoppingbagCount }}</h5>
       <h5 class="pt-2 text-muted">개 상품이 있습니다.</h5>
