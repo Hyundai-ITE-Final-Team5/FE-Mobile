@@ -21,8 +21,19 @@
       <br>
       <img src="@/assets/down.png" alt="" class="remoteControllDown" @click="scrollDown">
     </div>
-    <div class="d-flex justify-content-center">
-      <div v-if="loading" class="spinner-border my-2" style="color: gray; margin-top: 60vh;"></div>
+    <!-- skelleton UI -->
+    <div v-if="productListLoading" style="opacity: 0.7;">
+      <div class="mt-4 ms-3 border" style="width: 345px; height: 566px; background-color: #d3d3d3; border-radius: 0.5rem;"></div>
+      <div class="d-flex justify-content-between">
+        <div class="ms-3 mt-3 border" style="width: 150px; height: 20px; background-color: #d3d3d3; border-radius: 0.5rem;"></div>
+        <div class="me-3 mt-3 border" style="width: 30px; height: 20px; background-color: #d3d3d3; border-radius: 0.5rem;"></div>
+      </div>
+      <div class="ms-3 mt-2 border" style="width: 100px; height: 20px; background-color: #d3d3d3; border-radius: 0.5rem;"></div>
+      <div class="ms-3 mt-2 border" style="width: 100px; height: 20px; background-color: #d3d3d3; border-radius: 0.5rem;"></div>
+      <div class="d-flex mb-5">
+        <div class="ms-3 mt-3 border" style="width: 25px; height: 20px; background-color: #d3d3d3; border-radius: 0.5rem;"></div>
+        <div class="ms-3 mt-3 border" style="width: 25px; height: 20px; background-color: #d3d3d3; border-radius: 0.5rem;"></div>
+      </div>
     </div>
     <ProductList/>
   </div>
@@ -42,8 +53,8 @@ export default {
     ProductList,
   },
   computed: {
-    loading: function() {
-      return this.$store.state.loading
+    productListLoading: function() {
+      return this.$store.state.productListLoading
     },
     getProducts: function() {
       return this.$store.state.products
