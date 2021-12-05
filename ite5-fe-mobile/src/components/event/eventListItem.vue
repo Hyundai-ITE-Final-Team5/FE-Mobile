@@ -1,16 +1,9 @@
 <template>
   <div class="mb-5">
-    <h2 class="text-muted ms-2 mt-4">{{ event.etitle }}</h2>
+    <h2 class="fw-bold ms-2 mt-4">{{ event.etitle }}</h2>
+    <h6 class="text-muted ms-3">• {{ issuedate }} ~ {{ expiredate }}</h6>
     <img :src="event.eimg" style="width: 100vw;" alt="" class="mt-2">
     <img :src="event.edetailimg" style="width: 100vw;" alt="" class="mb-3">
-    <div class="d-flex">
-      <h5 class="my-2 me-2">•이벤트 시작</h5>
-      <h6 class="mt-2">{{ event.eissuedate }}</h6>
-    </div>
-    <div class="d-flex">
-      <h5 class="my-2 me-2">•이벤트 종료</h5>
-      <h6 class="mt-2">{{ event.eexpiredate }}</h6>
-    </div>
     <div class="d-flex justify-content-center my-4">
       <button v-if="decodedJWT != null" class="btn btn-lg btn-dark col-10" data-bs-toggle="modal" data-bs-target="#couponAlert" @click="downloadCoupon">쿠폰 발급받기</button>
       <button v-if="decodedJWT == null" class="btn btn-lg btn-dark col-10" data-bs-toggle="modal" data-bs-target="#loginAlert">쿠폰 발급받기</button>
@@ -30,8 +23,8 @@
             로그인이 필요한 서비스입니다.
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-outline-dark col-2" data-bs-dismiss="modal">닫기</button>
-            <button type="button" class="btn btn-sm btn-dark col-2" @click="goLogin" data-bs-dismiss="modal">로그인</button>
+            <button type="button" class="btn btn-sm btn-outline-dark col-3" data-bs-dismiss="modal">닫기</button>
+            <button type="button" class="btn btn-sm btn-dark col-3" @click="goLogin" data-bs-dismiss="modal">로그인</button>
           </div>
         </div>
       </div>
@@ -57,7 +50,7 @@
         </div>
       </div>
     </div>
-    <hr class="my-5">
+    <hr class="my-5" style="border: 10px;">
   </div>
 </template>
 
@@ -97,6 +90,12 @@ export default {
   computed: {
     decodedJWT: function() {
       return this.$store.getters.decodedToken
+    },
+    issuedate: function() {
+      return this.event.eissuedate.substring(0, 10)
+    },
+    expiredate: function() {
+      return this.event.eexpiredate.substring(0, 10)
     },
   },
 }

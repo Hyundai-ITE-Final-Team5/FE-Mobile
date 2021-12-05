@@ -1,6 +1,6 @@
 <template>
   <div>
-    <likeListItem v-for="(like, idx) in likeList" :key="idx" :like="like" :idx="idx"/>
+    <likeListItem v-for="(like, lidx) in likeList" :key="lidx" :like="like" :lidx="lidx"/>
   </div>
 </template>
 

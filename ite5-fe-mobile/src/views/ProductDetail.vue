@@ -1,6 +1,22 @@
 <template>
   <div>
-    <h1 class="mb-4">상품 상세</h1>
+    <div class="mb-5 fixed-top" id="nav">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <img src="@/assets/back.png" style="opacity: 0.6;" alt="" @click="goBack">
+          <h3 class="" @click="moveMenuStatusBarHome">
+            <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
+          </h3>
+          <div class="d-flex">
+            <router-link to="/login" v-if="decodedJWT == null">
+              <img src="@/assets/user.png" alt="" style=" height: 28px;" @click="moveMenuStatusBarMyPage">
+            </router-link>
+            <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.9; height: 28px;"></router-link>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <h1 class="mb-4" style="margin-top: 61px;">상품 상세</h1>
     <div id="carouselExampleControls" class="carousel slide">
       <div class="carousel-inner">
         <div class="carousel-item active">
@@ -59,12 +75,56 @@
         </div>
       </div>
       <div class="d-flex justify-content-center">
-        <button v-if="decodedJWT != null && this.addProduct.psid != ''" @click="addShoppingbag" 
+        <button v-if="decodedJWT == null" data-bs-toggle="modal" data-bs-target="#loginAlert"
+                class="btn btn-lg btn-dark mt-4 mb-2 col-12">쇼핑백 담기</button>
+        <button v-else-if="decodedJWT != null && this.addProduct.psid == ''" 
+                class="btn btn-lg btn-dark mt-4 mb-2 col-12" data-bs-toggle="modal" data-bs-target="#optionAlert">쇼핑백 담기</button>
+        <button v-else @click="addShoppingbag" 
                 class="btn btn-lg btn-dark mt-4 mb-2 col-12" data-bs-toggle="modal" data-bs-target="#shoppingbagAlert">쇼핑백 담기</button>
-        <button v-else class="btn btn-lg btn-dark mt-4 mb-2 col-12" disabled>쇼핑백 담기</button>
       </div>
       <div class="d-flex justify-content-center">
         <button class="btn btn-lg btn-outline-dark mb-4 col-12">바로 주문</button>
+      </div>
+      <!-- 로그인 요청 Modal -->
+      <div class="modal fade" style="margin-top: 30vh;" id="loginAlert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="modal-title d-flex" id="exampleModalLabel">
+                <img src="@/assets/problem.png" style="height: 24px;" alt="">
+                <h5 class="mx-2">알림</h5>
+              </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              로그인이 필요한 서비스입니다.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-outline-dark col-3" data-bs-dismiss="modal">닫기</button>
+              <button type="button" class="btn btn-sm btn-dark col-3" @click="goLogin" data-bs-dismiss="modal">로그인</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 옵션 선택 요청 Modal -->
+      <div class="modal fade" style="margin-top: 30vh;" id="optionAlert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="modal-title d-flex" id="exampleModalLabel">
+                <img src="@/assets/problem.png" style="height: 24px;" alt="">
+                <h5 class="mx-2">알림</h5>
+              </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              색상과 사이즈를 모두 선택해주세요.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-outline-dark col-3" data-bs-dismiss="modal">닫기</button>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- 상품담기 Modal -->
       <!-- Modal -->
@@ -133,6 +193,23 @@ export default {
     },
     goShoppingbag: function() {
       this.$router.push('/shoppingbag')
+    },
+    moveMenuStatusBarHome: function() {
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveHome")
+    },
+    moveMenuStatusBarMyPage: function() {
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveMyPage")
+    },
+    goBack: function() {
+      this.$router.go(-1)
+    },
+    goLogin: function() {
+      this.$router.push('/login')
+      this.moveMenuStatusBarMyPage()
     },
   },
   computed: {

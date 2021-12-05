@@ -1,6 +1,22 @@
 <template>
   <div>
-    <h1 class="mb-4">주문 완료</h1>
+    <div class="mb-5 fixed-top" id="nav">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <img src="@/assets/back.png" style="opacity: 0.6;" alt="">
+          <h3 class="" @click="moveMenuStatusBarHome">
+            <div>HANDSOME</div>
+          </h3>
+          <div class="d-flex">
+            <router-link to="/login" v-if="decodedJWT == null">
+              <img src="@/assets/user.png" alt="" style=" height: 28px;" @click="moveMenuStatusBarMyPage">
+            </router-link>
+            <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.9; height: 28px;"></router-link>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <h1 class="mb-4" style="margin-top: 61px;">주문 완료</h1>
     <hr>
     <h3 class="fw-bold my-3">주문 정보</h3>
     <div class="d-flex">
@@ -116,13 +132,22 @@ export default {
     orderNumber: function() {
       return this.$store.state.orderNumber
     },
+    decodedJWT: function() {
+      return this.$store.getters.decodedToken
+    },
   },
   methods: {
     routeIndex: function() {
-      this.$router.push('/index')
+      this.$router.replace('/index')
     },
     routeMypage: function() {
-      this.$router.push('/mypage')
+      this.$router.replace('/mypage')
+    },
+    moveMenuStatusBarHome: function() {
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveHome")
+      this.$router.replace('/')
     },
   },
 }
