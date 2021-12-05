@@ -43,6 +43,8 @@ export default new Vuex.Store({
     couponList: [],
     // 로딩상태 표시
     loading: false,
+    // 상품 목록 로딩상태 표시
+    productListLoading: false,
     brandIndex: [],
     // 카테고리 항목 관리
     // WOMEN
@@ -368,10 +370,10 @@ export default new Vuex.Store({
         hasToken = 'Bearer ' + context.state.userToken
       }
       // 로딩중 중복요청 제한
-      if (this.state.loading) {
+      if (this.state.productListLoading) {
         return
       }
-      this.state.loading = true
+      this.state.productListLoading = true
 
       axios({
         method: 'get',
@@ -388,7 +390,7 @@ export default new Vuex.Store({
           console.log(err)
         })
         .finally(() => {
-          this.state.loading = false
+          this.state.productListLoading = false
         })
     },
     // 선택한 카테고리 소속의 상품 리스트 가져오기
@@ -398,10 +400,10 @@ export default new Vuex.Store({
         hasToken = 'Bearer ' + context.state.userToken
       }      
       // 로딩중 중복요청 제한
-      if (this.state.loading) {
+      if (this.state.productListLoading) {
         return
       }
-      this.state.loading = true
+      this.state.productListLoading = true
 
       axios({
         method: 'get',
@@ -417,7 +419,7 @@ export default new Vuex.Store({
           console.log(err)
         })
         .finally(() => {
-          this.state.loading = false
+          this.state.productListLoading = false
         })
     },
     // 좋아요 추가

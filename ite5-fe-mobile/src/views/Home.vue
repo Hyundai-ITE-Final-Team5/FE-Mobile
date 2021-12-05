@@ -19,6 +19,9 @@
     <div class="homeRemoteControllUp" style="opacity: 0.7; height: 0;">
       <img src="@/assets/up-white.png" style="width: 16px;" alt="" @click="homeScrollUp">
     </div>
+    <div class="mb-2" id="homePageBar1" style="transform: scale(4.0, 1.0); width: 2px; height: 21px;"></div>
+    <div class="mb-2" id="homePageBar2" style="transform: scale(1.0, 1.0); width: 2px; height: 21px;"></div>
+    <div class="mb-2" id="homePageBar3" style="transform: scale(1.0, 1.0); width: 2px; height: 21px;"></div>
     <div class="homeRemoteControllDown" style="opacity: 0.7; height: 0;">
       <img src="@/assets/down-white.png" style="width: 16px;" alt="" @click="homeScrollDown">
     </div>
@@ -164,11 +167,35 @@ export default {
       let position = document.documentElement.scrollTop
       position -= 812
       window.scrollTo(0, position)
+      const homePageBar1Id = document.getElementById('homePageBar1')
+      const homePageBar2Id = document.getElementById('homePageBar2')
+      const homePageBar3Id = document.getElementById('homePageBar3')
+      if (homePageBar2Id.style.transform == 'scale(4, 1)') {
+        homePageBar1Id.style.transform = 'scale(4.0, 1.0)'
+        homePageBar2Id.style.transform = 'scale(1.0, 1.0)'
+        homePageBar3Id.style.transform = 'scale(1.0, 1.0)'
+      } else if (homePageBar3Id.style.transform == 'scale(4, 1)') {
+        homePageBar1Id.style.transform = 'scale(1.0, 1.0)'
+        homePageBar2Id.style.transform = 'scale(4.0, 1.0)'
+        homePageBar3Id.style.transform = 'scale(1.0, 1.0)'
+      }
     },
     homeScrollDown: function() {
       let position = document.documentElement.scrollTop
       position += 812
       window.scrollTo(0, position)
+      const homePageBar1Id = document.getElementById('homePageBar1')
+      const homePageBar2Id = document.getElementById('homePageBar2')
+      const homePageBar3Id = document.getElementById('homePageBar3')
+      if (homePageBar1Id.style.transform == 'scale(4, 1)') {
+        homePageBar1Id.style.transform = 'scale(1.0, 1.0)'
+        homePageBar2Id.style.transform = 'scale(4.0, 1.0)'
+        homePageBar3Id.style.transform = 'scale(1.0, 1.0)'
+      } else if (homePageBar2Id.style.transform == 'scale(4, 1)') {
+        homePageBar1Id.style.transform = 'scale(1.0, 1.0)'
+        homePageBar2Id.style.transform = 'scale(1.0, 1.0)'
+        homePageBar3Id.style.transform = 'scale(4.0, 1.0)'
+      }
     },
     moveMenuStatusBarHome: function() {
       const menuStatusBarId = document.getElementById('menuStatusBar')
@@ -275,17 +302,48 @@ export default {
 }
 .homeRemoteControllUp {
   position: fixed;
-  margin-top: 37vh;
-  margin-left: 89vw;
+  margin-top: 35vh;
+  margin-left: 335px;
   width: 20px;
   z-index: 1000;
 }
 .homeRemoteControllDown {
   position: fixed;
-  margin-top: 47vh;
-  margin-left: 89vw;
+  margin-top: 49vh;
+  margin-left: 335px;
   width: 20px;
   z-index: 1000;
+}
+#homePageBar1 {
+  position: fixed;
+  border: 2px;
+  border-color: #d3d3d3;
+  background-color: #d3d3d3;
+  margin-top: 39vh;
+  margin-left: 91vw;
+  z-index: 1000;
+  filter: brightness(150%);
+  transition: all 0.5s linear;
+}
+#homePageBar2 {
+  position: fixed;
+  border: 2px;
+  border-color: #d3d3d3;
+  background-color: #d3d3d3;
+  margin-top: 42vh;
+  margin-left: 91vw;
+  z-index: 1000;
+  transition: all 0.5s linear;
+}
+#homePageBar3 {
+  position: fixed;
+  border: 2px;
+  border-color: #d3d3d3;
+  background-color: #d3d3d3;
+  margin-top: 45vh;
+  margin-left: 91vw;
+  z-index: 1000;
+  transition: all 0.5s linear;
 }
 #nav {
   padding: 0px;
