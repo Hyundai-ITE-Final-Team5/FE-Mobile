@@ -1,5 +1,5 @@
 <template>
-  <div class="ms-3 mt-4">
+  <div class="ms-3 me-1 mt-4">
     <h3 class="fw-bold my-3">회원 정보</h3>
     <!-- ID -->
     <div class="d-flex">
@@ -168,46 +168,47 @@
 
 <script>
 export default {
- name: 'userInfo',
- data: function() {
-   return {
-     info: {
-       "mzipcode": '',
-       "maddress1": '',
-       "maddress2": '',
-     }
-   }
+  name: 'userInfo',
+  data: function() {
+    return {
+      info: {
+        "mzipcode": '',
+        "maddress1": '',
+        "maddress2": '',
+      }
+    }
+  },
+ props: {
+   userInfo: {
+     type: Object
+   },
  },
  computed: {
-   userInfo: function() {
-     return this.$store.state.userInfo
-   },
-   birth: function() {
-    const birthDate = this.userInfo.mbirth
-    return birthDate
-   },
-   phone: function() {
-     const temp = this.userInfo.mphone
-     //let phoneNumber = temp.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, "$1-$2-$3")
-     return temp
-   },
+    birth: function() {
+      const birthDate = this.userInfo.mbirth
+      return birthDate.substring(0, 10)
+    },
+    phone: function() {
+      const temp = this.userInfo.mphone
+      return temp.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/, "$1-$2-$3")
+    },
  },
- methods: {
-  modifyUserInfo: function() {
-    const defaultInfoId = document.getElementById('defaultInfo')
-    const changeInfoId = document.getElementById('changeInfo')
-    defaultInfoId.style.display = 'none'
-    changeInfoId.style.display = 'block'
-},
-  sendModifyUserInfo: function() {
-    this.$store.dispatch('sendModifyUserInfo', this.info)
+  methods: {
+    modifyUserInfo: function() {
+      const defaultInfoId = document.getElementById('defaultInfo')
+      const changeInfoId = document.getElementById('changeInfo')
+      defaultInfoId.style.display = 'none'
+      changeInfoId.style.display = 'block'
+    },
+    sendModifyUserInfo: function() {
+      this.$store.dispatch('sendModifyUserInfo', this.info)
 
-    const defaultInfoId = document.getElementById('defaultInfo')
-    const changeInfoId = document.getElementById('changeInfo')
-    defaultInfoId.style.display = 'block'
-    changeInfoId.style.display = 'none'
+      const defaultInfoId = document.getElementById('defaultInfo')
+      const changeInfoId = document.getElementById('changeInfo')
+      defaultInfoId.style.display = 'block'
+      changeInfoId.style.display = 'none'
+    },
   },
- },
 }
 </script>
 

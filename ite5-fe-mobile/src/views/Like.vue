@@ -1,6 +1,22 @@
 <template>
   <div id="like">
-    <div class="d-flex mb-3">
+    <div class="mb-5 fixed-top" id="nav">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <img src="@/assets/back.png" style="opacity: 0.6;" alt="" @click="goBack">
+          <h3 class="" @click="moveMenuStatusBarHome">
+            <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
+          </h3>
+          <div class="d-flex">
+            <router-link to="/login" v-if="decodedJWT == null">
+              <img src="@/assets/user.png" alt="" style=" height: 28px;" @click="moveMenuStatusBarMyPage">
+            </router-link>
+            <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.9; height: 28px;"></router-link>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="d-flex ms-2 mb-3" style="margin-top: 71px;">
       <img src="@/assets/heart.png" alt="" style="width: 32px; height: 32px;">
       <h5 class="mx-1 mt-1 fw-bold">{{ countLikeList }}</h5>
       <h5 class="mt-1 text-muted">개 상품을 좋아합니다.</h5>
@@ -27,6 +43,24 @@ export default {
     },
     loading: function() {
       return this.$store.state.loading
+    },
+    decodedJWT: function() {
+      return this.$store.getters.decodedToken
+    },
+  },
+  methods: {
+    moveMenuStatusBarHome: function() {
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveHome")
+    },
+    moveMenuStatusBarMyPage: function() {
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveMyPage")
+    },
+    goBack: function() {
+      this.$router.go(-1)
     },
   },
 }

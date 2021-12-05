@@ -1,29 +1,29 @@
 <template>
   <div id="app">
-    <div class="mb-5 fixed-top" id="nav">
+    <!-- <div class="mb-5 fixed-top" id="nav">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-          <img src="@/assets/back.png" alt="" style="opacity: 0.6;" @click="goBack">
-          <h4 class="pt-1" @click="moveMenuStatusBarHome">
+          <img src="@/assets/back-white.png" alt="" @click="goBack">
+          <h3 class="" @click="moveMenuStatusBarHome">
             <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
-          </h4>
+          </h3>
           <div class="d-flex">
             <router-link to="/login" v-if="decodedJWT == null">
-              <img src="@/assets/user.png" alt="" style="opacity: 0.7; height: 26px;" @click="moveMenuStatusBarMyPage">
+              <img src="@/assets/login_negative.png" alt="" style=" height: 28px;" @click="moveMenuStatusBarMyPage">
             </router-link>
             <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.9; height: 28px;"></router-link>
           </div>
         </div>
       </nav>
-    </div>
-    <router-view style="margin-top: 60px;"/>
+    </div> -->
+    <router-view/>
     <div style="height: 110px;">&nbsp;</div>
     <div class="fixed-bottom" id="footerNav">
       <button class="btn mb-3" style="color: white;" @click="showFooterNavBar" id="footerNavBarBtn">
         <img src="@/assets/menu.png" alt="" id="footerNavBarBtnImg" style="opacity: 0.7;">
       </button>
       <div id="footerNavBar" class="">
-        <div class="d-flex justify-content-between pt-1" id="nav">
+        <div class="d-flex justify-content-between pt-1" id="footernav">
             <router-link to="/" class="col-3 text-center text-decoration-none">
               <img src="@/assets/home.png" alt="" style="width: 24px;" @click="moveMenuStatusBarHome">
               <h6 class="mt-1" @click="moveMenuStatusBarHome">Home</h6>
@@ -150,10 +150,21 @@ hr {
   padding: 0px;
   background-color: white;
 }
+/* #11181d */
 #nav a {
-  color: #2c3e50;
+  color: black;
+}
+.btn {
+  border-radius: 0rem;
 }
 .btn:focus {   
+  box-shadow: 0px 0px 0px transparent;
+  border-color: #a0a0a0;
+}
+.form-check-input[type=checkbox] {
+  border-radius: 0rem;
+}
+.form-check-input[type=checkbox]:focus {
   box-shadow: 0px 0px 0px transparent;
   border-color: #a0a0a0;
 }
@@ -164,9 +175,10 @@ hr {
   bottom: -10vh;
 }
 #footerNavBar {
+  padding-top: 8px;
   position: relative;
   background-color: white;
-  height: 71px;
+  height: 75px;
 }
 #footerNavBarBtn {
   position: relative;

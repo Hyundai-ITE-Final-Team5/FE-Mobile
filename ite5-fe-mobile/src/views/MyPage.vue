@@ -1,6 +1,22 @@
 <template>
   <div id="mypage">
-    <div class="d-flex ms-3 justify-content-between">
+    <div class="mb-5 fixed-top" id="nav">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <img src="@/assets/back.png" style="opacity: 0.6;" alt="" @click="goBack">
+          <h3 class="" @click="moveMenuStatusBarHome">
+            <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
+          </h3>
+          <div class="d-flex">
+            <router-link to="/login" v-if="decodedJWT == null">
+              <img src="@/assets/user.png" alt="" style=" height: 28px;" @click="moveMenuStatusBarMyPage">
+            </router-link>
+            <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.9; height: 28px;"></router-link>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="d-flex ms-3 justify-content-between" style="margin-top: 61px;">
       <div class="d-flex">
         <img v-if="userInfo.mgrade == 1" src="https://static.solved.ac/tier_small/0.svg" style="width: 24px; heigth: 24px;" alt="">
         <img v-if="userInfo.mgrade == 2" src="https://static.solved.ac/tier_small/10.svg" style="width: 24px; heigth: 24px;" alt="">
@@ -74,7 +90,7 @@
     </div>
     <div class="mb-2 col-3" style="border: solid; border-color: #d3d3d3;" id="mypageStatusBar"></div>
     <orderHistory style="display: block;" id="orderHistoryId"/>
-    <userInfo style="display: none;" id="userInfoId"/>
+    <userInfo style="display: none;" id="userInfoId" :userInfo="userInfo"/>
     <coupon style="display: none;" id="couponId"/>
   </div>
 </template>
@@ -146,7 +162,21 @@ export default {
     },
     deleteJWT() {
       this.$store.dispatch('deleteJWT')
-      this.$router.push('/login')
+      this.$router.replace('/')
+      this.moveMenuStatusBarHome()
+    },
+    moveMenuStatusBarHome: function() {
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveHome")
+    },
+    moveMenuStatusBarMyPage: function() {
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveMyPage")
+    },
+    goBack: function() {
+      this.$router.go(-1)
     },
   },
   mounted: function() {
@@ -165,15 +195,15 @@ export default {
     left: 12vw;
   }
   .moveOrderHistory {
-    transform: translate(0vw, 0vw);
+    transform: translate(1vw, 0vw);
     transition:transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   .moveUserInfo {
-    transform: translate(24vw, 0vw);
+    transform: translate(26vw, 0vw);
     transition:transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   .moveCoupon {
-    transform: translate(49vw, 0vw);
+    transform: translate(51vw, 0vw);
     transition:transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   #mypage {

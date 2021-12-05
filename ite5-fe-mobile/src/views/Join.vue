@@ -1,11 +1,27 @@
 <template>
-  <div class="px-2">
-    <h1 class="text-center mt-5">회원가입</h1>
+  <div class="px-3">
+    <div class="mb-5 fixed-top" id="nav">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <img src="@/assets/back.png" style="opacity: 0.6;" alt="" @click="goBack">
+          <h3 class="" @click="moveMenuStatusBarHome">
+            <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
+          </h3>
+          <div class="d-flex">
+            <router-link to="/login" v-if="decodedJWT == null">
+              <img src="@/assets/user.png" alt="" style=" height: 28px;" @click="moveMenuStatusBarMyPage">
+            </router-link>
+            <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.9; height: 28px;"></router-link>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <h1 class="text-center" style="margin-top: 10vh;">회원가입</h1>
     <!-- 아이디 -->
     <div class="d-flex">
       <div class="form mb-3">
         <input v-model="joinCredential.mid" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-              style="height: 7vh; width: 73vw;" placeholder="아이디">
+              style="height: 7vh; width: 71vw;" placeholder="아이디">
       </div>
       <button @click="duplicatedMidCheck" class="btn btn-dark mt-3 ms-3" style="height: 5vh;">확인</button>
     </div>
@@ -96,11 +112,27 @@ export default {
         this.$router.push('/login')
       }
     },
+    moveMenuStatusBarHome: function() {
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveHome")
+    },
+    moveMenuStatusBarMyPage: function() {
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveMyPage")
+    },
+    goBack: function() {
+      this.$router.go(-1)
+    },
   },
   computed: {
     midCheck: function() {
       return this.$store.state.midCheck
-    }
+    },
+    decodedJWT: function() {
+      return this.$store.getters.decodedToken
+    },
   },
 }
 </script>

@@ -1,5 +1,21 @@
 <template>
-  <div class="ms-2 mb-4">
+  <div class="ms-2" style="margin-bottom: 31px;">
+    <div class="mb-5 fixed-top" id="nav">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <img src="@/assets/back.png" style="opacity: 0.6;" alt="" @click="goBack">
+          <h3 class="" @click="moveMenuStatusBarHome">
+            <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
+          </h3>
+          <div class="d-flex">
+            <router-link to="/login" v-if="decodedJWT == null">
+              <img src="@/assets/user.png" alt="" style=" height: 28px;" @click="moveMenuStatusBarMyPage">
+            </router-link>
+            <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.9; height: 28px;"></router-link>
+          </div>
+        </div>
+      </nav>
+    </div>
     <indexBrandList/>
     <indexCategoryList/>
     <hr class="mt-5">
@@ -28,6 +44,24 @@ export default {
       const brandIndexId = document.getElementById('brandIndex')
       if (brandIndexId.style.display == 'none') brandIndexId.style.display = 'block'
       else brandIndexId.style.display = 'none'
+    },
+    moveMenuStatusBarHome: function() {
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveHome")
+    },
+    moveMenuStatusBarMyPage: function() {
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveMyPage")
+    },
+    goBack: function() {
+      this.$router.go(-1)
+    },
+  },
+  computed: {
+    decodedJWT: function() {
+      return this.$store.getters.decodedToken
     },
   },
 }

@@ -213,8 +213,53 @@
       <h6>(전자상거래법 제8조 2항)</h6>
     </div>
     <div class="d-flex justify-content-center my-4">
-      <button v-if="agreement" class="btn btn-lg btn-dark col-10 mt-3" @click="pay">결제하기</button>
       <button v-if="!agreement" class="btn btn-lg btn-dark col-10 mt-3" disabled>결제하기</button>
+      <button v-else-if="orderUserInfo.ozipcode == '' || orderUserInfo.address1 == '' || orderUserInfo.address2 == ''" 
+              class="btn btn-lg btn-dark col-10 mt-3" data-bs-toggle="modal" data-bs-target="#addressAlert">결제하기</button>
+      <button v-else-if="orderUserInfo.pmcode == ''"
+              class="btn btn-lg btn-dark col-10 mt-3" data-bs-toggle="modal" data-bs-target="#pmcodeAlert">결제하기</button>
+      <button v-else
+              class="btn btn-lg btn-dark col-10 mt-3" @click="pay">결제하기</button>
+    </div>
+    <!-- 배송정보 입력요청 Modal -->
+    <div class="modal fade" style="margin-top: 30vh;" id="addressAlert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="modal-title d-flex" id="exampleModalLabel">
+              <img src="@/assets/problem.png" style="height: 24px;" alt="">
+              <h5 class="mx-2">알림</h5>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            배송지 정보를 입력해주세요.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-outline-dark col-3" data-bs-dismiss="modal">닫기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 결제수단 입력요청 Modal -->
+    <div class="modal fade" style="margin-top: 30vh;" id="pmcodeAlert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="modal-title d-flex" id="exampleModalLabel">
+              <img src="@/assets/problem.png" style="height: 24px;" alt="">
+              <h5 class="mx-2">알림</h5>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            결제수단을 선택해주세요.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-outline-dark col-3" data-bs-dismiss="modal">닫기</button>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -282,7 +327,7 @@ export default {
       // 포인트적용
       this.orderUserInfo.oafterprice -= this.orderUserInfo.ousedmileage
       this.$store.dispatch('pay', this.orderUserInfo)
-      this.$router.push('/ordercomplete')
+      this.$router.replace('/ordercomplete')
     },
     useMileageAll: function() {
       this.orderUserInfo.ousedmileage = this.userInfo[0].mmileage

@@ -1,6 +1,22 @@
 <template>
-  <div class="px-2">
-    <h1 class="text-center my-5">로그인</h1>
+  <div class="px-3">
+    <div class="mb-5 fixed-top" id="nav">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+          <img src="@/assets/back.png" style="opacity: 0.6;" alt="" @click="goBack">
+          <h3 class="" @click="moveMenuStatusBarHome">
+            <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
+          </h3>
+          <div class="d-flex">
+            <router-link to="/login" v-if="decodedJWT == null">
+              <img src="@/assets/user.png" alt="" style=" height: 28px;" @click="moveMenuStatusBarMyPage">
+            </router-link>
+            <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.9; height: 28px;"></router-link>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <h1 class="text-center" style="margin-top: 10vh;">로그인</h1>
     <div class="form mb-3">
       <input v-model="credential.mid" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
              style="height: 7vh;" placeholder="아이디">
@@ -45,15 +61,23 @@ export default {
         this.moveMenuStatusBarHome()
       }
     },
+    moveMenuStatusBarLike: function() {
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveLike")
+    },
     moveMenuStatusBarHome: function() {
       const menuStatusBarId = document.getElementById('menuStatusBar')
       menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
       menuStatusBarId.classList.add("moveHome")
     },
-    moveMenuStatusBarLike: function() {
+    moveMenuStatusBarMyPage: function() {
       const menuStatusBarId = document.getElementById('menuStatusBar')
       menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
-      menuStatusBarId.classList.add("moveLike")
+      menuStatusBarId.classList.add("moveMyPage")
+    },
+    goBack: function() {
+      this.$router.go(-1)
     },
   },
   computed: {
