@@ -4,19 +4,26 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <img src="@/assets/back.png" style="opacity: 0.6;" alt="" @click="goBack">
-          <h3 class="" @click="moveMenuStatusBarHome">
+          <h3 class="pt-2" @click="moveMenuStatusBarHome">
             <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
           </h3>
           <div class="d-flex">
             <router-link to="/login" v-if="decodedJWT == null">
               <img src="@/assets/user.png" alt="" style=" height: 28px;" @click="moveMenuStatusBarMyPage">
             </router-link>
-            <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.9; height: 28px;"></router-link>
+            <router-link to="/shoppingbag" v-if="decodedJWT != null" class="me-1">
+              <img src="@/assets/shop-bag.png" alt="" style="opacity: 0.8; height: 28px;">
+              <span class="position-absolute start-89 translate-middle badge rounded-pill bg-dark ps-2" style="top: 44px; height: 21px;">{{ shoppingbagCount }}</span>
+            </router-link>
           </div>
         </div>
       </nav>
     </div>
-    <h1 class="mb-4" style="margin-top: 61px;">상품 상세</h1>
+    <h1 class="mb-4" style="margin-top: 81px;"></h1>
+    <div class="d-flex justify-content-center my-3">
+      <img src="@/assets/love.png" alt="">
+      <h5 class="ms-3">현재 <span class="fw-bold">{{ productDetail.visitor }}</span> 명이 함께 보고 있습니다.</h5>
+    </div>
     <div id="carouselExampleControls" class="carousel slide">
       <div class="carousel-inner">
         <div class="carousel-item active">
@@ -32,11 +39,11 @@
           <img v-else :src="carousel3" class="d-block w-100" alt="...">
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <button class="carousel-control-prev" style="opacity: 1.0;" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <button class="carousel-control-next" style="opacity: 1.0;" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
@@ -92,13 +99,13 @@
             <div class="modal-header">
               <div class="modal-title d-flex" id="exampleModalLabel">
                 <img src="@/assets/problem.png" style="height: 24px;" alt="">
-                <h5 class="mx-2">알림</h5>
+                <h4 class="mx-2 fw-bold">알림</h4>
               </div>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <h5 class="modal-body">
               로그인이 필요한 서비스입니다.
-            </div>
+            </h5>
             <div class="modal-footer">
               <button type="button" class="btn btn-sm btn-outline-dark col-3" data-bs-dismiss="modal">닫기</button>
               <button type="button" class="btn btn-sm btn-dark col-3" @click="goLogin" data-bs-dismiss="modal">로그인</button>
@@ -113,13 +120,13 @@
             <div class="modal-header">
               <div class="modal-title d-flex" id="exampleModalLabel">
                 <img src="@/assets/problem.png" style="height: 24px;" alt="">
-                <h5 class="mx-2">알림</h5>
+                <h4 class="mx-2 fw-bold">알림</h4>
               </div>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <h5 class="modal-body">
               색상과 사이즈를 모두 선택해주세요.
-            </div>
+            </h5>
             <div class="modal-footer">
               <button type="button" class="btn btn-sm btn-outline-dark col-3" data-bs-dismiss="modal">닫기</button>
             </div>
@@ -134,13 +141,13 @@
             <div class="modal-header">
               <div class="modal-title d-flex" id="exampleModalLabel">
                 <img src="@/assets/problem.png" style="height: 24px;" alt="">
-                <h5 class="mx-2">알림</h5>
+                <h4 class="mx-2 fw-bold">알림</h4>
               </div>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <h5 class="modal-body">
               쇼핑백에 상품이 추가되었습니다.
-            </div>
+            </h5>
             <div class="modal-footer">
               <button type="button" class="btn btn-sm btn-outline-dark col-2" data-bs-dismiss="modal">닫기</button>
               <button type="button" class="btn btn-sm btn-dark col-2" @click="goShoppingbag" data-bs-dismiss="modal">확인</button>
@@ -213,6 +220,9 @@ export default {
     },
   },
   computed: {
+    productDetail: function() {
+      return this.$store.state.productDetail
+    },
     getProductCommon: function() {
       return this.$store.getters.getProductCommon
     },
@@ -222,16 +232,20 @@ export default {
     decodedJWT: function() {
       return this.$store.getters.decodedToken
     },
+    shoppingbagCount: function() {
+     return this.$store.state.shoppingbagCount
+    },
   },
   mounted: function() {
     window.scrollTo(0,0)
   },
-  // destroyed: function() {
-  //   this.$store.state.productDetail = []
-  // },
+  destroyed: function() {
+    console.log("destroyed")
+    this.$store.dispatch('detailExit', this.getProductDetail[0].pcid)
+  },
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

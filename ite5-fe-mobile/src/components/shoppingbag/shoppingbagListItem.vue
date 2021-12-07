@@ -64,8 +64,29 @@
       </div>
     </div>
     <div class="d-flex justify-content-end my-3">
-      <button class="btn btn-sm" style="color: #e4beb3; border-color: #e4beb3;" @click="deleteShoppingbag">삭제</button>
+      <button class="btn btn-sm" style="color: #b97687; border-color: #b97687;" data-bs-toggle="modal" :data-bs-target="'#shoppingbagDeleteAlert_' + this.idx">삭제</button>
       <button @click="showOption" class="btn btn-sm mx-2" style="color: gray; border-color: gray;">옵션</button>
+    </div>
+    <!-- 삭제확인 Modal -->
+    <div class="modal fade" style="margin-top: 30vh;" :id="'shoppingbagDeleteAlert_' + idx" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="modal-title d-flex" id="exampleModalLabel">
+              <img src="@/assets/problem.png" style="height: 24px;" alt="">
+              <h4 class="mx-2 fw-bold">알림</h4>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <h5 class="modal-body">
+            쇼핑백 목록에서 삭제하시겠습니까?
+          </h5>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-outline-dark col-3" data-bs-dismiss="modal">닫기</button>
+            <button type="button" class="btn btn-sm btn-dark col-3" @click="deleteShoppingbag" data-bs-dismiss="modal">삭제</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

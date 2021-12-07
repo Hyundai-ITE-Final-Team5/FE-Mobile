@@ -38,7 +38,15 @@
       </div>
       <h6 class="ms-3">{{ userInfo[0].memail }}</h6>
     </div>
-    <h3 class="mt-4 fw-bold">수령인 정보</h3>
+    <div class="d-flex justify-content-between">
+      <h3 class="mt-2 fw-bold">수령인 정보</h3>
+      <div class="form-check mt-2">
+        <input class="form-check-input" type="checkbox" value="" id="checkReceiverInfo" @click="putReceiverInfo">
+        <label class="form-check-label" for="flexCheckDefault">
+          주문자 정보와 동일
+        </label>
+      </div>
+    </div>
     <!-- 수령인 이름 -->
     <div class="d-flex ms-2">
       <div class="col-3">
@@ -80,7 +88,15 @@
       </div>
     </div>
     <hr>
-    <h3 class="mt-4 fw-bold">배송 정보</h3>
+    <div class="d-flex justify-content-between">
+      <h3 class="my-3 fw-bold">배송지 정보</h3>
+      <div class="form-check my-3">
+        <input class="form-check-input" type="checkbox" value="" id="checkDeliveryInfo" @click="putDeliveryInfo">
+        <label class="form-check-label" for="flexCheckDefault">
+          기본배송지 선택
+        </label>
+      </div>
+    </div>
     <!-- 수령인 우편번호 -->
     <div class="d-flex ms-2">
       <div class="col-3">
@@ -88,7 +104,7 @@
       </div>
       <div class="form mb-3">
         <input v-model="orderUserInfo.ozipcode" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-              style="height: 7vh; width: 20vw;" value="">
+              style="height: 7vh; width: 25vw;" value="">
       </div>
       <div>
         <button class="btn btn-dark ms-4 mt-3">주소찾기</button>
@@ -213,13 +229,13 @@
       <h6>(전자상거래법 제8조 2항)</h6>
     </div>
     <div class="d-flex justify-content-center my-4">
-      <button v-if="!agreement" class="btn btn-lg btn-dark col-10 mt-3" disabled>결제하기</button>
+      <button v-if="!agreement" class="btn btn-lg btn-dark col-12 mt-3" disabled>결제하기</button>
       <button v-else-if="orderUserInfo.ozipcode == '' || orderUserInfo.address1 == '' || orderUserInfo.address2 == ''" 
-              class="btn btn-lg btn-dark col-10 mt-3" data-bs-toggle="modal" data-bs-target="#addressAlert">결제하기</button>
+              class="btn btn-lg btn-dark col-12 mt-3" data-bs-toggle="modal" data-bs-target="#addressAlert">결제하기</button>
       <button v-else-if="orderUserInfo.pmcode == ''"
-              class="btn btn-lg btn-dark col-10 mt-3" data-bs-toggle="modal" data-bs-target="#pmcodeAlert">결제하기</button>
+              class="btn btn-lg btn-dark col-12 mt-3" data-bs-toggle="modal" data-bs-target="#pmcodeAlert">결제하기</button>
       <button v-else
-              class="btn btn-lg btn-dark col-10 mt-3" @click="pay">결제하기</button>
+              class="btn btn-lg btn-dark col-12 mt-3" @click="pay">결제하기</button>
     </div>
     <!-- 배송정보 입력요청 Modal -->
     <div class="modal fade" style="margin-top: 30vh;" id="addressAlert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -294,12 +310,12 @@ export default {
         "ozipcode": '',
         "oaddress1": '',
         "oaddress2": '',
-        "oreceiver": this.userInfo[0].mname,
-        "ophone": this.userInfo[0].mphone,
-        "orphone": this.userInfo[0].mphone,
-        "otel": this.userInfo[0].mtel,
+        "oreceiver": '',
+        "ophone": '',
+        "orphone": '',
+        "otel": '',
         "omemo": '문앞에 두고 가주세요 :)',
-        "oemail": this.userInfo[0].memail,
+        "oemail": '',
         "ousedmileage": 0,
         "obeforeprice": 0,
         "oafterprice": 0,
@@ -334,6 +350,32 @@ export default {
     },
     selectpm: function(pmcode) {
       this.orderUserInfo.pmcode = pmcode
+    },
+    putReceiverInfo: function() {
+      if (this.orderUserInfo.oreceiver == this.userInfo[0].mname) {
+        this.orderUserInfo.oreceiver = ''
+        this.orderUserInfo.ophone = ''
+        this.orderUserInfo.otel = ''
+        this.orderUserInfo.oemail = ''
+      } else {
+        this.orderUserInfo.oreceiver = this.userInfo[0].mname
+        this.orderUserInfo.ophone = this.userInfo[0].mphone
+        this.orderUserInfo.otel = this.userInfo[0].mtel
+        this.orderUserInfo.oemail = this.userInfo[0].memail
+      }
+    },
+    putDeliveryInfo: function() {
+      if (this.orderUserInfo.ozipcode == this.userInfo[0].mzipcode &&
+          this.orderUserInfo.oaddress1 == this.userInfo[0].maddress1 &&
+          this.orderUserInfo.oaddress2 == this.userInfo[0].maddress2) {
+        this.orderUserInfo.ozipcode = ''
+        this.orderUserInfo.oaddress1 = ''
+        this.orderUserInfo.oaddress2 = ''
+      } else {
+        this.orderUserInfo.ozipcode = this.userInfo[0].mzipcode
+        this.orderUserInfo.oaddress1 = this.userInfo[0].maddress1
+        this.orderUserInfo.oaddress2 = this.userInfo[0].maddress2
+      }
     },
   },
   computed: {

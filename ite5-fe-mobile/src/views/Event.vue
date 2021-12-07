@@ -4,19 +4,22 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <img src="@/assets/back.png" style="opacity: 0.6;" alt="" @click="goBack">
-          <h3 class="" @click="moveMenuStatusBarHome">
+          <h3 class="pt-2" @click="moveMenuStatusBarHome">
             <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
           </h3>
           <div class="d-flex">
             <router-link to="/login" v-if="decodedJWT == null">
               <img src="@/assets/user.png" alt="" style=" height: 28px;" @click="moveMenuStatusBarMyPage">
             </router-link>
-            <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.9; height: 28px;"></router-link>
+            <router-link to="/shoppingbag" v-if="decodedJWT != null" class="me-1">
+              <img src="@/assets/shop-bag.png" alt="" style="opacity: 0.8; height: 28px;">
+              <span class="position-absolute start-89 translate-middle badge rounded-pill bg-dark ps-2" style="top: 44px; height: 21px;">{{ shoppingbagCount }}</span>
+            </router-link>
           </div>
         </div>
       </nav>
     </div>
-    <h1 class="ms-2 mb-3" style="margin-top: 61px;">EVENT</h1>
+    <h1 class="ms-2 mb-3" style="margin-top: 81px;">EVENT</h1>
     <eventList/>
   </div>
 </template>
@@ -47,6 +50,9 @@ export default {
   computed: {
     decodedJWT: function() {
       return this.$store.getters.decodedToken
+    },
+    shoppingbagCount: function() {
+     return this.$store.state.shoppingbagCount
     },
   },
 }

@@ -4,9 +4,9 @@
     <h6 class="text-muted ms-3">• {{ issuedate }} ~ {{ expiredate }}</h6>
     <img :src="event.eimg" style="width: 100vw;" alt="" class="mt-2">
     <img :src="event.edetailimg" style="width: 100vw;" alt="" class="mb-3">
-    <div class="d-flex justify-content-center my-4">
-      <button v-if="decodedJWT != null" class="btn btn-lg btn-dark col-10" data-bs-toggle="modal" data-bs-target="#couponAlert" @click="downloadCoupon">쿠폰 발급받기</button>
-      <button v-if="decodedJWT == null" class="btn btn-lg btn-dark col-10" data-bs-toggle="modal" data-bs-target="#loginAlert">쿠폰 발급받기</button>
+    <div class="d-flex justify-content-center mx-3 my-4">
+      <button v-if="decodedJWT != null" class="btn btn-lg btn-dark col-12" data-bs-toggle="modal" data-bs-target="#couponAlert" @click="downloadCoupon">쿠폰 발급받기</button>
+      <button v-if="decodedJWT == null" class="btn btn-lg btn-dark col-12" data-bs-toggle="modal" data-bs-target="#loginAlert">쿠폰 발급받기</button>
     </div>
     <!-- 로그인 요청 Modal -->
     <div class="modal fade" style="margin-top: 30vh;" id="loginAlert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -15,13 +15,13 @@
           <div class="modal-header">
             <div class="modal-title d-flex" id="exampleModalLabel">
               <img src="@/assets/problem.png" style="height: 24px;" alt="">
-              <h5 class="mx-2">알림</h5>
+              <h4 class="mx-2 fw-bold">알림</h4>
             </div>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <h5 class="modal-body">
             로그인이 필요한 서비스입니다.
-          </div>
+          </h5>
           <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-outline-dark col-3" data-bs-dismiss="modal">닫기</button>
             <button type="button" class="btn btn-sm btn-dark col-3" @click="goLogin" data-bs-dismiss="modal">로그인</button>
@@ -36,13 +36,13 @@
           <div class="modal-header">
             <div class="modal-title d-flex" id="exampleModalLabel">
               <img src="@/assets/congratulation.png" style="height: 24px;" alt="">
-              <h5 class="mx-2">쿠폰 발급</h5>
+              <h4 class="mx-2 fw-bold">쿠폰 발급</h4>
             </div>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
+          <h5 class="modal-body">
             쿠폰이 성공적으로 발급되었습니다.
-          </div>
+          </h5>
           <div class="modal-footer">
             <button type="button" class="btn btn-sm btn-outline-dark col-2" data-bs-dismiss="modal">닫기</button>
             <button type="button" class="btn btn-sm btn-dark col-2" data-bs-dismiss="modal" @click="goMypage">확인</button>

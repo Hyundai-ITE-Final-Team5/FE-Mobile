@@ -1,9 +1,13 @@
 <template>
   <div>
-    <div class="d-flex mb-3 ms-2">
+    <div class="d-flex mb-4 ms-2">
       <img src="@/assets/shoppingbag.png" alt="" class="me-1" style="width: 30px; height: 32px;">
       <h5 class="pt-2 mx-1 fw-bold">{{ shoppingbagCount }}</h5>
       <h5 class="pt-2 text-muted">개 상품이 있습니다.</h5>
+    </div>
+    <div v-if="shoppingbagCount > 0" class="form-check ms-2">
+      <input class="form-check-input" type="checkbox" value="" id="checkAll" style="width: 18px; height: 18px;" checked>
+      <h5>전체 선택</h5>
     </div>
     <h2 class="text-center text-muted" style="margin-top: 40vh;" v-if="shoppingbagCount == 0">쇼핑백에 상품이 없습니다.</h2>
     <shoppingbagListItem v-for="(item, idx) in getShoppingbag" :key="idx" :item="item" :idx="idx"/>
@@ -38,8 +42,8 @@
           </div>
         </div>
       </div>
-      <div class="d-flex justify-content-center mt-5">
-        <button @click="makeOrder" class="btn btn-lg btn-dark col-10">주문하기</button>
+      <div class="d-flex justify-content-center ms-3 me-2 mt-5">
+        <button @click="makeOrder" class="btn btn-lg btn-dark col-12">주문하기</button>
       </div>
     </div>
   </div>
@@ -94,6 +98,7 @@ export default {
         tempList.push(tempObject)
       }
       this.$store.dispatch('makeOrder', tempList)
+      this.$store.dispatch('makeTempOrder', this.getShoppingbag)
       this.$router.push('/order')
     },
   },

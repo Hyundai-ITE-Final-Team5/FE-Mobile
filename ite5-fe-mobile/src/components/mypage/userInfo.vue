@@ -1,97 +1,161 @@
 <template>
   <div class="ms-3 me-1 mt-4">
-    <h3 class="fw-bold my-3">회원 정보</h3>
-    <!-- ID -->
-    <div class="d-flex">
-      <div class="col-3">
-        <h5>아이디</h5>
+    <div class="d-flex justify-content-between mt-4">
+      <h3 class="fw-bold my-3">회원 정보</h3>
+      <div class="d-flex mt-2">
+        <button class="btn btn-outline-dark me-1" style="height: 40px;" @click="modifyUserInfo1">수정</button>
+        <button class="btn btn-dark me-2" style="height: 40px;" @click="sendModifyUserInfo1">등록</button>
+      </div>      
+    </div>
+    <div id="defaultInfo1" style="display: block;">
+      <!-- ID -->
+      <div class="d-flex">
+        <div class="col-3">
+          <h5>아이디</h5>
+        </div>
+        <div class="col-9">
+          <h6 v-if="userInfo">{{ userInfo.mid }}</h6>
+        </div>
       </div>
-      <div class="col-9">
-        <h6 v-if="userInfo">{{ userInfo.mid }}</h6>
+      <!-- NAME -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>이름</h5>
+        </div>
+        <div class="col-9">
+          <h6>{{ userInfo.mname }}</h6>
+        </div>
+      </div>
+      <!-- GENDER -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>성별</h5>
+        </div>
+        <div class="col-9">
+          <h6 v-if="userInfo.mgender == 2">여</h6>
+          <h6 v-if="userInfo.mgender == 1">남</h6>
+        </div>
+      </div>
+      <!-- 생년월일 -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>생년월일</h5>
+        </div>
+        <div class="col-9">
+          <h6 v-if="userInfo">{{ birth }}</h6>
+        </div>
+      </div>
+      <!-- PHONE -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>휴대폰</h5>
+        </div>
+        <div class="col-9">
+          <h6 v-if="userInfo">{{ phone }}</h6>
+        </div>
+      </div>
+      <!-- EMAIL -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>이메일</h5>
+        </div>
+        <div class="col-9">
+          <h6>{{ userInfo.memail }}</h6>
+        </div>
+      </div>
+      <!-- TEL -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>전화번호</h5>
+        </div>
+        <div class="col-9">
+          <h6 v-if="userInfo.mtel == null" class="ms-4">-</h6>
+          <h6 v-if="userInfo.mtel != null">{{ userInfo.mtel }}</h6>
+        </div>
       </div>
     </div>
-    <!-- PASSWORD -->
-    <div class="d-flex my-3">
-      <div class="col-3">
-        <h5 class="mt-1">비밀번호</h5>
+    <div id="changeInfo1" style="display: none;">
+      <!-- ID -->
+      <div class="d-flex">
+        <div class="col-3">
+          <h5>아이디</h5>
+        </div>
+        <div class="col-9">
+          <h6 v-if="userInfo">{{ userInfo.mid }}</h6>
+        </div>
       </div>
-      <div class="col-6">
-        <input type="password" class="form-control" value="******">
+      <!-- NAME -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>이름</h5>
+        </div>
+        <div class="col-9">
+          <h6>{{ userInfo.mname }}</h6>
+        </div>
       </div>
-      <div class="btn btn-dark ms-2">수정</div>
-    </div>
-    <!-- NAME -->
-    <div class="d-flex my-2">
-      <div class="col-3">
-        <h5>이름</h5>
+      <!-- GENDER -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>성별</h5>
+        </div>
+        <div class="col-9">
+          <h6 v-if="userInfo.mgender == 2">여</h6>
+          <h6 v-if="userInfo.mgender == 1">남</h6>
+        </div>
       </div>
-      <div class="col-9">
-        <h6>{{ userInfo.mname }}</h6>
+      <!-- 생년월일 -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>생년월일</h5>
+        </div>
+        <div class="col-9">
+          <h6 v-if="userInfo">{{ birth }}</h6>
+        </div>
       </div>
-    </div>
-    <!-- GENDER -->
-    <div class="d-flex my-2">
-      <div class="col-3">
-        <h5>성별</h5>
+      <!-- PHONE -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>휴대폰</h5>
+        </div>
+        <div class="col-8">
+          <input v-model="info.mphone" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
+                 style="height: 5vh;" @keyup="sendModifyUserInfo1">
+        </div>
       </div>
-      <div class="col-9">
-        <h6 v-if="userInfo.mgender == 2">여</h6>
-        <h6 v-if="userInfo.mgender == 1">남</h6>
+      <!-- EMAIL -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>이메일</h5>
+        </div>
+        <input v-model="info.memail" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
+                style="height: 5vh;" @keyup="sendModifyUserInfo1">
       </div>
-    </div>
-    <!-- 생년월일 -->
-    <div class="d-flex my-2">
-      <div class="col-3">
-        <h5>생년월일</h5>
-      </div>
-      <div class="col-9">
-        <h6 v-if="userInfo">{{ birth }}</h6>
-      </div>
-    </div>
-    <!-- EMAIL -->
-    <div class="d-flex my-2">
-      <div class="col-3">
-        <h5>이메일</h5>
-      </div>
-      <div class="col-9">
-        <h6>{{ userInfo.memail }}</h6>
-      </div>
-    </div>
-    <!-- PHONE -->
-    <div class="d-flex my-2">
-      <div class="col-3">
-        <h5>휴대폰</h5>
-      </div>
-      <div class="col-9">
-        <h6 v-if="userInfo">{{ phone }}</h6>
-      </div>
-    </div>
-    <!-- TEL -->
-    <div class="d-flex my-2">
-      <div class="col-3">
-        <h5>전화번호</h5>
-      </div>
-      <div class="col-9">
-        <h6 v-if="userInfo.mtel == null" class="ms-3">-</h6>
-        <h6 v-if="userInfo.mtel != null">{{ userInfo.mtel }}</h6>
+      <!-- TEL -->
+      <div class="d-flex my-2">
+        <div class="col-3">
+          <h5>전화번호</h5>
+        </div>
+        <input v-model="info.mtel" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
+                style="height: 5vh;" @keyup="sendModifyUserInfo1">
       </div>
     </div>
     <hr>
     <div class="d-flex justify-content-between">
       <h3 class="fw-bold my-3">기본 배송지</h3>
       <div class="d-flex mt-2">
-        <button class="btn btn-outline-dark me-1" style="height: 40px;" @click="modifyUserInfo">수정</button>
-        <button class="btn btn-dark me-2" style="height: 40px;" @click="sendModifyUserInfo">등록</button>
+        <button class="btn btn-outline-dark me-1" style="height: 40px;" @click="modifyUserInfo2">수정</button>
+        <button class="btn btn-dark me-2" style="height: 40px;" @click="sendModifyUserInfo2">등록</button>
       </div>      
     </div>
-    <div id="defaultInfo" style="display: block;">
+    <div id="defaultInfo2" style="display: block;">
       <!-- ZIPCODE -->
       <div class="d-flex my-2">
         <div class="col-3">
           <h5>우편번호</h5>
         </div>
         <div class="col-9">
-          <h6>{{ userInfo.mzipcode }}</h6>
+          <h6 v-if="userInfo.mzipcode == null" class="ms-4">-</h6>
+          <h6 v-if="userInfo.mzipcode != null">{{ userInfo.mzipcode }}</h6>
         </div>
       </div>
       <!-- 주소1 -->
@@ -100,7 +164,8 @@
           <h5>주소</h5>
         </div>
         <div class="col-9">
-          <h6>{{ userInfo.maddress1 }}</h6>
+          <h6 v-if="userInfo.maddress1 == null" class="ms-4">-</h6>
+          <h6 v-if="userInfo.maddress1 != null">{{ userInfo.maddress1 }}</h6>
         </div>
       </div>
       <!-- 주소2 -->
@@ -109,11 +174,12 @@
           <h5>상세주소</h5>
         </div>
         <div class="col-9">
-          <h6>{{ userInfo.maddress2 }}</h6>
+          <h6 v-if="userInfo.maddress2 == null" class="ms-4">-</h6>
+          <h6 v-if="userInfo.maddress2 != null">{{ userInfo.maddress2 }}</h6>
         </div>
       </div>
     </div>
-    <div id="changeInfo" style="display: none;">
+    <div id="changeInfo2" style="display: none;">
       <!-- ZIPCODE -->
       <div class="d-flex my-2">
         <div class="col-3">
@@ -121,7 +187,7 @@
         </div>
         <div class="col-8">
           <input v-model="info.mzipcode" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-                 style="height: 5vh;">
+                 style="height: 5vh;" @keyup="sendModifyUserInfo2">
         </div>
       </div>
       <!-- 주소1 -->
@@ -131,7 +197,7 @@
         </div>
         <div class="col-8">
           <input v-model="info.maddress1" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-                 style="height: 5vh;">
+                 style="height: 5vh;" @keyup.enter="sendModifyUserInfo2">
         </div>
       </div>
       <!-- 주소2 -->
@@ -141,7 +207,7 @@
         </div>
         <div class="col-8">
           <input v-model="info.maddress2" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-                 style="height: 5vh;">
+                 style="height: 5vh;" @keyup.enter ="sendModifyUserInfo2">
         </div>
       </div>
     </div>
@@ -172,9 +238,12 @@ export default {
   data: function() {
     return {
       info: {
-        "mzipcode": '',
-        "maddress1": '',
-        "maddress2": '',
+        "mphone": this.userInfo.mphone,
+        "memail": this.userInfo.memail,
+        "mtel": this.userInfo.mtel,
+        "mzipcode": this.userInfo.mzipcode,
+        "maddress1": this.userInfo.maddress1,
+        "maddress2": this.userInfo.maddress2,
       }
     }
   },
@@ -194,17 +263,29 @@ export default {
     },
  },
   methods: {
-    modifyUserInfo: function() {
-      const defaultInfoId = document.getElementById('defaultInfo')
-      const changeInfoId = document.getElementById('changeInfo')
+    modifyUserInfo1: function() {
+      const defaultInfoId = document.getElementById('defaultInfo1')
+      const changeInfoId = document.getElementById('changeInfo1')
       defaultInfoId.style.display = 'none'
       changeInfoId.style.display = 'block'
     },
-    sendModifyUserInfo: function() {
+    modifyUserInfo2: function() {
+      const defaultInfoId = document.getElementById('defaultInfo2')
+      const changeInfoId = document.getElementById('changeInfo2')
+      defaultInfoId.style.display = 'none'
+      changeInfoId.style.display = 'block'
+    },
+    sendModifyUserInfo1: function() {
       this.$store.dispatch('sendModifyUserInfo', this.info)
-
-      const defaultInfoId = document.getElementById('defaultInfo')
-      const changeInfoId = document.getElementById('changeInfo')
+      const defaultInfoId = document.getElementById('defaultInfo1')
+      const changeInfoId = document.getElementById('changeInfo1')
+      defaultInfoId.style.display = 'block'
+      changeInfoId.style.display = 'none'
+    },
+    sendModifyUserInfo2: function() {
+      this.$store.dispatch('sendModifyUserInfo', this.info)
+      const defaultInfoId = document.getElementById('defaultInfo2')
+      const changeInfoId = document.getElementById('changeInfo2')
       defaultInfoId.style.display = 'block'
       changeInfoId.style.display = 'none'
     },
