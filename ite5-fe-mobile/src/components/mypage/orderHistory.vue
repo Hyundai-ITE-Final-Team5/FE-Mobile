@@ -1,6 +1,6 @@
 <template>
   <div class="ms-2 me-1 mt-4">
-    <div class="d-flex justify-content-between my-3">
+    <div class="d-flex justify-content-between mt-5 mb-3">
       <h3 class="fw-bold">주문 내역</h3>
       <h6 class="text-muted mx-3 mt-1">최근 날짜순</h6>
     </div>

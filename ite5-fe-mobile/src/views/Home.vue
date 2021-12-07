@@ -3,26 +3,31 @@
     <div class="mb-5 fixed-top" id="nav-home">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-          <img src="@/assets/back-white.png" alt="" @click="goBack">
-          <h3 class="" @click="moveMenuStatusBarHome">
+          <img src="@/assets/menu_negative.png" alt="" @click="showFooterNavBar">
+          <h3 class="pt-2" @click="moveMenuStatusBarHome">
             <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
           </h3>
           <div class="d-flex">
             <router-link to="/login" v-if="decodedJWT == null">
               <img src="@/assets/login_negative.png" alt="" style=" height: 28px;" @click="moveMenuStatusBarMyPage">
             </router-link>
-            <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag_negative.png" alt="" style="height: 28px;"></router-link>
+            <div>
+              <router-link to="/shoppingbag" v-if="decodedJWT != null" class="me-1">
+                <img src="@/assets/shop-bag_negative.png" alt="" style="height: 28px;">
+                <span class="position-absolute start-89 translate-middle badge rounded-pill bg-dark ps-2" style="top: 44px; height: 21px;">{{ shoppingbagCount }}</span>
+              </router-link>
+            </div>
           </div>
         </div>
       </nav>
     </div>
-    <div class="homeRemoteControllUp" style="opacity: 0.7; height: 0;">
+    <div class="homeRemoteControllUp" style="">
       <img src="@/assets/up-white.png" style="width: 16px;" alt="" @click="homeScrollUp">
     </div>
-    <div class="mb-2" id="homePageBar1" style="transform: scale(4.0, 1.0); width: 2px; height: 21px;"></div>
-    <div class="mb-2" id="homePageBar2" style="transform: scale(1.0, 1.0); width: 2px; height: 21px;"></div>
-    <div class="mb-2" id="homePageBar3" style="transform: scale(1.0, 1.0); width: 2px; height: 21px;"></div>
-    <div class="homeRemoteControllDown" style="opacity: 0.7; height: 0;">
+    <div class="mb-2" id="homePageBar1" style="transform: scale(2.0, 2.0); width: 3px; height: 18px; margin-top: 39vh; opacity: 1.0;"></div>
+    <div class="mb-2" id="homePageBar2" style="transform: scale(1.0, 1.0); width: 3px; height: 18px; margin-top: 43vh; opacity: 0.5;"></div>
+    <div class="mb-2" id="homePageBar3" style="transform: scale(1.0, 1.0); width: 3px; height: 18px; margin-top: 46vh; opacity: 0.5;"></div>
+    <div class="homeRemoteControllDown" style="">
       <img src="@/assets/down-white.png" style="width: 16px;" alt="" @click="homeScrollDown">
     </div>
     <div class="bg-content1 ms-2">
@@ -57,9 +62,10 @@
           <h6>29</h6>
         </div>
       </div> -->
-      <h5 class="mt-4">Brands | Category</h5>
-      <h5 class="mb-2">Click here to search index.</h5>
-      <div class="mx-3 mb-5 d-flex justify-content-between">
+      <h5 class="mt-5">Brands | Category</h5>
+      <h5>Find your style,</h5>
+      <h5 class="mb-3">Click here to search index.</h5>
+      <div class="me-2 mb-5 d-flex justify-content-between">
         <form class="d-flex my-3 ">
           <input class="form-control me-2 form-control border-3 border-top-0 border-start-0 border-end-0 text-light" style="background-color: transparent;">
           <button class="btn btn-outline-light border-3 border-top-0 border-start-0 border-end-0" style="width: 35vw; border: 2px solid; border-radius: 0rem;" 
@@ -74,7 +80,7 @@
       </div>
     </div>
     <div class="bg-content3 ms-2">
-      <h1>Memebership</h1>
+      <h1>Membership</h1>
       <h1>Benefit</h1>
       <div class="mx-3 my-5 d-flex justify-content-between">
         <div class="col-3 text-center">
@@ -113,6 +119,13 @@
     <div class="bg-img3"></div>
     <div>
       <h1 class="mt-4 ms-2">EVENT</h1>
+      <button type="button" class="btn btn-primary position-relative">
+        Inbox
+        <span class="position-absolute top-100 start-100 translate-middle badge rounded-pill bg-dark">
+          {{ shoppingbagCount }}
+          <span class="visually-hidden">unread messages</span>
+        </span>
+      </button>
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -161,6 +174,9 @@ export default {
     decodedJWT: function() {
       return this.$store.getters.decodedToken
     },
+    shoppingbagCount: function() {
+     return this.$store.state.shoppingbagCount
+    },
   },
   methods: {
     homeScrollUp: function() {
@@ -170,14 +186,22 @@ export default {
       const homePageBar1Id = document.getElementById('homePageBar1')
       const homePageBar2Id = document.getElementById('homePageBar2')
       const homePageBar3Id = document.getElementById('homePageBar3')
-      if (homePageBar2Id.style.transform == 'scale(4, 1)') {
-        homePageBar1Id.style.transform = 'scale(4.0, 1.0)'
+      if (homePageBar2Id.style.transform == 'scale(2, 2)') {
+        homePageBar1Id.style.transform = 'scale(2.0, 2.0)'
+        homePageBar1Id.style.marginTop = '39vh'
+        homePageBar1Id.style.opacity = '1.0'
         homePageBar2Id.style.transform = 'scale(1.0, 1.0)'
+        homePageBar2Id.style.marginTop = '43vh'
+        homePageBar2Id.style.opacity = '0.5'
         homePageBar3Id.style.transform = 'scale(1.0, 1.0)'
-      } else if (homePageBar3Id.style.transform == 'scale(4, 1)') {
+      } else if (homePageBar3Id.style.transform == 'scale(2, 2)') {
         homePageBar1Id.style.transform = 'scale(1.0, 1.0)'
-        homePageBar2Id.style.transform = 'scale(4.0, 1.0)'
+        homePageBar2Id.style.transform = 'scale(2.0, 2.0)'
+        homePageBar2Id.style.marginTop = '42vh'
+        homePageBar2Id.style.opacity = '1.0'
         homePageBar3Id.style.transform = 'scale(1.0, 1.0)'
+        homePageBar3Id.style.marginTop = '46vh'
+        homePageBar3Id.style.opacity = '0.5'
       }
     },
     homeScrollDown: function() {
@@ -187,15 +211,59 @@ export default {
       const homePageBar1Id = document.getElementById('homePageBar1')
       const homePageBar2Id = document.getElementById('homePageBar2')
       const homePageBar3Id = document.getElementById('homePageBar3')
-      if (homePageBar1Id.style.transform == 'scale(4, 1)') {
+      if (homePageBar1Id.style.transform == 'scale(2, 2)') {
         homePageBar1Id.style.transform = 'scale(1.0, 1.0)'
-        homePageBar2Id.style.transform = 'scale(4.0, 1.0)'
+        homePageBar1Id.style.marginTop = '38vh'
+        homePageBar1Id.style.opacity = '0.5'
+        homePageBar2Id.style.transform = 'scale(2.0, 2.0)'
+        homePageBar2Id.style.marginTop = '42vh'
+        homePageBar2Id.style.opacity = '1.0'
         homePageBar3Id.style.transform = 'scale(1.0, 1.0)'
-      } else if (homePageBar2Id.style.transform == 'scale(4, 1)') {
+      } else if (homePageBar2Id.style.transform == 'scale(2, 2)') {
         homePageBar1Id.style.transform = 'scale(1.0, 1.0)'
         homePageBar2Id.style.transform = 'scale(1.0, 1.0)'
-        homePageBar3Id.style.transform = 'scale(4.0, 1.0)'
+        homePageBar2Id.style.marginTop = '41vh'
+        homePageBar2Id.style.opacity = '0.5'
+        homePageBar3Id.style.transform = 'scale(2.0, 2.0)'
+        homePageBar3Id.style.marginTop = '45vh'
+        homePageBar3Id.style.opacity = '1.0'
       }
+    },
+    showFooterNavBar: function() {
+      const footerNavBarId = document.getElementById('footerNavBar')
+      const footerNavBarBtnId = document.getElementById('footerNavBarBtn')
+      const footerNavBarBtnImgId = document.getElementById('footerNavBarBtnImg')
+      if (footerNavBarId.classList.contains("showFooterNavBar") == true) {
+        footerNavBarId.classList.remove("showFooterNavBar")
+        footerNavBarId.classList.add("closeFooterNavBar")
+        footerNavBarBtnId.classList.remove("showFooterNavBar")
+        footerNavBarBtnId.classList.add("closeFooterNavBar")
+        footerNavBarBtnImgId.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAsQAAALEBxi1JjQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABoSURBVEiJ7c4xCsJQEEXRM+5AcAvBTgR7V2Tv+uwkpLB0Dx/SWZslpHoQwj8w7X1Dt6LwxC3UnwoNp9BAKwy4hgY+oW63NSP+oXsf8As+n2x3W1G44BzqfwszjqGBufDAPTTwCnX3ZAGCWyJ5FGiNNAAAAABJRU5ErkJggg=='
+      } else {
+        footerNavBarId.classList.remove("closeFooterNavBar")
+        footerNavBarId.classList.add("showFooterNavBar")
+        footerNavBarBtnId.classList.remove("closeFooterNavBar")
+        footerNavBarBtnId.classList.add("showFooterNavBar")
+        footerNavBarBtnImgId.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYBAMAAAASWSDLAAAAA3NCSVQICAjb4U/gAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkUExURf///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMcmPmUAAAALdFJOUwAGISQ/f6KxudjjxauaGAAAAAlwSFlzAAAAvAAAALwBzx0kHgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABeSURBVCjPY6AYeATCWKItDLO3C0DYjNU7Gbp3F0I44rt3MFjthkgxVu9ezMC8GiIlvnuXAQNUCizBAJWCSECkoBIQKZgEWAomAZaCS4Ck4BIgKYQEA4NaEgMVAAMDAOogJ5Va++q/AAAAAElFTkSuQmCC'
+      }
+    },
+    closeMenuHome: function() {
+      this.$router.push('/')
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveHome")
+    },
+    closeMenuIndex: function() {
+      this.$router.push('/index')
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveIndex")
+    },
+    closeMenuMyPage: function() {
+      this.$router.push('/mypage')
+      const menuStatusBarId = document.getElementById('menuStatusBar')
+      menuStatusBarId.classList.remove("moveHome", "moveIndex", "moveLike", "moveMyPage")
+      menuStatusBarId.classList.add("moveMyPage")
     },
     moveMenuStatusBarHome: function() {
       const menuStatusBarId = document.getElementById('menuStatusBar')
@@ -269,7 +337,7 @@ export default {
   height: 812px;
   position: relative;
   background-image: url("../assets/brand/brand-pop-1.jpg");
-  filter: brightness(65%);
+  filter: brightness(55%);
   z-index: 10;
 }
 .bg-img3 {
@@ -288,7 +356,7 @@ export default {
 }
 .bg-content2 {
   position: absolute;
-  top: 1100px;
+  top: 1120px;
   left: 3vw;
   z-index: 100;
   color: #e9e9e9;
@@ -302,7 +370,7 @@ export default {
 }
 .homeRemoteControllUp {
   position: fixed;
-  margin-top: 35vh;
+  margin-top: 34vh;
   margin-left: 335px;
   width: 20px;
   z-index: 1000;
@@ -317,9 +385,8 @@ export default {
 #homePageBar1 {
   position: fixed;
   border: 2px;
-  border-color: #d3d3d3;
-  background-color: #d3d3d3;
-  margin-top: 39vh;
+  border-color: white;
+  background-color: white;
   margin-left: 91vw;
   z-index: 1000;
   filter: brightness(150%);
@@ -328,9 +395,8 @@ export default {
 #homePageBar2 {
   position: fixed;
   border: 2px;
-  border-color: #d3d3d3;
-  background-color: #d3d3d3;
-  margin-top: 42vh;
+  border-color: white;
+  background-color: white;
   margin-left: 91vw;
   z-index: 1000;
   transition: all 0.5s linear;
@@ -338,9 +404,8 @@ export default {
 #homePageBar3 {
   position: fixed;
   border: 2px;
-  border-color: #d3d3d3;
-  background-color: #d3d3d3;
-  margin-top: 45vh;
+  border-color: white;
+  background-color: white;
   margin-left: 91vw;
   z-index: 1000;
   transition: all 0.5s linear;

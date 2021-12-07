@@ -4,7 +4,7 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <img src="@/assets/back.png" style="opacity: 0.6;" alt="" @click="goBack">
-          <h3 class="" @click="moveMenuStatusBarHome">
+          <h3 class="pt-2" @click="moveMenuStatusBarHome">
             <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
           </h3>
           <div class="d-flex">

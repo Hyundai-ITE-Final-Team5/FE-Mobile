@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h4 class="me-4" style="" :id="cpidx + 'textSizeSelect_' + sidx" @click="selectSize">{{ size.psize }}</h4>
+    <h4 v-if="size.psstock > 0" class="me-4" style="" :id="cpidx + 'textSizeSelect_' + sidx" @click="selectSize">{{ size.psize }}</h4>
+    <h4 v-if="size.psstock == 0" class="me-4 text-muted" style="text-decoration: line-through;">{{ size.psize }}</h4>
     <div class="mb-2 col-7" style="border: solid; border-color: white;" :id="cpidx + 'sizeSelect_' + sidx"></div>
   </div>
 </template>

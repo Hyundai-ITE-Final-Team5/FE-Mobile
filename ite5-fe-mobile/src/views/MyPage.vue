@@ -4,19 +4,22 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <img src="@/assets/back.png" style="opacity: 0.6;" alt="" @click="goBack">
-          <h3 class="" @click="moveMenuStatusBarHome">
+          <h3 class="pt-2" @click="moveMenuStatusBarHome">
             <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
           </h3>
           <div class="d-flex">
             <router-link to="/login" v-if="decodedJWT == null">
               <img src="@/assets/user.png" alt="" style=" height: 28px;" @click="moveMenuStatusBarMyPage">
             </router-link>
-            <router-link to="/shoppingbag" v-if="decodedJWT != null"><img src="@/assets/shoppingbag.png" alt="" style="opacity: 0.9; height: 28px;"></router-link>
+            <router-link to="/shoppingbag" v-if="decodedJWT != null" class="me-1">
+              <img src="@/assets/shop-bag.png" alt="" style="opacity: 0.8; height: 28px;">
+              <span class="position-absolute start-89 translate-middle badge rounded-pill bg-dark ps-2" style="top: 44px; height: 21px;">{{ shoppingbagCount }}</span>
+            </router-link>   
           </div>
         </div>
       </nav>
     </div>
-    <div class="d-flex ms-3 justify-content-between" style="margin-top: 61px;">
+    <div class="d-flex ms-3 justify-content-between" style="margin-top: 71px;">
       <div class="d-flex">
         <img v-if="userInfo.mgrade == 1" src="https://static.solved.ac/tier_small/0.svg" style="width: 24px; heigth: 24px;" alt="">
         <img v-if="userInfo.mgrade == 2" src="https://static.solved.ac/tier_small/10.svg" style="width: 24px; heigth: 24px;" alt="">
@@ -70,12 +73,12 @@
     <div class="d-flex justify-content-center">
     <hr class="col-10">
     </div>
-    <div class="d-flex  mt-3">
+    <div class="d-flex mt-3">
       <h5 class="ms-5">• POINT :&nbsp;&nbsp;</h5>
       <h5>{{ userInfo.mmileage }}</h5>
       <h5>&nbsp;P</h5>
     </div>
-    <div class="d-flex  mt-3">
+    <div class="d-flex mt-3">
       <h5 class="ms-5">• 이용금액 :&nbsp;&nbsp;</h5>
       <h5>{{ userInfo.totalorderprice }}</h5>
       <h5>&nbsp;원</h5>
@@ -84,28 +87,28 @@
       <hr class="col-10">
     </div>
     <div class="d-flex justify-content-center mt-4 text-center">
-      <h5 class="col-3" @click="showOrderHistory">주문내역</h5>
-      <h5 class="col-3" @click="showUserInfo">내 정보</h5>
-      <h5 class="col-3" @click="showCoupon">쿠폰함</h5>
+      <h4 class="col-3" @click="showOrderHistory">주문내역</h4>
+      <h4 class="col-3" @click="showUserInfo">내 정보</h4>
+      <h4 class="col-3" @click="showCoupon">쿠폰함</h4>
     </div>
     <div class="mb-2 col-3" style="border: solid; border-color: #d3d3d3;" id="mypageStatusBar"></div>
     <orderHistory style="display: block;" id="orderHistoryId"/>
     <userInfo style="display: none;" id="userInfoId" :userInfo="userInfo"/>
-    <coupon style="display: none;" id="couponId"/>
+    <couponList style="display: none;" id="couponId"/>
   </div>
 </template>
 
 <script>
 import orderHistory from '@/components/mypage/orderHistory.vue'
 import userInfo from '@/components/mypage/userInfo.vue'
-import coupon from '@/components/mypage/coupon.vue'
+import couponList from '@/components/mypage/couponList.vue'
 
 export default {
   name: 'MyPage',
   components: {
     orderHistory,
     userInfo,
-    coupon,
+    couponList,
   },
   computed: {
     decodedJWT: function() {
@@ -113,6 +116,9 @@ export default {
     },
     userInfo: function() {
       return this.$store.state.userInfo
+    },
+    shoppingbagCount: function() {
+     return this.$store.state.shoppingbagCount
     },
   },
   methods: {

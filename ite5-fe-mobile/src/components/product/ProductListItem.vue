@@ -29,21 +29,21 @@
                   <div class="modal-header">
                     <div class="modal-title d-flex" id="exampleModalLabel">
                       <img src="@/assets/problem.png" style="height: 24px;" alt="">
-                      <h5 class="mx-2">알림</h5>
+                      <h4 class="mx-2 fw-bold">알림</h4>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
-                  <div class="modal-body">
+                  <h5 class="modal-body">
                     로그인이 필요한 서비스입니다.
-                  </div>
+                  </h5>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-outline-dark col-2" data-bs-dismiss="modal">닫기</button>
-                    <button type="button" class="btn btn-sm btn-dark col-2" @click="goLogin" data-bs-dismiss="modal">로그인</button>
+                    <button type="button" class="btn btn-sm btn-outline-dark col-3" data-bs-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-sm btn-dark col-3" @click="goLogin" data-bs-dismiss="modal">로그인</button>
                   </div>
                 </div>
               </div>
             </div>
-            <img src="@/assets/shoppingbag.png" alt="" style="height: 24px;">
+            <img src="@/assets/shoppingbag.png" @click="getProductDetail" alt="" style="height: 24px;">
           </div>
         </div>
       </div>

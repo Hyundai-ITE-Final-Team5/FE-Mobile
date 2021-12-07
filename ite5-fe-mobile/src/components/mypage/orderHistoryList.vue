@@ -22,13 +22,13 @@
         <h5>•주문상태</h5>
       </div>
       <div class="col-8">
-        <h6 v-if="order.ostatus != '주문취소'" style="color: #b1d3c5;">{{ order.ostatus }}</h6>
-        <h6 v-if="order.ostatus == '주문취소'" id="orderStatus" style="color: #e4beb3;">{{ order.ostatus }}</h6>
+        <h5 v-if="order.ostatus != '주문취소'" class="fw-bold" style="color: #7fb7a0;">{{ order.ostatus }}</h5>
+        <h5 v-if="order.ostatus == '주문취소'" class="fw-bold" id="orderStatus" style="color: #b97687;">{{ order.ostatus }}</h5>
       </div>
     </div>
     <orderHistoryListItem v-for="(oitem, oiidx) in order.items" :key="oiidx" :oitem="oitem" :oiidx="oiidx"/>
     <div v-if="order.ostatus != '주문취소'" class="d-flex justify-content-end me-3">
-      <button class="btn btn-sm" style="color: #e4beb3; border-color: #e4beb3;" 
+      <button class="btn btn-sm" style="color: #b97687; border-color: #b97687;" 
               data-bs-toggle="modal" :data-bs-target="'#orderCancelAlert_' + this.oidx">주문취소</button>
     </div>
     <div v-if="order.ostatus == '주문취소'" class="d-flex justify-content-end me-3">

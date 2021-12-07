@@ -4,7 +4,7 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <img src="@/assets/back.png" style="opacity: 0.6;" alt="" @click="goBack">
-          <h3 class="" @click="moveMenuStatusBarHome">
+          <h3 class="pt-2" @click="moveMenuStatusBarHome">
             <router-link to="/" class="text-decoration-none" id="handsome">HANDSOME</router-link>
           </h3>
           <div class="d-flex">
@@ -25,8 +25,8 @@
       </div>
       <button @click="duplicatedMidCheck" class="btn btn-dark mt-3 ms-3" style="height: 5vh;">확인</button>
     </div>
-    <h6 v-if="midCheck == 'possible'" class="ms-2" style="color: #b1d3c5;">V 사용가능한 아이디 입니다.</h6>
-    <h6 v-if="midCheck == 'duplicate'" class="ms-2" style="color: #e4beb3;">X 사용중인 아이디 입니다.</h6>
+    <h6 v-if="midCheck == 'possible'" class="ms-2" style="color: #7fb7a0;">V 사용가능한 아이디 입니다.</h6>
+    <h6 v-if="midCheck == 'duplicate'" class="ms-2" style="color:#b97687;">X 사용중인 아이디 입니다.</h6>
     <!-- 비밀번호 -->
     <div class="form mb-3">
       <input v-model="joinCredential.mpassword" type="password" class="form-control border-2 border-top-0 border-start-0 border-end-0"
@@ -38,8 +38,8 @@
              style="height: 7vh;" placeholder="비밀번호 확인">
     </div>
     <div v-if="joinCredential.mpassword != '' && mpasswordCheck != ''">
-      <h6 v-if="joinCredential.mpassword != mpasswordCheck" class="ms-2" style="color: #e4beb3;">X 비밀번호가 일치하지 않습니다.</h6>
-      <h6 v-if="joinCredential.mpassword == mpasswordCheck" class="ms-2" style="color: #b1d3c5;">V 비밀번호가 일치합니다.</h6>
+      <h6 v-if="joinCredential.mpassword != mpasswordCheck" class="ms-2" style="color: #b97687;">X 비밀번호가 일치하지 않습니다.</h6>
+      <h6 v-if="joinCredential.mpassword == mpasswordCheck" class="ms-2" style="color: #7fb7a0;">V 비밀번호가 일치합니다.</h6>
     </div>
     <div class="d-flex">
       <!-- 이름 -->
