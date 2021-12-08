@@ -17,6 +17,8 @@ export default new Vuex.Store({
     eventList: [],
     // 베스트 상품 목록
     bestList: [],
+    // 신상품 목록
+    newList: [],
     // 좋아요 목록
     likes: [],
     // 상품 목록
@@ -239,6 +241,9 @@ export default new Vuex.Store({
     GET_BEST_PRODUCT: function(state, bestList) {
       state.bestList = bestList
     },
+    GET_NEW_PRODUCT: function(state, newList) {
+      state.newList = newList
+    }
   },
   actions: {
     // 로그인
@@ -884,6 +889,26 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('GET_BEST_PRODUCT', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 신상품 리스트 가져오기
+    getNewproduct: function(context) {
+      let hasToken = ''
+      if (context.state.userToken != null) {
+        hasToken = 'Bearer ' + context.state.userToken
+      }
+      axios({
+        method: 'get',
+        url: 'http://kosa1.iptime.org:50222/newproduct',
+        headers: {
+          Authorization: hasToken
+        },
+      })
+        .then((res) => {
+          context.commit('GET_NEW_PRODUCT', res.data)
         })
         .catch((err) => {
           console.log(err)
