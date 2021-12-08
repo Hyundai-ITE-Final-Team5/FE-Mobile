@@ -3,7 +3,7 @@
     <div class="mb-5 fixed-top me-2" id="nav">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-          <img src="@/assets/back.png" style="opacity: 0.6;" alt="">
+          <img src="@/assets/diamond_negative.png" style="opacity: 0.6;" alt="">
           <h3 class="pt-2" @click="moveMenuStatusBarHome">
             <div>HANDSOME</div>
           </h3>

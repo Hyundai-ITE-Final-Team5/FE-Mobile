@@ -35,8 +35,10 @@ export default new Vuex.Store({
     shoppingbagTotal: 0,
     // 주문정보 임시보관
     tempOrderInfo: [],
-    // 주문정보 임시보관
+    // 주문상품정보 임시보관
     tempOrderListInfo: [],
+    // 주문상품정보 임시보관
+    tempOrderListTotal: 0,
     // 결제정보 임시보관
     tempOrderCompleteInfo: [],
     // 주문번호
@@ -207,8 +209,11 @@ export default new Vuex.Store({
       state.tempOrderInfo = orderInfo
     },
     MAKE_TEMP_ORDER: function(state, orderListInfo) {
+      state.tempOrderListTotal = 0
       state.tempOrderListInfo = orderListInfo
-      console.log(state.tempOrderListInfo)
+      for (let i = 0; i < state.tempOrderListInfo.length; i++) {
+        state.tempOrderListTotal += state.tempOrderListInfo[i].pcprice * state.tempOrderListInfo[i].pquantity
+      }
     },
     // 쿠폰목록 가져오기
     GET_COUPONLIST: function(state, coupon) {
