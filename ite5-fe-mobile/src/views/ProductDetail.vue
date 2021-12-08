@@ -240,7 +240,6 @@ export default {
     window.scrollTo(0,0)
   },
   destroyed: function() {
-    console.log("destroyed")
     this.$store.dispatch('detailExit', this.getProductDetail[0].pcid)
   },
 }

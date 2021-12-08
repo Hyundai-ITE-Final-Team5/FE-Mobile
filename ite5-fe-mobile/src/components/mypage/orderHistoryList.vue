@@ -22,13 +22,13 @@
         <h5>•주문상태</h5>
       </div>
       <div class="col-8">
-        <h5 v-if="order.ostatus != '주문취소'" class="fw-bold" style="color: #7fb7a0;">{{ order.ostatus }}</h5>
-        <h5 v-if="order.ostatus == '주문취소'" class="fw-bold" id="orderStatus" style="color: #b97687;">{{ order.ostatus }}</h5>
+        <h5 v-if="order.ostatus != '주문취소'" class="fw-bold" :id="'orderStatus' + oidx" style="color: #7fb7a0;">{{ order.ostatus }}</h5>
+        <h5 v-if="order.ostatus == '주문취소'" class="fw-bold" style="color: #b97687;">{{ order.ostatus }}</h5>
       </div>
     </div>
     <orderHistoryListItem v-for="(oitem, oiidx) in order.items" :key="oiidx" :oitem="oitem" :oiidx="oiidx"/>
     <div v-if="order.ostatus != '주문취소'" class="d-flex justify-content-end me-3">
-      <button class="btn btn-sm" style="color: #b97687; border-color: #b97687;" 
+      <button class="btn btn-sm" style="color: #b97687; border-color: #b97687;" :id="'cancelBtn' + oidx" 
               data-bs-toggle="modal" :data-bs-target="'#orderCancelAlert_' + this.oidx">주문취소</button>
     </div>
     <div v-if="order.ostatus == '주문취소'" class="d-flex justify-content-end me-3">
@@ -79,9 +79,13 @@ export default {
       this.$store.dispatch('cancelOrder', this.order.oid)
       this.$store.dispatch('getOrderHistory')
 
-      const orderStatusId = document.getElementById('orderStatus')
-      orderStatusId.style.color = '#e4beb3'
+      const orderStatusId = document.getElementById('orderStatus' + this.oidx)
+      const cancelBtnId = document.getElementById('cancelBtn' + this.oidx)
+      orderStatusId.style.color = '#b97687'
       orderStatusId.innerHTML = '주문취소'
+      cancelBtnId.style.borderColor = '#6c757d'
+      cancelBtnId.style.color = '#6c757d'
+      cancelBtnId.disabled = true
     },
   },
   computed: {
