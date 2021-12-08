@@ -1,6 +1,6 @@
 <template>
   <div id="orderList">
-    <orderListItem v-for="(orderitem, oidx) in getShoppingbag" :key="oidx" :oidx="oidx" :orderitem="orderitem"/>
+    <orderListItem v-for="(orderitem, oidx) in getTempOrderListInfo" :key="oidx" :oidx="oidx" :orderitem="orderitem"/>
     <hr>
     <h3 class="my-4 fw-bold">주문자 정보</h3>
     <!-- 아이디 -->
@@ -177,7 +177,7 @@
           <h3>총</h3>
         </div>
         <div class="d-flex col-7 justify-content-end">
-          <h3 class="mx-2 fw-bold">{{ shoppingbagCount }}</h3>
+          <h3 class="mx-2 fw-bold">{{ getTempOrderListInfoCount }}</h3>
           <h3>개 상품</h3>
         </div>
       </div>
@@ -199,12 +199,12 @@
           <h5>합계</h5>
         </div>
         <div class="d-flex col-7 justify-content-end">
-          <h5 class="mx-2 fw-bold">{{ shoppingbagTotal * (1 - getUsedCoupon / 100) - orderUserInfo.ousedmileage }}</h5>
+          <h5 class="mx-2 fw-bold">{{ getTempOrderListTotal * (1 - getUsedCoupon / 100) - orderUserInfo.ousedmileage }}</h5>
           <h5>원</h5>
         </div>
       </div>
       <div class="me-3 my-2 d-flex justify-content-end text-muted">
-        <h6 class="fw-bold me-2">{{ (shoppingbagTotal * (1 - getUsedCoupon / 100) - orderUserInfo.ousedmileage) * 0.05 }}</h6>
+        <h6 class="fw-bold me-2">{{ (getTempOrderListTotal * (1 - getUsedCoupon / 100) - orderUserInfo.ousedmileage) * 0.05 }}</h6>
         <h6>Point 적립 (5%)</h6>
       </div>
     </div>
@@ -381,6 +381,15 @@ export default {
   computed: {
     getTempOrderInfo: function() {
       return this.$store.state.tempOrderInfo
+    },
+    getTempOrderListInfo: function() {
+      return this.$store.state.tempOrderListInfo
+    },
+    getTempOrderListTotal: function() {
+      return this.$store.state.tempOrderListTotal
+    },
+    getTempOrderListInfoCount: function() {
+      return this.$store.state.tempOrderListInfo.length
     },
     getShoppingbag: function() {
       return this.$store.state.shoppingbag

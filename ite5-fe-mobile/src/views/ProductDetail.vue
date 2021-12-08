@@ -90,7 +90,11 @@
                 class="btn btn-lg btn-dark mt-4 mb-2 col-12" data-bs-toggle="modal" data-bs-target="#shoppingbagAlert">쇼핑백 담기</button>
       </div>
       <div class="d-flex justify-content-center">
-        <button class="btn btn-lg btn-outline-dark mb-4 col-12">바로 주문</button>
+        <button v-if="decodedJWT == null" data-bs-toggle="modal" data-bs-target="#loginAlert"
+                class="btn btn-lg btn-outline-dark mb-4 col-12">바로 주문</button>
+        <button v-else-if="decodedJWT != null && this.addProduct.psid == ''" 
+                class="btn btn-lg btn-outline-dark mb-4 col-12" data-bs-toggle="modal" data-bs-target="#optionAlert">바로 주문</button>
+        <button v-else class="btn btn-lg btn-outline-dark mb-4 col-12" @click="makeOrder">바로 주문</button>
       </div>
       <!-- 로그인 요청 Modal -->
       <div class="modal fade" style="margin-top: 30vh;" id="loginAlert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -190,6 +194,52 @@ export default {
         this.$store.dispatch('addShoppingbag', this.addProduct)
       }
     },
+    // 바로주문 요청
+    makeOrder: function() {
+      const tempList = []
+      let tempObject = {
+        "psid": '',
+        "oid": '',
+        "oicount": 0,
+        "oitotalprice": 0,
+      }
+      const tempOrderList = []
+      let tempOrderObject = {
+        "bname": '',
+        "pcchipimg": '',
+        "pccolorcode": '',
+        "pcprice": '',
+        "pid": '',
+        "pname": '',
+        "psid": '',
+        "psize": '',
+        "pquantity": null,
+        "pcimg1": '',
+      }
+      tempObject.psid = this.addProduct.psid
+      tempObject.oicount = this.addProduct.pquantity
+      tempObject.oitotalprice = this.addProduct.pquantity * this.getProductDetail[0].pcprice
+      tempList.push(tempObject)
+      tempOrderObject.bname = this.getProductCommon.bname
+      tempOrderObject.pname = this.getProductCommon.pname
+      tempOrderObject.psid = this.addProduct.psid
+      tempOrderObject.pquantity = this.addProduct.pquantity
+      const tempSize = this.addProduct.psid.split("_")[2]
+      tempOrderObject.psize = tempSize
+      for (let i = 0; i < this.getProductDetail.length; i++) {
+        if (this.addProduct.psid.split("_")[1] == this.getProductDetail[i].pccolorcode) {
+          tempOrderObject.pcimg1 = this.getProductDetail[i].pcimg1
+          tempOrderObject.pcchipimg = this.getProductDetail[i].pcchipimg
+          tempOrderObject.pccolorcode = this.getProductDetail[i].pccolorcode
+          tempOrderObject.pcprice = this.getProductDetail[i].pcprice
+          tempOrderObject.pid = this.getProductDetail[i].pid
+        }
+      }
+      tempOrderList.push(tempOrderObject)
+      this.$store.dispatch('makeOrder', tempList)
+      this.$store.dispatch('makeTempOrder', tempOrderList)
+      this.$router.push('/order')
+    },
     getpsid: function(psid) {
       this.addProduct.psid = psid
     },
@@ -234,6 +284,9 @@ export default {
     },
     shoppingbagCount: function() {
      return this.$store.state.shoppingbagCount
+    },
+    getShoppingbag: function() {
+      return this.$store.state.shoppingbag
     },
   },
   mounted: function() {
