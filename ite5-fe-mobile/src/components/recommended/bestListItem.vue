@@ -1,8 +1,8 @@
 <template>
-  <div class="me-1">
-    <img :src="best.colorinfo[0].pcimg1" style="width: 185px;" alt="" @click="getProductDetail">
+  <div class="mx-3">
+    <img :src="best.colorinfo[0].pcimg1" style="width: 250px;" alt="" @click="getProductDetail">
     <div class="d-flex justify-content-between mt-2">
-      <h6 class="ms-1 mt-1 fw-bold">{{ best.bname }}</h6>
+      <h5 class="ms-1 mt-1 fw-bold">{{ best.bname }}</h5>
       <div class="d-flex">
         <div v-if="decodedJWT == null">
           <img src="@/assets/heart_1.png" @click="goLogin" alt="" style=" height: 20px;" class="me-3" id="likeBtn">
@@ -14,6 +14,7 @@
       </div>
     </div>
     <h6 class="ms-1 mb-2">{{ best.pname }}</h6>
+    <h6 @click="getProductDetail" class="ms-1 mt-3" style="text-decoration: underline; text-underline-position: under">Shop Now →</h6>
   </div>
 </template>
 

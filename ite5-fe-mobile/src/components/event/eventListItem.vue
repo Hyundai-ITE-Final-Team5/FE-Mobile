@@ -1,7 +1,7 @@
 <template>
   <div class="mb-5">
     <h2 class="fw-bold ms-2 mt-4">{{ event.etitle }}</h2>
-    <h6 class="text-muted ms-3">• {{ issuedate }} ~ {{ expiredate }}</h6>
+    <h6 v-if="issuedate != ''" class="text-muted ms-3">• {{ issuedate }} ~ {{ expiredate }}</h6>
     <img :src="event.eimg" style="width: 100vw;" alt="" class="mt-2">
     <img :src="event.edetailimg" style="width: 100vw;" alt="" class="mb-3">
     <div class="d-flex justify-content-center mx-3 my-4">

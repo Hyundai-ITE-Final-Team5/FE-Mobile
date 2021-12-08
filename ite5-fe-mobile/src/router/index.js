@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import Event from '@/views/Event.vue'
+import Recommended from '@/views/Recommended.vue'
 import Index from '@/views/Index.vue'
 import ShoppingBag from '@/views/ShoppingBag.vue'
 import Like from '@/views/Like.vue'
@@ -25,6 +26,11 @@ const routes = [
     path: '/event',
     name: 'Event',
     component: Event
+  },
+  {
+    path: '/recommended',
+    name: 'Recommended',
+    component: Recommended
   },
   {
     path: '/index',

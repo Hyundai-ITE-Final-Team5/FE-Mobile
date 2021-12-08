@@ -74,9 +74,9 @@
       </div>
       <div class="d-flex justify-content-center">
         <button class="btn btn-outline-light" style="width: 43vw; border: 2px solid; border-radius: 0rem;" 
-                >BEST</button>
+                @click="goRecommended">BEST</button>
         <button class="btn btn-outline-light mx-2" style="width: 43vw; border: 2px solid; border-radius: 0rem;" 
-                >NEW</button>
+                @click="goRecommended">NEW</button>
       </div>
     </div>
     <div class="bg-content3 ms-2">
@@ -117,55 +117,15 @@
     <div class="bg-img1"></div>
     <div class="bg-img2"></div>
     <div class="bg-img3"></div>
-    <div>
-      <h1 class="mt-4 ms-2">EVENT</h1>
-      <button type="button" class="btn btn-primary position-relative">
-        Inbox
-        <span class="position-absolute top-100 start-100 translate-middle badge rounded-pill bg-dark">
-          {{ shoppingbagCount }}
-          <span class="visually-hidden">unread messages</span>
-        </span>
-      </button>
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img v-if="eventList.length > 0" :src="eventList[0].eimg" class="d-block w-100" alt="..." @click="getEventDetail">
-          </div>
-          <div class="carousel-item">
-            <img v-if="eventList.length > 0" :src="eventList[1].eimg" class="d-block w-100" alt="..." @click="getEventDetail">
-          </div>
-          <div class="carousel-item">
-            <img v-if="eventList.length > 0" :src="eventList[2].eimg" class="d-block w-100" alt="..." @click="getEventDetail">
-          </div>
-          <div class="carousel-item">
-            <img v-if="eventList.length > 0" :src="eventList[3].eimg" class="d-block w-100" alt="..." @click="getEventDetail">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </div>
-    <h1 class="mt-5 ms-2">BEST</h1>
-    <bestList/>
   </div>
 </template>
 <script>
-import bestList from '@/components/best/bestList'
-
 export default {
   name: 'Home',
-  components: {
-    bestList,
-  },
   created: function() {
     this.$store.dispatch('getEventList')
     this.$store.dispatch('getBestproduct')
+    this.$store.dispatch('getNewproduct')
   },
   computed: {
     eventList: function() {
@@ -290,6 +250,9 @@ export default {
     },
     goBack: function() {
       this.$router.go(-1)
+    },
+    goRecommended: function() {
+      this.$router.push('/recommended')
     },
     goIndex: function() {
       this.$router.push('/index')
