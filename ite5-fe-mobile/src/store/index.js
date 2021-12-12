@@ -13,6 +13,10 @@ export default new Vuex.Store({
     userToken: null,
     // 사용자 정보
     userInfo: [],
+    // 방문자 수 플래그
+    visitorFlag: 1,
+    // 홈 UI 정보
+    homeInfo: [],
     // 이벤트 목록
     eventList: [],
     // 베스트 상품 목록
@@ -85,6 +89,9 @@ export default new Vuex.Store({
     },
     RESET_PRODUCT_LIST: function(state) {
       state.products = []
+    },
+    VISITOR_COUNT: function(state) {
+      state.visitorFlag = 0
     },
     GET_BRAND_INDEX: function(state, data) {
       state.brandIndex = data
@@ -243,7 +250,10 @@ export default new Vuex.Store({
     },
     GET_NEW_PRODUCT: function(state, newList) {
       state.newList = newList
-    }
+    },
+    GET_HOME_IMAGE: function(state, uiInfo) {
+      state.homeInfo = uiInfo
+    },
   },
   actions: {
     // 로그인
@@ -304,6 +314,21 @@ export default new Vuex.Store({
       .catch((err) => {
         console.log(err)
       })
+    },
+    // 방문자 수 체크
+    visitorCount: function(context) {
+      if (this.state.visitorFlag == 0) return
+      axios({
+        method: 'post',
+        url: 'http://kosa1.iptime.org:50215/visit',
+      })
+      .then((res) => {
+        context.commit('VISITOR_COUNT')
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })      
     },
     // Index Page
     //브랜드 목록 가져오기
@@ -909,6 +934,19 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('GET_NEW_PRODUCT', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    // 홈UI정보 가져오기
+    getHomeImage: function(context) {
+      axios({
+        method: 'get',
+        url: 'http://kosa1.iptime.org:50215/gethomeorderimg',
+      })
+        .then((res) => {
+          context.commit('GET_HOME_IMAGE', res.data)
         })
         .catch((err) => {
           console.log(err)
