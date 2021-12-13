@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mb-5 fixed-top" id="nav">
+    <div class="mb-5 fixed-top" id="nav" style="z-index: 100000;">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <img src="@/assets/back.png" style="opacity: 0.6;" alt="" @click="goBack">
@@ -20,7 +20,7 @@
       </nav>
     </div>
     <h1 class="mb-4" style="margin-top: 81px;"></h1>
-    <div class="d-flex justify-content-center my-3">
+    <div class="notification-container d-flex justify-content-center my-3" id="notification-container">
       <img src="@/assets/love.png" alt="">
       <h5 class="ms-3">현재 <span class="fw-bold">{{ productDetail.visitor }}</span> 명이 함께 보고 있습니다.</h5>
     </div>
@@ -291,6 +291,14 @@ export default {
   },
   mounted: function() {
     window.scrollTo(0,0)
+    const notification = document.getElementById('notification-container')
+    const showNotification = () => {
+      notification.classList.add('show')
+      setTimeout(() => {
+        notification.classList.remove('show')
+      }, 2000)
+    }
+    showNotification()    
   },
   destroyed: function() {
     this.$store.dispatch('detailExit', this.getProductDetail[0].pcid)
@@ -299,5 +307,17 @@ export default {
 </script>
 
 <style scoped>
+.notification-container {
+  background-color: white;
+  padding: 15px 20px;
+  position: absolute;
+  width: 375px;
+  top: -100px;
+  z-index: 10000;
+  transition: transform 0.2s ease-in-out;
+}
 
+.notification-container.show {
+  transform: translateY(150px);
+}
 </style>
