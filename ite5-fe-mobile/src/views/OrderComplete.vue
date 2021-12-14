@@ -1,5 +1,5 @@
 <template>
-  <div class="ms-2 me-4 orderComplete">
+  <div class="ms-2 me-4 orderComplete" id="ordercomplete">
     <div class="mb-5 fixed-top me-2" id="nav">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -19,18 +19,18 @@
         </div>
       </nav>
     </div>
+    
     <div class="d-flex justify-content-center mb-5" style="margin-top: 91px;">
       <img src="@/assets/checked.png" class="me-2" style="height: 32px;" alt="">
       <h1>주문이 완료되었습니다.</h1>
     </div>
-    <hr>
-    <h3 class="fw-bold my-3">주문 정보</h3>
+    <h3 class="fw-bold my-4">주문 정보</h3>
     <div class="d-flex">
       <div class="col-3">
         <h5>•주문번호</h5>
       </div>
       <div class="col-9 ms-2">
-        <h6>{{ orderNumber }}</h6>
+        <h6>|&nbsp;&nbsp;{{ orderNumber }}</h6>
       </div>
     </div>
     <div class="d-flex my-2">
@@ -38,9 +38,9 @@
         <h5>•결제수단</h5>
       </div>
       <div class="col-9 ms-2">
-        <h6 v-if="completeOrderOid.pmcode == '0hyundai'">신용카드</h6>
-        <h6 v-if="completeOrderOid.pmcode == '1hyundai'">계좌이체</h6>
-        <h6 v-if="completeOrderOid.pmcode == '2hyundai'">무통장입금</h6>
+        <h6 v-if="completeOrderOid.pmcode == '0hyundai'">|&nbsp;&nbsp;신용카드</h6>
+        <h6 v-if="completeOrderOid.pmcode == '1hyundai'">|&nbsp;&nbsp;계좌이체</h6>
+        <h6 v-if="completeOrderOid.pmcode == '2hyundai'">|&nbsp;&nbsp;무통장입금</h6>
       </div>
     </div>
     <div class="d-flex my-2">
@@ -48,19 +48,19 @@
         <h5>•주문시간</h5>
       </div>
       <div class="col-9 ms-2">
-        <h6>{{ orderTime }}</h6>
+        <h6>|&nbsp;&nbsp;{{ orderTime }}</h6>
       </div>
     </div>
     <hr>
-    <h3 class="fw-bold my-3">상품 정보</h3>
+    <h3 class="fw-bold my-4">상품 정보</h3>
     <orderCompleteListItem v-for="(orderitem, oidx) in tempOrderListInfo" :key="oidx" :oidx="oidx" :orderitem="orderitem"/>
-    <h3 class="fw-bold my-3">배송 정보</h3>
+    <h3 class="fw-bold my-4">배송 정보</h3>
     <div class="d-flex my-2">
       <div class="col-3">
         <h5>•수령인</h5>
       </div>
       <div class="col-9 ms-3">
-        <h6>{{ completeOrderOid.oreceiver }}</h6>
+        <h6>|&nbsp;&nbsp;{{ completeOrderOid.oreceiver }}</h6>
       </div>
     </div>
     <div class="d-flex my-2">
@@ -68,7 +68,7 @@
         <h5>•휴대폰</h5>
       </div>
       <div class="col-9 ms-3">
-        <h6>{{ completeOrderOid.ophone }}</h6>
+        <h6>|&nbsp;&nbsp;{{ completeOrderOid.ophone }}</h6>
       </div>
     </div>
     <div class="d-flex my-2">
@@ -76,7 +76,7 @@
         <h5>•이메일</h5>
       </div>
       <div class="col-9 ms-3">
-        <h6>{{ completeOrderOid.oemail }}</h6>
+        <h6>|&nbsp;&nbsp;{{ completeOrderOid.oemail }}</h6>
       </div>
     </div>
     <div class="d-flex my-2">
@@ -84,7 +84,7 @@
         <h5>•배송메모</h5>
       </div>
       <div class="col-9 ms-3">
-        <h6>{{ completeOrderOid.omemo }}</h6>
+        <h6>|&nbsp;&nbsp;{{ completeOrderOid.omemo }}</h6>
       </div>
     </div>
     <div class="d-flex my-2">
@@ -92,7 +92,7 @@
         <h5>•우편번호</h5>
       </div>
       <div class="col-9 ms-3">
-        <h6>{{ completeOrderOid.ozipcode }}</h6>
+        <h6>|&nbsp;&nbsp;{{ completeOrderOid.ozipcode }}</h6>
       </div>
     </div>
     <div class="d-flex my-2">
@@ -100,7 +100,7 @@
         <h5>•주소</h5>
       </div>
       <div class="col-9 ms-3">
-        <h6>{{ completeOrderOid.oaddress1 }}</h6>
+        <h6>|&nbsp;&nbsp;{{ completeOrderOid.oaddress1 }}</h6>
       </div>
     </div>
     <div class="d-flex my-2">
@@ -108,7 +108,7 @@
         <h5>•상세주소</h5>
       </div>
       <div class="col-9 ms-3">
-        <h6>{{ completeOrderOid.oaddress2}}</h6>
+        <h6>|&nbsp;&nbsp;{{ completeOrderOid.oaddress2}}</h6>
       </div>
     </div>
     <hr>
@@ -171,5 +171,8 @@ export default {
 <style scoped>
 .orderComplete {
   overflow-x: hidden;
+}
+#ordercomplete {
+  font-family: GowunBatang-Bold;
 }
 </style>

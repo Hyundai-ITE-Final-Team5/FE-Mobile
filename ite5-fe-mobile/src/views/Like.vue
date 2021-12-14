@@ -75,5 +75,6 @@ export default {
 <style scoped>
 #like {
   overflow-x: hidden;
+  font-family: GowunBatang-Bold;
 }
 </style>

@@ -7,7 +7,7 @@
       <div class="col-8 mt-2 ms-2">
         <h5 class="fw-bold">{{ orderitem.bname }}</h5>
         <h6>{{ orderitem.pname }}</h6>
-        <h6>{{ orderitem.pcprice }}<span> 원</span></h6>
+        <h6>{{ pcprice }}<span> 원</span></h6>
         <div class="d-flex mt-3">
           <div class="d-flex col-5">
             <h6>COLOR</h6>
@@ -25,7 +25,7 @@
           </div>
           <div class="d-flex col-7">
             <h6>합계</h6>
-            <h6 class="mx-2 fw-bold">{{ orderitem.pquantity * orderitem.pcprice }}</h6>
+            <h6 class="mx-2 fw-bold">{{ pcpriceTotal }}</h6>
             <h6>원</h6>
           </div>
         </div>
@@ -44,6 +44,14 @@ export default {
     },
     oidx: {
       type: Number
+    },
+  },
+  computed: {
+    pcprice: function() {
+      return this.orderitem.pcprice.toLocaleString("ko-KR")
+    },
+    pcpriceTotal: function() {
+      return (this.orderitem.pquantity * this.orderitem.pcprice).toLocaleString("ko-KR")
     },
   },
 }

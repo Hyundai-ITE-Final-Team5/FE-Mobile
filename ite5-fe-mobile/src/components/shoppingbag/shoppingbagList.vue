@@ -79,7 +79,7 @@ export default {
      return this.getShoppingbag.length
     },
     shoppingbagTotal: function() {
-      return this.$store.state.shoppingbagTotal
+      return this.$store.state.shoppingbagTotal.toLocaleString("ko-KR")
     },
   },
   methods: {

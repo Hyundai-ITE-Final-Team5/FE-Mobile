@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="event">
     <div class="mb-5 fixed-top" id="nav">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -59,5 +59,7 @@ export default {
 </script>
 
 <style>
-
+#event {
+  font-family: GowunBatang-Bold;
+}
 </style>
