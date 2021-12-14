@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="productdetail">
     <div class="mb-5 fixed-top" id="nav" style="z-index: 100000;">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -51,7 +51,7 @@
     <div class="card-body">
       <h5 class="fw-bold my-2" v-if="getProductDetail">{{ getProductCommon.bname }}</h5>
       <h6 class="my-2" v-if="getProductDetail">{{ getProductCommon.pname }}</h6>
-      <h6 class="" v-if="getProductDetail">{{ getProductDetail[0].pcprice }} 원</h6>
+      <h6 class="" v-if="getProductDetail">{{ detailprice }} 원</h6>
       <hr>
       <p class="my-3" v-if="getProductDetail">{{ getProductCommon.pnote }}</p>
       <hr>
@@ -76,7 +76,7 @@
         <div class="d-flex me-3">
           <div class="form mb-3">
             <input v-if="getProductDetail" type="text" class="mx-2 text-end form-control border-2 border-top-0 border-bottom-0 border-start-0 border-end-0" 
-                  style="font-size: 20px; width: 60vw;" :value="getProductDetail[0].pcprice * addProduct.pquantity">
+                  style="font-size: 20px; width: 60vw;" :value="detailpriceTotal">
           </div>
           <h5 class="mt-2">원</h5>
         </div>
@@ -288,6 +288,12 @@ export default {
     getShoppingbag: function() {
       return this.$store.state.shoppingbag
     },
+    detailprice: function() {
+      return this.$store.getters.getProductDetail[0].pcprice.toLocaleString("ko-KR")
+    },
+    detailpriceTotal: function() {
+      return (this.$store.getters.getProductDetail[0].pcprice * this.addProduct.pquantity).toLocaleString("ko-KR")
+    },
   },
   mounted: function() {
     window.scrollTo(0,0)
@@ -307,6 +313,9 @@ export default {
 </script>
 
 <style scoped>
+#productdetail {
+  font-family: GowunBatang-Bold;
+}
 .notification-container {
   background-color: white;
   padding: 15px 20px;

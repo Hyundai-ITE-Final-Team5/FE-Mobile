@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top: 5vh;">
+  <div style="margin-top: 5vh;" id="product">
     <div class="mb-5 fixed-top" id="nav">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -148,6 +148,9 @@ export default {
 </script>
 
 <style scoped>
+#product {
+  font-family: 'GowunBatang-Bold';
+}
 .remoteControllUp {
   position: fixed;
   margin-top: 77vh;

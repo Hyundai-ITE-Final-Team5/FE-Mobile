@@ -4,10 +4,10 @@
       <div class="col-4 ps-2">
         <img :src="like.pcimg1" alt="" style="width: 105px;">
       </div>
-      <div class="col-8 mt-2 ms-2">
+      <div class="col-8 mt-2 me-1">
         <h5 class="fw-bold">{{ like.bname }}</h5>
         <h6>{{ like.pname }}</h6>
-        <h6>{{ like.pcprice }}<span> 원</span></h6>
+        <h6>{{ pcprice }}<span> 원</span></h6>
         <div class="d-flex mt-4">
           <button class="btn btn-sm" style="color: #b97687; border-color: #b97687;" data-bs-toggle="modal" :data-bs-target="'#likeDeleteAlert_' + this.lidx">삭제</button>
           <button class="btn btn-sm mx-2" style="color: gray; border-color: gray;" @click="getProductDetail">쇼핑백 담기</button>
@@ -56,6 +56,11 @@ export default {
     getProductDetail: function() {
       this.$store.dispatch('getProductDetail', this.like.pcid)
       this.$router.push('/productdetail')
+    },
+  },
+  computed: {
+    pcprice: function() {
+      return this.like.pcprice.toLocaleString("ko-KR")
     },
   },
 }

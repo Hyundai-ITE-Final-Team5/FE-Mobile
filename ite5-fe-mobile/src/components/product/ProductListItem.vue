@@ -11,7 +11,7 @@
           </div>
         </div>
         <h6 class="card-text my-2">{{ productInfo.pname }}</h6>
-        <h6 class="card-text" v-if="productInfo.colorinfo">{{ productInfo.colorinfo[0].pcprice }} 원</h6>
+        <h6 class="card-text" v-if="productInfo.colorinfo">{{ pcprice }} 원</h6>
         <div class="d-flex justify-content-between">
           <div class="mt-2 d-flex">
             <div v-if="decodedJWT != null">
@@ -110,6 +110,9 @@ export default {
     decodedJWT: function() {
       return this.$store.getters.decodedToken
     },
+    pcprice: function() {
+      return this.product.colorinfo[0].pcprice.toLocaleString("ko-KR")
+    }
   },
 }
 </script>

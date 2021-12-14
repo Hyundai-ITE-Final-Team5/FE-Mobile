@@ -86,6 +86,10 @@ export default new Vuex.Store({
     },
     GET_USER_INFO: function(state, info) {
       state.userInfo = info
+      if (state.userInfo.mtel == null) state.userInfo.mtel = ''
+      if (state.userInfo.maddress1 == null) state.userInfo.maddress1 = ''
+      if (state.userInfo.maddress2 == null) state.userInfo.maddress2 = ''
+      if (state.userInfo.mzipcode == null) state.userInfo.mzipcode = ''
     },
     RESET_PRODUCT_LIST: function(state) {
       state.products = []

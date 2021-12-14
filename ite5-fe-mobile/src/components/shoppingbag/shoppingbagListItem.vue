@@ -7,7 +7,7 @@
       <div v-if="itemInfo.psstock > 0" class="col-8 mt-2 ms-2">
         <h5 class="fw-bold">{{ itemInfo.bname }}</h5>
         <h6>{{ itemInfo.pname }}</h6>
-        <h6>{{ itemInfo.pcprice }}<span> 원</span></h6>
+        <h6>{{ itemprice }}<span> 원</span></h6>
         <div class="d-flex mt-3">
           <div class="d-flex col-5">
             <h6>COLOR</h6>
@@ -25,7 +25,7 @@
           </div>
           <div class="d-flex col-7">
             <h6>합계</h6>
-            <h6 class="mx-2 fw-bold">{{ itemInfo.pquantity * itemInfo.pcprice }}</h6>
+            <h6 class="mx-2 fw-bold">{{ itempriceTotal }}</h6>
             <h6>원</h6>
           </div>
         </div>
@@ -36,7 +36,8 @@
       </div>
     </div>
     <div :id="'option_' + idx" style="display: none;" class="mx-3">
-      <h5 class="my-3">COLOR / SIZE</h5>
+      <hr>
+      <h5 class="my-4">COLOR / SIZE</h5>
       <shoppingbagColorList :idx="idx" :item="item" @changepsid="getNewpsid"/>
       <div class="d-flex justify-content-between">
         <h5 class="mt-2 me-3">수량</h5>
@@ -53,14 +54,14 @@
         <h5 class="mt-2 me-3">합계</h5>
         <div class="d-flex me-3">
           <div class="form mb-3">
-            <input type="text" class="mx-2 text-end form-control border-2 border-top-0 border-bottom-0 border-start-0 border-end-0" 
-                  style="font-size: 20px; width: 60vw;" :value="this.changeInfo.pquantity* this.item.pcprice">
+            <input type="text" class="text-end form-control border-2 border-top-0 border-bottom-0 border-start-0 border-end-0" 
+                  style="font-size: 20px; width: 60vw;" :value="itempriceTotal">
           </div>
           <h5 class="mt-2">원</h5>
         </div>
       </div>
       <div class="d-flex justify-content-center my-4">
-        <button class="btn btn-dark col-8" @click="changeOption">변경하기</button>
+        <button class="btn btn-lg btn-outline-dark col-12" @click="changeOption">변경하기</button>
       </div>
     </div>
     <div class="d-flex justify-content-end my-3">
@@ -121,6 +122,12 @@ export default {
     },
     decodedJWT: function() {
       return this.$store.getters.decodedToken
+    },
+    itemprice: function() {
+      return this.item.pcprice.toLocaleString("ko-KR")
+    },
+    itempriceTotal: function() {
+      return (this.changeInfo.pquantity* this.item.pcprice).toLocaleString("ko-KR")
     },
   },
   methods: {

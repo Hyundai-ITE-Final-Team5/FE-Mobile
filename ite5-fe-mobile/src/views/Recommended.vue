@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="recommended">
     <div class="mb-5 fixed-top" id="nav">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -90,6 +90,9 @@ export default {
 </script>
 
 <style scoped>
+#recommended {
+  font-family: GowunBatang-Bold;
+}
 #recommendedStatusBar {
   position: relative;
   width: 17vw;

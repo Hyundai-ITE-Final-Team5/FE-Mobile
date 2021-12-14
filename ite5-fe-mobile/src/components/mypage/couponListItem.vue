@@ -7,7 +7,7 @@
         <h5>• 쿠폰번호</h5>
       </div>
       <div class="col-8">
-        <h6>{{ coupon.cpid }}</h6>
+        <h6>|&nbsp;&nbsp;&nbsp;{{ coupon.cpid }}</h6>
       </div>
     </div>
     <!-- 쿠폰이름 -->
@@ -16,7 +16,7 @@
         <h5>• 분류</h5>
       </div>
       <div class="col-8">
-        <h6>{{ coupon.ecoupontitle }}</h6>
+        <h6>|&nbsp;&nbsp;&nbsp;{{ coupon.ecoupontitle }}</h6>
       </div>
     </div>
     <!-- 할인율 -->
@@ -25,7 +25,7 @@
         <h5>• 할인율</h5>
       </div>
       <div class="col-8">
-        <h6>{{ coupon.ediscount }}%</h6>
+        <h6>|&nbsp;&nbsp;&nbsp;{{ coupon.ediscount }}%</h6>
       </div>
     </div>
     <!-- 쿠폰 유효기간 -->
@@ -34,7 +34,7 @@
         <h5>• 유효기간</h5>
       </div>
       <div class="col-8">
-        <h6>{{ couponIssueDate }} ~ {{ couponExpireDate }}</h6>
+        <h6>|&nbsp;&nbsp;&nbsp;{{ couponIssueDate }} ~ {{ couponExpireDate }}</h6>
       </div>
     </div>
     <!-- 쿠폰사용여부 -->

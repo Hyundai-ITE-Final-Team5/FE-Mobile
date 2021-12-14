@@ -80,7 +80,7 @@
     </div>
     <div class="d-flex mt-3">
       <h5 class="ms-5">• 이용금액 :&nbsp;&nbsp;</h5>
-      <h5>{{ userInfo.totalorderprice }}</h5>
+      <h5>{{ totalUsed }}</h5>
       <h5>&nbsp;원</h5>
     </div>
     <div class="d-flex justify-content-center">
@@ -119,6 +119,9 @@ export default {
     },
     shoppingbagCount: function() {
      return this.$store.state.shoppingbagCount
+    },
+    totalUsed: function() {
+      return this.$store.state.userInfo.totalorderprice.toLocaleString("ko-KR")
     },
   },
   methods: {
@@ -214,5 +217,6 @@ export default {
   }
   #mypage {
     overflow-x: hidden;
+    font-family: GowunBatang-Bold;
   }
 </style>

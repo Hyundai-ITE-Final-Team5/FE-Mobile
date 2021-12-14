@@ -78,5 +78,7 @@ export default {
 </script>
 
 <style scoped>
-
+#shoppingbag {
+  font-family: GowunBatang-Bold;
+}
 </style>

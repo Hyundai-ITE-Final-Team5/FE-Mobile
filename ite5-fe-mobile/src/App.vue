@@ -192,6 +192,7 @@ hr {
 #footerNav {
   padding: 0px;
   background-color: transparent;
+  font-family: GowunBatang-Bold;
   /* background-color: skyblue; */
 }
 #footerNav a {

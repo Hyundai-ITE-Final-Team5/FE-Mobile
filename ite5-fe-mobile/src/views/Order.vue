@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-2">
+  <div class="mx-2" id="order">
     <div class="mb-5 fixed-top" id="nav">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -77,5 +77,7 @@ export default {
 </script>
 
 <style>
-
+#order {
+  font-family: GowunBatang-Bold;
+}
 </style>

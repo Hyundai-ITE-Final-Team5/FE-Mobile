@@ -11,66 +11,66 @@
       <!-- ID -->
       <div class="d-flex">
         <div class="col-3">
-          <h5>아이디</h5>
+          <h5>•아이디</h5>
         </div>
-        <div class="col-9">
-          <h6 v-if="userInfo">{{ userInfo.mid }}</h6>
+        <div class="col-9 ms-2">
+          <h6 v-if="userInfo">|&nbsp;&nbsp;&nbsp;{{ userInfo.mid }}</h6>
         </div>
       </div>
       <!-- NAME -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>이름</h5>
+          <h5>•이름</h5>
         </div>
-        <div class="col-9">
-          <h6>{{ userInfo.mname }}</h6>
+        <div class="col-9 ms-2">
+          <h6>|&nbsp;&nbsp;&nbsp;{{ userInfo.mname }}</h6>
         </div>
       </div>
       <!-- GENDER -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>성별</h5>
+          <h5>•성별</h5>
         </div>
-        <div class="col-9">
-          <h6 v-if="userInfo.mgender == 2">여</h6>
-          <h6 v-if="userInfo.mgender == 1">남</h6>
+        <div class="col-9 ms-2">
+          <h6 v-if="userInfo.mgender == 2">|&nbsp;&nbsp;&nbsp;여</h6>
+          <h6 v-if="userInfo.mgender == 1">|&nbsp;&nbsp;&nbsp;남</h6>
         </div>
       </div>
       <!-- 생년월일 -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>생년월일</h5>
+          <h5>•생년월일</h5>
         </div>
-        <div class="col-9">
-          <h6 v-if="userInfo">{{ birth }}</h6>
+        <div class="col-9 ms-2">
+          <h6 v-if="userInfo">|&nbsp;&nbsp;&nbsp;{{ birth }}</h6>
         </div>
       </div>
       <!-- PHONE -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>휴대폰</h5>
+          <h5>•휴대폰</h5>
         </div>
-        <div class="col-9">
-          <h6 v-if="userInfo">{{ phone }}</h6>
+        <div class="col-9 ms-2">
+          <h6 v-if="userInfo">|&nbsp;&nbsp;&nbsp;{{ phone }}</h6>
         </div>
       </div>
       <!-- EMAIL -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>이메일</h5>
+          <h5>•이메일</h5>
         </div>
-        <div class="col-9">
-          <h6>{{ userInfo.memail }}</h6>
+        <div class="col-9 ms-2">
+          <h6>|&nbsp;&nbsp;&nbsp;{{ userInfo.memail }}</h6>
         </div>
       </div>
       <!-- TEL -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>전화번호</h5>
+          <h5>•전화번호</h5>
         </div>
-        <div class="col-9">
-          <h6 v-if="userInfo.mtel == null" class="ms-4">-</h6>
-          <h6 v-if="userInfo.mtel != null">{{ userInfo.mtel }}</h6>
+        <div class="col-9 ms-2">
+          <h6 v-if="userInfo.mtel == null" class="ms-4">|&nbsp;&nbsp;&nbsp;-</h6>
+          <h6 v-if="userInfo.mtel != null">|&nbsp;&nbsp;&nbsp;{{ userInfo.mtel }}</h6>
         </div>
       </div>
     </div>
@@ -78,65 +78,65 @@
       <!-- ID -->
       <div class="d-flex">
         <div class="col-3">
-          <h5>아이디</h5>
+          <h5>•아이디</h5>
         </div>
-        <div class="col-9">
-          <h6 v-if="userInfo">{{ userInfo.mid }}</h6>
+        <div class="col-9 ms-2">
+          <h6 v-if="userInfo">|&nbsp;&nbsp;&nbsp;{{ userInfo.mid }}</h6>
         </div>
       </div>
       <!-- NAME -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>이름</h5>
+          <h5>•이름</h5>
         </div>
-        <div class="col-9">
-          <h6>{{ userInfo.mname }}</h6>
+        <div class="col-9 ms-2">
+          <h6>|&nbsp;&nbsp;&nbsp;{{ userInfo.mname }}</h6>
         </div>
       </div>
       <!-- GENDER -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>성별</h5>
+          <h5>•성별</h5>
         </div>
-        <div class="col-9">
-          <h6 v-if="userInfo.mgender == 2">여</h6>
-          <h6 v-if="userInfo.mgender == 1">남</h6>
+        <div class="col-9 ms-2">
+          <h6 v-if="userInfo.mgender == 2">|&nbsp;&nbsp;&nbsp;여</h6>
+          <h6 v-if="userInfo.mgender == 1">|&nbsp;&nbsp;&nbsp;남</h6>
         </div>
       </div>
       <!-- 생년월일 -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>생년월일</h5>
+          <h5>•생년월일</h5>
         </div>
-        <div class="col-9">
-          <h6 v-if="userInfo">{{ birth }}</h6>
+        <div class="col-9 ms-2">
+          <h6 v-if="userInfo">|&nbsp;&nbsp;&nbsp;{{ birth }}</h6>
         </div>
       </div>
       <!-- PHONE -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>휴대폰</h5>
+          <h5>•휴대폰</h5>
         </div>
         <div class="col-8">
           <input v-model="info.mphone" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-                 style="height: 5vh;" @keyup="sendModifyUserInfo1">
+                 style="height: 5vh;" @keyup.enter="sendModifyUserInfo1">
         </div>
       </div>
       <!-- EMAIL -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>이메일</h5>
+          <h5>•이메일</h5>
         </div>
         <input v-model="info.memail" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-                style="height: 5vh;" @keyup="sendModifyUserInfo1">
+                style="height: 5vh;" @keyup.enter="sendModifyUserInfo1">
       </div>
       <!-- TEL -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>전화번호</h5>
+          <h5>•전화번호</h5>
         </div>
         <input v-model="info.mtel" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-                style="height: 5vh;" @keyup="sendModifyUserInfo1">
+                style="height: 5vh;" @keyup.enter="sendModifyUserInfo1">
       </div>
     </div>
     <hr>
@@ -151,31 +151,31 @@
       <!-- ZIPCODE -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>우편번호</h5>
+          <h5>•우편번호</h5>
         </div>
-        <div class="col-9">
-          <h6 v-if="userInfo.mzipcode == null" class="ms-4">-</h6>
-          <h6 v-if="userInfo.mzipcode != null">{{ userInfo.mzipcode }}</h6>
+        <div class="col-9 ms-2">
+          <h6 v-if="userInfo.mzipcode == null" class="ms-4">|&nbsp;&nbsp;&nbsp;-</h6>
+          <h6 v-if="userInfo.mzipcode != null">|&nbsp;&nbsp;&nbsp;{{ userInfo.mzipcode }}</h6>
         </div>
       </div>
       <!-- 주소1 -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>주소</h5>
+          <h5>•주소</h5>
         </div>
-        <div class="col-9">
-          <h6 v-if="userInfo.maddress1 == null" class="ms-4">-</h6>
-          <h6 v-if="userInfo.maddress1 != null">{{ userInfo.maddress1 }}</h6>
+        <div class="col-9 ms-2">
+          <h6 v-if="userInfo.maddress1 == null" class="ms-4">|&nbsp;&nbsp;&nbsp;-</h6>
+          <h6 v-if="userInfo.maddress1 != null">|&nbsp;&nbsp;&nbsp;{{ userInfo.maddress1 }}</h6>
         </div>
       </div>
       <!-- 주소2 -->
       <div class="d-flex my-2">
         <div class="col-3">
-          <h5>상세주소</h5>
+          <h5>•상세주소</h5>
         </div>
-        <div class="col-9">
-          <h6 v-if="userInfo.maddress2 == null" class="ms-4">-</h6>
-          <h6 v-if="userInfo.maddress2 != null">{{ userInfo.maddress2 }}</h6>
+        <div class="col-9 ms-2">
+          <h6 v-if="userInfo.maddress2 == null" class="ms-4">|&nbsp;&nbsp;&nbsp;-</h6>
+          <h6 v-if="userInfo.maddress2 != null">|&nbsp;&nbsp;&nbsp;{{ userInfo.maddress2 }}</h6>
         </div>
       </div>
     </div>
@@ -187,7 +187,7 @@
         </div>
         <div class="col-8">
           <input v-model="info.mzipcode" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-                 style="height: 5vh;" @keyup="sendModifyUserInfo2">
+                 style="height: 5vh;" @keyup.enter="sendModifyUserInfo2">
         </div>
       </div>
       <!-- 주소1 -->

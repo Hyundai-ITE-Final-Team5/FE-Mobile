@@ -1,5 +1,5 @@
 <template>
-  <div class="px-3">
+  <div class="px-3" id="login">
     <div class="mb-5 fixed-top" id="nav">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -90,6 +90,12 @@ export default {
 </script>
 
 <style>
+#nav {
+  font-family: 'ChosunSm';
+}
+#login {
+  font-family: 'GowunBatang-Bold';
+}
 .form-check-input:checked {
   background-color: black;
   border-color: black;

@@ -362,6 +362,9 @@ export default {
 </script>
 
 <style scoped>
+.home {
+  font-family: 'ChosunSm';
+}
 #nav-home {
   padding: 0px;
   background-color: transparent;

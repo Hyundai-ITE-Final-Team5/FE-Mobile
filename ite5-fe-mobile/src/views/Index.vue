@@ -1,5 +1,5 @@
 <template>
-  <div class="ms-2" style="margin-bottom: 31px;">
+  <div class="ms-2" style="margin-bottom: 31px;" id="index">
     <div class="mb-5 fixed-top" id="nav">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -74,5 +74,7 @@ export default {
 </script>
 
 <style>
-
+#index {
+  font-family: 'ChosunSm';
+}
 </style>

@@ -1,49 +1,50 @@
 <template>
   <div id="orderList">
     <orderListItem v-for="(orderitem, oidx) in getTempOrderListInfo" :key="oidx" :oidx="oidx" :orderitem="orderitem"/>
-    <hr>
+    <hr class="mb-5">
     <h3 class="my-4 fw-bold">주문자 정보</h3>
     <!-- 아이디 -->
     <div class="d-flex ms-2 my-3">
       <div class="col-3">
-        <h5>아이디</h5>
+        <h5>•아이디</h5>
       </div>
-      <h6 class="ms-3">{{ userInfo[0].mid }}</h6>
+      <h6 class="ms-2">|&nbsp;&nbsp;{{ userInfo[0].mid }}</h6>
     </div>
     <!-- 주문자 이름 -->
     <div class="d-flex ms-2 my-3">
       <div class="col-3">
-        <h5>이름</h5>
+        <h5>•이름</h5>
       </div>
-      <h6 class="ms-3">{{ userInfo[0].mname }}</h6>
+      <h6 class="ms-2">|&nbsp;&nbsp;{{ userInfo[0].mname }}</h6>
     </div>
     <!-- 주문자 휴대폰 -->
     <div class="d-flex ms-2 my-3">
       <div class="col-3">
-        <h5>휴대폰</h5>
+        <h5>•휴대폰</h5>
       </div>
-      <h6 class="ms-3">{{ userInfo[0].mphone }}</h6>
+      <h6 class="ms-2">|&nbsp;&nbsp;{{ userInfo[0].mphone }}</h6>
     </div>
     <!-- 주문자 전화번호 -->
     <div class="d-flex ms-2 my-3">
       <div class="col-3">
-        <h5 >전화번호</h5>
+        <h5>•전화번호</h5>
       </div>
-      <h6 class="ms-3">{{ userInfo[0].mtel }}</h6>
+      <h6 class="ms-2">|&nbsp;&nbsp;{{ userInfo[0].mtel }}</h6>
     </div>
     <!-- 주문자 이메일 -->
     <div class="d-flex ms-2 my-3">
       <div class="col-3">
-        <h5>이메일</h5>
+        <h5>•이메일</h5>
       </div>
-      <h6 class="ms-3">{{ userInfo[0].memail }}</h6>
+      <h6 class="ms-2">|&nbsp;&nbsp;{{ userInfo[0].memail }}</h6>
     </div>
-    <div class="d-flex justify-content-between">
+    <hr class="my-5">
+    <div class="d-flex justify-content-between me-1">
       <h3 class="mt-2 fw-bold">수령인 정보</h3>
       <div class="form-check mt-2">
         <input class="form-check-input" type="checkbox" value="" id="checkReceiverInfo" @click="putReceiverInfo">
         <label class="form-check-label" for="flexCheckDefault">
-          주문자 정보와 동일
+          주문자정보와 동일
         </label>
       </div>
     </div>
@@ -87,10 +88,10 @@
               style="height: 7vh; width: 65vw;" value="">
       </div>
     </div>
-    <hr>
+    <hr class="my-5">
     <div class="d-flex justify-content-between">
       <h3 class="my-3 fw-bold">배송지 정보</h3>
-      <div class="form-check my-3">
+      <div class="form-check my-3 me-1">
         <input class="form-check-input" type="checkbox" value="" id="checkDeliveryInfo" @click="putDeliveryInfo">
         <label class="form-check-label" for="flexCheckDefault">
           기본배송지 선택
@@ -140,7 +141,7 @@
               style="height: 7vh; width: 65vw;">
       </div>
     </div>
-    <hr>
+    <hr class="my-5">
     <h3 class="mt-4 fw-bold">Point</h3>
     <div class="d-flex ms-2">
       <div class="form mb-3">
@@ -156,7 +157,7 @@
       <h6 class="ms-2 fw-bold">{{ userInfo[0].mmileage }}</h6>
       <h6 class="ms-2">Point</h6>
     </div>
-    <hr>
+    <hr class="my-5">
     <h3 class="my-4 fw-bold">Coupon</h3>
     <div class="d-flex mb-4">
       <select v-model="orderUserInfo.cpid" class="select form-select border-2 border-top-0 border-start-0 border-end-0" aria-label="Default select example" style="width: 250px;">
@@ -169,7 +170,7 @@
     </div>
     <h6 v-if="getUsedCouponName != 0" class="ms-2 fw-bold">{{ getUsedCouponName }} - {{ getUsedCoupon }} %</h6>
     <h6 class="ms-2 mt-3 text-muted">* 쿠폰은 중복으로 사용하실 수 없습니다.</h6>
-    <hr>
+    <hr class="my-5">
     <h3 class="my-4 fw-bold">최종 결제금액</h3>
     <div class="ms-4">
       <div class="d-flex justify-content-end me-3 mt-4">
@@ -199,7 +200,7 @@
           <h5>합계</h5>
         </div>
         <div class="d-flex col-7 justify-content-end">
-          <h5 class="mx-2 fw-bold">{{ getTempOrderListTotal * (1 - getUsedCoupon / 100) - orderUserInfo.ousedmileage }}</h5>
+          <h5 class="mx-2 fw-bold">{{ finalPrice }}</h5>
           <h5>원</h5>
         </div>
       </div>
@@ -216,7 +217,7 @@
     <div class="d-flex ms-5 my-4">
       <img src="@/assets/creditcard.png" style="width: 250px;" alt="">
     </div>
-    <hr>
+    <hr class="my-5">
     <div class="form-check">
       <input class="form-check-input" @click="checkAgreement" type="checkbox" value="" id="agreement" style="width: 20px; height: 20px;">
       <label class="form-check-label" for="agreement">
@@ -433,6 +434,9 @@ export default {
       }
       return temp
     },
+    finalPrice: function() {
+      return (this.getTempOrderListTotal * (1 - this.getUsedCoupon / 100) - this.orderUserInfo.ousedmileage).toLocaleString("ko-KR")
+    },
   },
   mounted: function() {
     this.orderUserInfo.obeforeprice = this.shoppingbagTotal
@@ -454,7 +458,7 @@ export default {
 input:disabled {
   background-color: transparent;
 }
-#orderList {
+/* #orderList {
   overflow-x: hidden;
-}
+} */
 </style>

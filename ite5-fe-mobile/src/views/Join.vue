@@ -1,5 +1,5 @@
 <template>
-  <div class="px-3">
+  <div class="px-3" id="join">
     <div class="mb-5 fixed-top" id="nav">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -138,5 +138,7 @@ export default {
 </script>
 
 <style scoped>
-
+#join {
+  font-family: 'GowunBatang-Bold';
+}
 </style>
