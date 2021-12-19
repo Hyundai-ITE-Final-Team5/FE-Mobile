@@ -4,7 +4,7 @@
     <h6 v-if="issuedate != ''" class="text-muted ms-3">• {{ issuedate }} ~ {{ expiredate }}</h6>
     <img :src="event.eimg" style="width: 100vw;" alt="" class="mt-2">
     <img :src="event.edetailimg" style="width: 100vw;" alt="" class="mb-3">
-    <div class="d-flex justify-content-center mx-3 my-4">
+    <div class="px-2" style="width: 100vw; position: absolute; bottom: 3vh;">
       <button v-if="decodedJWT != null" class="btn btn-lg btn-dark col-12" data-bs-toggle="modal" data-bs-target="#couponAlert" @click="downloadCoupon">쿠폰 발급받기</button>
       <button v-if="decodedJWT == null" class="btn btn-lg btn-dark col-12" data-bs-toggle="modal" data-bs-target="#loginAlert">쿠폰 발급받기</button>
     </div>
@@ -50,7 +50,7 @@
         </div>
       </div>
     </div>
-    <hr class="my-5" style="border: 10px;">
+    <div class="my-5" style="width: 375px;"></div>
   </div>
 </template>
 
