@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <hr>
+  <div class="my-3 px-2 pt-2 pb-1" style="background-color: #fff;">
     <!-- 쿠폰번호 -->
-    <div class="d-flex  my-2">
-      <div class="col-4">
+    <div class="d-flex my-2">
+      <div class="col-4 mt-3">
         <h5>• 쿠폰번호</h5>
       </div>
-      <div class="col-8">
+      <div class="col-8 mt-3">
         <h6>|&nbsp;&nbsp;&nbsp;{{ coupon.cpid }}</h6>
       </div>
     </div>

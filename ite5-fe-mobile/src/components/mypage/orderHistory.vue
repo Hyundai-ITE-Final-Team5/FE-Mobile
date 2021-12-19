@@ -1,10 +1,10 @@
 <template>
-  <div class="ms-2 me-1 mt-4">
-    <div class="d-flex justify-content-between mt-5 mb-3">
+  <div class="mt-4">
+    <div class="d-flex justify-content-between ms-2 me-1 mt-5 mb-4">
       <h3 class="fw-bold">주문 내역</h3>
       <h6 class="text-muted mx-3 mt-1">최근 날짜순</h6>
     </div>
-    <div v-if="getOrderHistoryList.length > 0">
+    <div v-if="getOrderHistoryList.length > 0" class="pb-2" style="background-color: #e9e9e9;">
       <orderHistoryList v-for="(order, oidx) in getOrderHistoryList" :key="oidx" :order="order" :oidx="oidx"/>
     </div>
     <div v-if="getOrderHistoryList.length == 0">

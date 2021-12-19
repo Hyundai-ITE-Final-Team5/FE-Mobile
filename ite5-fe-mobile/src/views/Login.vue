@@ -16,7 +16,7 @@
         </div>
       </nav>
     </div>
-    <h1 class="text-center" style="margin-top: 10vh;">로그인</h1>
+    <h1 class="text-center mb-4" style="margin-top: 10vh;">로그인</h1>
     <div class="form mb-3">
       <input v-model="credential.mid" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
              style="height: 7vh;" placeholder="아이디">

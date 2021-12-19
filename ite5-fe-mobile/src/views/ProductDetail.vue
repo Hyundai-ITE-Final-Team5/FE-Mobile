@@ -24,6 +24,20 @@
       <img src="@/assets/love.png" alt="">
       <h5 class="ms-3">현재 <span class="fw-bold">{{ productDetail.visitor }}</span> 명이 함께 보고 있습니다.</h5>
     </div>
+    <!-- skelleton UI -->
+    <div v-if="productListLoading" class="productListSkelletonUI" style="opacity: 0.5;">
+      <div class="mt-4 ms-3 border" style="width: 345px; height: 566px; background-color: #d3d3d3; border-radius: 0.5rem;"></div>
+      <div class="d-flex justify-content-between">
+        <div class="ms-3 mt-3 border" style="width: 150px; height: 20px; background-color: #d3d3d3; border-radius: 0.5rem;"></div>
+        <div class="me-3 mt-3 border" style="width: 30px; height: 20px; background-color: #d3d3d3; border-radius: 0.5rem;"></div>
+      </div>
+      <div class="ms-3 mt-2 border" style="width: 100px; height: 20px; background-color: #d3d3d3; border-radius: 0.5rem;"></div>
+      <div class="ms-3 mt-2 border" style="width: 100px; height: 20px; background-color: #d3d3d3; border-radius: 0.5rem;"></div>
+      <div class="d-flex mb-5">
+        <div class="ms-3 mt-3 border" style="width: 25px; height: 20px; background-color: #d3d3d3; border-radius: 0.5rem;"></div>
+        <div class="ms-3 mt-3 border" style="width: 25px; height: 20px; background-color: #d3d3d3; border-radius: 0.5rem;"></div>
+      </div>
+    </div>
     <div id="carouselExampleControls" class="carousel slide">
       <div class="carousel-inner">
         <div class="carousel-item active">
@@ -270,6 +284,9 @@ export default {
     },
   },
   computed: {
+    productListLoading: function() {
+      return this.$store.state.productListLoading
+    },    
     productDetail: function() {
       return this.$store.state.productDetail
     },
@@ -325,8 +342,21 @@ export default {
   z-index: 10000;
   transition: transform 0.2s ease-in-out;
 }
-
 .notification-container.show {
   transform: translateY(150px);
+}
+.productListSkelletonUI {
+  animation: 0.4s infinite ease;
+  animation-direction: alternate;
+  animation-name: productListSkelletonUIname;
+}
+@keyframes productListSkelletonUIname {
+    from{
+        opacity: 0.5; /* 애니메이션 시작 색상 */
+    }
+    to{
+        opacity: 1.0; /* 애니메이션 종료 색상 */
+        transform: scale(1.0) translate(0px, 0px) rotate(0deg); /* 애니메이션 변형 */
+    }
 }
 </style>

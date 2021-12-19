@@ -139,12 +139,6 @@ hr {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-/* 스크롤바 숨기기 구현할 예정 */
-#app::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera*/
 }
 #nav {
   padding: 0px;

@@ -1,13 +1,13 @@
 <template>
-  <div class="ms-3 me-1 mt-4">
-    <div class="d-flex justify-content-between mt-4">
+  <div class="mt-4 mb-4" style="background-color: #e9e9e9; padding-top: 1px;">
+    <div class="d-flex justify-content-between ps-2 p-1" style="background-color: #fff;">
       <h3 class="fw-bold my-3">회원 정보</h3>
       <div class="d-flex mt-2">
         <button class="btn btn-outline-dark me-1" style="height: 40px;" @click="modifyUserInfo1">수정</button>
         <button class="btn btn-dark me-2" style="height: 40px;" @click="sendModifyUserInfo1">등록</button>
       </div>      
     </div>
-    <div id="defaultInfo1" style="display: block;">
+    <div id="defaultInfo1" class="ps-3 pe-1 py-3" style="display: block; background-color: #fff;">
       <!-- ID -->
       <div class="d-flex">
         <div class="col-3">
@@ -74,7 +74,7 @@
         </div>
       </div>
     </div>
-    <div id="changeInfo1" style="display: none;">
+    <div id="changeInfo1" class="ps-3 pe-1 py-3" style="display: none; background-color: #fff;" >
       <!-- ID -->
       <div class="d-flex">
         <div class="col-3">
@@ -119,7 +119,7 @@
         </div>
         <div class="col-8">
           <input v-model="info.mphone" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-                 style="height: 5vh;" @keyup.enter="sendModifyUserInfo1">
+                 style="height: 5vh;">
         </div>
       </div>
       <!-- EMAIL -->
@@ -127,27 +127,30 @@
         <div class="col-3">
           <h5>•이메일</h5>
         </div>
-        <input v-model="info.memail" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-                style="height: 5vh;" @keyup.enter="sendModifyUserInfo1">
+        <div class="col-8">
+          <input v-model="info.memail" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
+                 style="height: 5vh;">
+        </div>
       </div>
       <!-- TEL -->
       <div class="d-flex my-2">
         <div class="col-3">
           <h5>•전화번호</h5>
         </div>
-        <input v-model="info.mtel" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-                style="height: 5vh;" @keyup.enter="sendModifyUserInfo1">
+        <div class="col-8">
+          <input v-model="info.mtel" type="text" class=" mb-3 form-control border-2 border-top-0 border-start-0 border-end-0" 
+                  style="height: 5vh;">
+        </div>
       </div>
     </div>
-    <hr>
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between mt-3 ps-2 pt-3 pb-1" style="background-color: #fff;">
       <h3 class="fw-bold my-3">기본 배송지</h3>
       <div class="d-flex mt-2">
         <button class="btn btn-outline-dark me-1" style="height: 40px;" @click="modifyUserInfo2">수정</button>
         <button class="btn btn-dark me-2" style="height: 40px;" @click="sendModifyUserInfo2">등록</button>
       </div>      
     </div>
-    <div id="defaultInfo2" style="display: block;">
+    <div id="defaultInfo2" class="ps-3 pe-1 p-1" style="display: block; background-color: #fff;">
       <!-- ZIPCODE -->
       <div class="d-flex my-2">
         <div class="col-3">
@@ -179,7 +182,7 @@
         </div>
       </div>
     </div>
-    <div id="changeInfo2" style="display: none;">
+    <div id="changeInfo2" style="display: none; background-color: #fff;">
       <!-- ZIPCODE -->
       <div class="d-flex my-2">
         <div class="col-3">
@@ -187,7 +190,7 @@
         </div>
         <div class="col-8">
           <input v-model="info.mzipcode" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-                 style="height: 5vh;" @keyup.enter="sendModifyUserInfo2">
+                 style="height: 5vh;">
         </div>
       </div>
       <!-- 주소1 -->
@@ -197,7 +200,7 @@
         </div>
         <div class="col-8">
           <input v-model="info.maddress1" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-                 style="height: 5vh;" @keyup.enter="sendModifyUserInfo2">
+                 style="height: 5vh;">
         </div>
       </div>
       <!-- 주소2 -->
@@ -207,26 +210,27 @@
         </div>
         <div class="col-8">
           <input v-model="info.maddress2" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
-                 style="height: 5vh;" @keyup.enter ="sendModifyUserInfo2">
+                 style="height: 5vh;">
         </div>
       </div>
     </div>
-    <hr>
-    <h5 class="fw-bold mt-4 mb-3">수신여부 동의</h5>
-    <h6 class="text-muted">더한섬닷컴에서 제공되는 서비스에 대한 수신동의 여부를 확인해주세요.</h6>
-    <h6 class="text-muted">선택 하시면 더한섬닷컴에서 진행하는 공지 및 이벤트 소식을 받아보실 수 있습니다.</h6>
-    <div class="d-flex mt-3">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" style="width: 20px; height: 20px;" checked>
-        <label class="form-check-label" for="agreement">
-          <h6 class="ms-1 mt-1">EMAIL</h6>
-        </label>
-      </div>
-      <div class="form-check mx-3">
-        <input class="form-check-input" type="checkbox" value="" style="width: 20px; height: 20px;">
-        <label class="form-check-label" for="agreement">
-          <h6 class="ms-1 mt-1">SMS</h6>
-        </label>
+    <div class="mt-3 px-2 py-1" style="background-color: #fff;">
+      <h3 class="fw-bold mt-3 mb-3">수신여부 동의</h3>
+      <h6 class="text-muted">더한섬닷컴에서 제공되는 서비스에 대한 수신동의 여부를 확인해주세요.</h6>
+      <h6 class="text-muted">선택 하시면 더한섬닷컴에서 진행하는 공지 및 이벤트 소식을 받아보실 수 있습니다.</h6>
+      <div class="d-flex mt-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" style="width: 20px; height: 20px;" checked>
+          <label class="form-check-label" for="agreement">
+            <h6 class="ms-1 mt-1">EMAIL</h6>
+          </label>
+        </div>
+        <div class="form-check mx-3">
+          <input class="form-check-input" type="checkbox" value="" style="width: 20px; height: 20px;">
+          <label class="form-check-label" for="agreement">
+            <h6 class="ms-1 mt-1">SMS</h6>
+          </label>
+        </div>
       </div>
     </div>
   </div>

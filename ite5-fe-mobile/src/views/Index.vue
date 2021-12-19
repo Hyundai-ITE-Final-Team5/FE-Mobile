@@ -19,16 +19,9 @@
         </div>
       </nav>
     </div>
+    
     <indexBrandList/>
     <indexCategoryList/>
-    <hr class="mt-5">
-    <h1 class="mt-5">SEARCH</h1>
-    <form class="d-flex my-3 ">
-      <input class="form-control me-2">
-      <button class="btn" type="submit">
-        <img src="@/assets/search.png" alt="" style="width: 24px; border: #ced4da; opacity: 0.7;">
-      </button>
-    </form>
   </div>
 </template>
 

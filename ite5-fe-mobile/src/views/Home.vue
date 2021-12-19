@@ -384,14 +384,14 @@ export default {
   height: 812px;
   position: relative;
   background-image: url("../assets/brand/brand-pop-1.jpg");
-  filter: brightness(55%);
+  filter: brightness(65%);
   z-index: 10;
 }
 #bg-img3 {
   height: 812px;
   position: relative;
   background-image: url("../assets/brand/brand-pop-6.jpg");
-  filter: brightness(60%);
+  filter: brightness(65%);
   z-index: 10;
 }
 .bgcontent1 {

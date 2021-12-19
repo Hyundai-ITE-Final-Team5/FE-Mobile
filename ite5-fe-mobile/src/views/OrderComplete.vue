@@ -1,6 +1,6 @@
 <template>
-  <div class="ms-2 me-4 orderComplete" id="ordercomplete">
-    <div class="mb-5 fixed-top me-2" id="nav">
+  <div class="orderComplete" id="ordercomplete">
+    <div class="mb-5 fixed-top me-2" id="nav" style="z-index: 100000;">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <img src="@/assets/diamond_negative.png" style="opacity: 0.6;" alt="">
@@ -19,13 +19,12 @@
         </div>
       </nav>
     </div>
-    
-    <div class="d-flex justify-content-center mb-5" style="margin-top: 91px;">
+    <div class="d-flex justify-content-center mb-5" style="margin-top: 100px;">
       <img src="@/assets/checked.png" class="me-2" style="height: 32px;" alt="">
       <h1>주문이 완료되었습니다.</h1>
     </div>
-    <h3 class="fw-bold my-4">주문 정보</h3>
-    <div class="d-flex">
+    <h3 class="fw-bold my-4 ms-2">주문 정보</h3>
+    <div class="d-flex ms-2 ps-2">
       <div class="col-3">
         <h5>•주문번호</h5>
       </div>
@@ -33,7 +32,7 @@
         <h6>|&nbsp;&nbsp;{{ orderNumber }}</h6>
       </div>
     </div>
-    <div class="d-flex my-2">
+    <div class="d-flex my-2 ms-2 ps-2">
       <div class="col-3">
         <h5>•결제수단</h5>
       </div>
@@ -43,7 +42,7 @@
         <h6 v-if="completeOrderOid.pmcode == '2hyundai'">|&nbsp;&nbsp;무통장입금</h6>
       </div>
     </div>
-    <div class="d-flex my-2">
+    <div class="d-flex my-2 ms-2 ps-2">
       <div class="col-3">
         <h5>•주문시간</h5>
       </div>
@@ -51,11 +50,12 @@
         <h6>|&nbsp;&nbsp;{{ orderTime }}</h6>
       </div>
     </div>
-    <hr>
-    <h3 class="fw-bold my-4">상품 정보</h3>
+    <div class="my-4" style="border: 0.5rem solid; border-color: #e9e9e9; width: 375px;"></div>
+    <h3 class="fw-bold my-4 ps-2">상품 정보</h3>
     <orderCompleteListItem v-for="(orderitem, oidx) in tempOrderListInfo" :key="oidx" :oidx="oidx" :orderitem="orderitem"/>
-    <h3 class="fw-bold my-4">배송 정보</h3>
-    <div class="d-flex my-2">
+    <div class="my-4" style="border: 0.5rem solid; border-color: #e9e9e9; width: 375px;"></div>
+    <h3 class="fw-bold my-4 ps-2">배송 정보</h3>
+    <div class="d-flex my-2 ms-2 ps-2">
       <div class="col-3">
         <h5>•수령인</h5>
       </div>
@@ -63,7 +63,7 @@
         <h6>|&nbsp;&nbsp;{{ completeOrderOid.oreceiver }}</h6>
       </div>
     </div>
-    <div class="d-flex my-2">
+    <div class="d-flex my-2 ms-2 ps-2">
       <div class="col-3">
         <h5>•휴대폰</h5>
       </div>
@@ -71,7 +71,7 @@
         <h6>|&nbsp;&nbsp;{{ completeOrderOid.ophone }}</h6>
       </div>
     </div>
-    <div class="d-flex my-2">
+    <div class="d-flex my-2 ms-2 ps-2">
       <div class="col-3">
         <h5>•이메일</h5>
       </div>
@@ -79,7 +79,7 @@
         <h6>|&nbsp;&nbsp;{{ completeOrderOid.oemail }}</h6>
       </div>
     </div>
-    <div class="d-flex my-2">
+    <div class="d-flex my-2 ms-2 ps-2">
       <div class="col-3">
         <h5>•배송메모</h5>
       </div>
@@ -87,7 +87,7 @@
         <h6>|&nbsp;&nbsp;{{ completeOrderOid.omemo }}</h6>
       </div>
     </div>
-    <div class="d-flex my-2">
+    <div class="d-flex my-2 ms-2 ps-2">
       <div class="col-3">
         <h5>•우편번호</h5>
       </div>
@@ -95,7 +95,7 @@
         <h6>|&nbsp;&nbsp;{{ completeOrderOid.ozipcode }}</h6>
       </div>
     </div>
-    <div class="d-flex my-2">
+    <div class="d-flex my-2 ms-2 ps-2">
       <div class="col-3">
         <h5>•주소</h5>
       </div>
@@ -103,7 +103,7 @@
         <h6>|&nbsp;&nbsp;{{ completeOrderOid.oaddress1 }}</h6>
       </div>
     </div>
-    <div class="d-flex my-2">
+    <div class="d-flex my-2 ms-2 ps-2">
       <div class="col-3">
         <h5>•상세주소</h5>
       </div>
@@ -111,11 +111,10 @@
         <h6>|&nbsp;&nbsp;{{ completeOrderOid.oaddress2}}</h6>
       </div>
     </div>
-    <hr>
-    <div class="d-flex justify-content-center ms-3 mt-5">
+    <div class="d-flex justify-content-center mt-5 px-2">
       <button class="btn btn-lg btn-dark col-12" @click="routeIndex">쇼핑 계속하기</button>
     </div>
-    <div class="d-flex justify-content-center ms-3 my-2">
+    <div class="d-flex justify-content-center my-2 px-2">
       <button class="btn btn-lg btn-outline-dark col-12" @click="routeMypage">쇼핑 내역보기</button>
     </div>
   </div>
@@ -146,6 +145,7 @@ export default {
     },
     orderTime: function() {
       const temp = this.$store.state.tempOrderCompleteInfo.odate
+
       return temp
     },
   },
@@ -174,5 +174,17 @@ export default {
 }
 #ordercomplete {
   font-family: GowunBatang-Bold;
+}
+.notification-container {
+  background-color: white;
+  padding: 15px 20px;
+  position: absolute;
+  width: 375px;
+  top: -100px;
+  z-index: 10000;
+  transition: transform 0.2s ease-in-out;
+}
+.notification-container.show {
+  transform: translateY(150px);
 }
 </style>
