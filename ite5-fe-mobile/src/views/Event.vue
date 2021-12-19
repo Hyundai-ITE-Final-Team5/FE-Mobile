@@ -19,7 +19,7 @@
         </div>
       </nav>
     </div>
-    <h1 class="ms-2 mb-3" style="margin-top: 81px;">EVENT</h1>
+    <h1 class="ms-2 mb-3" style="margin-top: 53px;"></h1>
     <eventList/>
   </div>
 </template>
