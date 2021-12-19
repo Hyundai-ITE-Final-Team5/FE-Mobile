@@ -41,7 +41,6 @@ export default {
 <style scoped>
 #bestList {
   scroll-behavior: smooth;
-  -ms-overflow-style: none;
 }
 #bestList::-webkit-scrollbar {
   display: none;

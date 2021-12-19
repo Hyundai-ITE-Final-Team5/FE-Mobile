@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="d-flex">
+    <div class="d-flex mb-3">
       <div class="col-4 ps-2">
         <img :src="orderitem.pcimg1" alt="" style="width: 105px;">
       </div>
@@ -31,7 +31,6 @@
         </div>
       </div>
     </div>
-    <hr>
   </div>
 </template>
 

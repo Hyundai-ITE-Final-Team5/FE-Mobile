@@ -12,7 +12,7 @@
     <h2 class="text-center text-muted" style="margin-top: 40vh;" v-if="shoppingbagCount == 0">쇼핑백에 상품이 없습니다.</h2>
     <shoppingbagListItem v-for="(item, idx) in getShoppingbag" :key="idx" :item="item" :idx="idx"/>
     <div class="mt-3" v-if="shoppingbagCount > 0">
-      <hr>
+      <div class="my-4" style="border: 0.5rem solid; border-color: #e9e9e9; width: 375px;"></div>
       <div class="ms-4">
         <div class="d-flex justify-content-end me-3 mt-4 mb-1">
           <div class="d-flex col-7">
@@ -32,6 +32,7 @@
             <h5>원</h5>
           </div>
         </div>
+        <hr>
         <div class="d-flex me-3">
           <div class="d-flex col-7">
             <h5>합계</h5>

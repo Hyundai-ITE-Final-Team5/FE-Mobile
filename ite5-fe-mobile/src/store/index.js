@@ -472,8 +472,13 @@ export default new Vuex.Store({
           console.log(err)
         })
         .finally(() => {
-          this.state.productListLoading = false
+          setTimeout(function () {
+            this.state.productListLoading = false
+          }.bind(this), 1200);
         })
+      
+
+      
     },
     // 선택한 카테고리 소속의 상품 리스트 가져오기
     getCategoryList: function(context, str) {
@@ -501,7 +506,9 @@ export default new Vuex.Store({
           console.log(err)
         })
         .finally(() => {
-          this.state.productListLoading = false
+          setTimeout(function () {
+            this.state.productListLoading = false
+          }.bind(this), 1200);
         })
     },
     // 좋아요 추가
@@ -594,6 +601,11 @@ export default new Vuex.Store({
       if (context.state.userToken != null) {
         hasToken = 'Bearer ' + context.state.userToken
       }  
+      // 로딩중 중복요청 제한
+      if (this.state.productListLoading) {
+        return
+      }
+      this.state.productListLoading = true      
       axios({
         method: 'get',
         url: `http://kosa1.iptime.org:50222/product/detail/${productColorId}`,
@@ -607,6 +619,12 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err)
         })
+        .finally(() => {
+          setTimeout(function () {
+            this.state.productListLoading = false
+          }.bind(this), 50);
+        })        
+        
     },
     // 선택상품 빠져나가기
     detailExit: function(context, pcid) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-2" id="order">
+  <div class="" id="order">
     <div class="mb-5 fixed-top" id="nav">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -11,7 +11,7 @@
             <router-link to="/login" v-if="decodedJWT == null">
               <img src="@/assets/user.png" alt="" style=" height: 28px;" @click="moveMenuStatusBarMyPage">
             </router-link>
-            <router-link to="/shoppingbag" v-if="decodedJWT != null" class="me-1">
+            <router-link to="/shoppingbag" v-if="decodedJWT != null" class="pe-3">
               <img src="@/assets/shop-bag.png" alt="" style="opacity: 0.8; height: 28px;">
               <span class="position-absolute start-89 translate-middle badge rounded-pill bg-dark ps-2" style="top: 44px; height: 21px;">{{ shoppingbagCount }}</span>
             </router-link>
@@ -19,7 +19,7 @@
         </div>
       </nav>
     </div>
-    <h1 class="mb-4" style="margin-top: 81px;">주문 정보</h1>
+    <h1 class="mb-4 ms-2" style="margin-top: 81px;">주문 정보</h1>
     <orderList :userInfo="userInfo" :couponList="couponList" :paymentList="paymentList"/>
   </div>
 </template>

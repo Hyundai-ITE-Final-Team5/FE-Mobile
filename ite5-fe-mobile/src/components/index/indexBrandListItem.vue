@@ -22,11 +22,14 @@ export default {
       this.$store.dispatch('resetProductList')
       this.$store.dispatch('getBrandList', this.b.bno)
       this.$store.dispatch('changeBrandCallKey', this.b.bno)
-    }
+    },
+    hoverSearch() {
+
+    },
   },
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

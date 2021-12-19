@@ -1,37 +1,37 @@
 <template>
-  <div>
+  <div class="my-3 pt-1 pb-1" style="background-color: #fff;">
+    <div class="d-flex  my-2 ms-2 me-1">
+      <div class="col-4 mt-3">
+        <h5>•주문번호&nbsp;&nbsp;&nbsp;&nbsp;|</h5>
+      </div>
+      <div class="col-8 mt-3">
+        <h6>&nbsp;&nbsp;{{ order.oid }}</h6>
+      </div>
+    </div>
+    <div class="d-flex my-2 ms-2 me-1">
+      <div class="col-4">
+        <h5>•주문날짜&nbsp;&nbsp;&nbsp;&nbsp;|</h5>
+      </div>
+      <div class="col-8">
+        <h6>&nbsp;&nbsp;{{ odate }}</h6>
+      </div>
+    </div>
+    <div class="d-flex my-2 ms-2 me-1">
+      <div class="col-4">
+        <h5>•주문상태&nbsp;&nbsp;&nbsp;&nbsp;|</h5>
+      </div>
+      <div class="col-8">
+        <h5 v-if="order.ostatus != '주문취소'" class="fw-bold" :id="'orderStatus' + oidx" style="color: #7fb7a0;">&nbsp;&nbsp;{{ order.ostatus }}</h5>
+        <h5 v-if="order.ostatus == '주문취소'" class="fw-bold" style="color: #b97687;">&nbsp;&nbsp;{{ order.ostatus }}</h5>
+      </div>
+    </div>
     <hr>
-    <div class="d-flex  my-2">
-      <div class="col-4">
-        <h5>•주문번호</h5>
-      </div>
-      <div class="col-8">
-        <h6>{{ order.oid }}</h6>
-      </div>
-    </div>
-    <div class="d-flex  my-2">
-      <div class="col-4">
-        <h5>•주문날짜</h5>
-      </div>
-      <div class="col-8">
-        <h6>{{ odate }}</h6>
-      </div>
-    </div>
-    <div class="d-flex  my-2">
-      <div class="col-4">
-        <h5>•주문상태</h5>
-      </div>
-      <div class="col-8">
-        <h5 v-if="order.ostatus != '주문취소'" class="fw-bold" :id="'orderStatus' + oidx" style="color: #7fb7a0;">{{ order.ostatus }}</h5>
-        <h5 v-if="order.ostatus == '주문취소'" class="fw-bold" style="color: #b97687;">{{ order.ostatus }}</h5>
-      </div>
-    </div>
     <orderHistoryListItem v-for="(oitem, oiidx) in order.items" :key="oiidx" :oitem="oitem" :oiidx="oiidx"/>
-    <div v-if="order.ostatus != '주문취소'" class="d-flex justify-content-end me-3">
+    <div v-if="order.ostatus != '주문취소'" class="d-flex justify-content-end me-3 pb-3">
       <button class="btn btn-sm" style="color: #b97687; border-color: #b97687;" :id="'cancelBtn' + oidx" 
               data-bs-toggle="modal" :data-bs-target="'#orderCancelAlert_' + this.oidx">주문취소</button>
     </div>
-    <div v-if="order.ostatus == '주문취소'" class="d-flex justify-content-end me-3">
+    <div v-if="order.ostatus == '주문취소'" class="d-flex justify-content-end me-3 pb-3">
       <button class="btn btn-sm btn-outline-secondary" disabled>주문취소</button>
     </div>
     <!-- 주문취소확인 Modal -->

@@ -16,7 +16,7 @@
         </div>
       </nav>
     </div>
-    <h1 class="text-center" style="margin-top: 10vh;">회원가입</h1>
+    <h1 class="text-center mb-4" style="margin-top: 10vh;">회원가입</h1>
     <!-- 아이디 -->
     <div class="d-flex">
       <div class="form mb-3">

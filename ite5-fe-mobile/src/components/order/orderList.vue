@@ -1,46 +1,46 @@
 <template>
   <div id="orderList">
-    <orderListItem v-for="(orderitem, oidx) in getTempOrderListInfo" :key="oidx" :oidx="oidx" :orderitem="orderitem"/>
-    <hr class="mb-5">
-    <h3 class="my-4 fw-bold">주문자 정보</h3>
+    <orderListItem class="ps-2" v-for="(orderitem, oidx) in getTempOrderListInfo" :key="oidx" :oidx="oidx" :orderitem="orderitem"/>
+    <div class="my-4" style="border: 0.5rem solid; border-color: #e9e9e9; width: 375px;"></div>
+    <h3 class="my-4 mb-4 ps-2 fw-bold">주문자 정보</h3>
     <!-- 아이디 -->
-    <div class="d-flex ms-2 my-3">
+    <div class="d-flex ps-2 ms-2 my-3">
       <div class="col-3">
         <h5>•아이디</h5>
       </div>
       <h6 class="ms-2">|&nbsp;&nbsp;{{ userInfo[0].mid }}</h6>
     </div>
     <!-- 주문자 이름 -->
-    <div class="d-flex ms-2 my-3">
+    <div class="d-flex ps-2 ms-2 my-3">
       <div class="col-3">
         <h5>•이름</h5>
       </div>
       <h6 class="ms-2">|&nbsp;&nbsp;{{ userInfo[0].mname }}</h6>
     </div>
     <!-- 주문자 휴대폰 -->
-    <div class="d-flex ms-2 my-3">
+    <div class="d-flex ps-2 ms-2 my-3">
       <div class="col-3">
         <h5>•휴대폰</h5>
       </div>
       <h6 class="ms-2">|&nbsp;&nbsp;{{ userInfo[0].mphone }}</h6>
     </div>
     <!-- 주문자 전화번호 -->
-    <div class="d-flex ms-2 my-3">
+    <div class="d-flex ps-2 ms-2 my-3">
       <div class="col-3">
         <h5>•전화번호</h5>
       </div>
       <h6 class="ms-2">|&nbsp;&nbsp;{{ userInfo[0].mtel }}</h6>
     </div>
     <!-- 주문자 이메일 -->
-    <div class="d-flex ms-2 my-3">
+    <div class="d-flex ps-2 ms-2 my-3">
       <div class="col-3">
         <h5>•이메일</h5>
       </div>
       <h6 class="ms-2">|&nbsp;&nbsp;{{ userInfo[0].memail }}</h6>
     </div>
-    <hr class="my-5">
-    <div class="d-flex justify-content-between me-1">
-      <h3 class="mt-2 fw-bold">수령인 정보</h3>
+    <div class="my-4" style="border: 0.5rem solid; border-color: #e9e9e9; width: 375px;"></div>
+    <div class="d-flex justify-content-between px-2">
+      <h3 class="mt-2 mb-4 fw-bold">수령인 정보</h3>
       <div class="form-check mt-2">
         <input class="form-check-input" type="checkbox" value="" id="checkReceiverInfo" @click="putReceiverInfo">
         <label class="form-check-label" for="flexCheckDefault">
@@ -49,7 +49,7 @@
       </div>
     </div>
     <!-- 수령인 이름 -->
-    <div class="d-flex ms-2">
+    <div class="d-flex ms-2 ps-2">
       <div class="col-3">
         <h5 class="mt-4">이름</h5>
       </div>
@@ -59,17 +59,17 @@
       </div>
     </div>
     <!-- 수령인 휴대폰 -->
-    <div class="d-flex ms-2">
+    <div class="d-flex ms-2 ps-2">
       <div class="col-3">
         <h5 class="mt-4">휴대폰</h5>
       </div>
-      <div class="form mb-3">
+      <div class="form mb-3 ps-2">
         <input v-model="orderUserInfo.ophone" type="text" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
               style="height: 7vh; width: 65vw;" value="">
       </div>
     </div>
     <!-- 수령인 전화번호 -->
-    <div class="d-flex ms-2">
+    <div class="d-flex ms-2 ps-2">
       <div class="col-3">
         <h5 class="mt-4">전화번호</h5>
       </div>
@@ -79,7 +79,7 @@
       </div>
     </div>
     <!-- 주문자 이메일 -->
-    <div class="d-flex ms-2">
+    <div class="d-flex ms-2 ps-2">
       <div class="col-3">
         <h5 class="mt-4">이메일</h5>
       </div>
@@ -88,9 +88,9 @@
               style="height: 7vh; width: 65vw;" value="">
       </div>
     </div>
-    <hr class="my-5">
-    <div class="d-flex justify-content-between">
-      <h3 class="my-3 fw-bold">배송지 정보</h3>
+    <div class="my-4" style="border: 0.5rem solid; border-color: #e9e9e9; width: 375px;"></div>
+    <div class="d-flex justify-content-between px-2">
+      <h3 class="my-3 mb-4 fw-bold">배송지 정보</h3>
       <div class="form-check my-3 me-1">
         <input class="form-check-input" type="checkbox" value="" id="checkDeliveryInfo" @click="putDeliveryInfo">
         <label class="form-check-label" for="flexCheckDefault">
@@ -99,7 +99,7 @@
       </div>
     </div>
     <!-- 수령인 우편번호 -->
-    <div class="d-flex ms-2">
+    <div class="d-flex ms-2 ps-2">
       <div class="col-3">
         <h5 class="mt-4">우편번호</h5>
       </div>
@@ -112,7 +112,7 @@
       </div>
     </div>
     <!-- 수령인 주소1 -->
-    <div class="d-flex ms-2">
+    <div class="d-flex ms-2 ps-2">
       <div class="col-3">
         <h5 class="mt-4">주소</h5>
       </div>
@@ -122,7 +122,7 @@
       </div>
     </div>
     <!-- 수령인 주소2 -->
-    <div class="d-flex ms-2">
+    <div class="d-flex ms-2 ps-2">
       <div class="col-3">
         <h5 class="mt-4">상세주소</h5>
       </div>
@@ -132,7 +132,7 @@
       </div>
     </div>
     <!-- 메모 -->
-    <div class="d-flex ms-2">
+    <div class="d-flex ms-2 ps-2">
       <div class="col-3">
         <h5 class="mt-4">배송메모</h5>
       </div>
@@ -141,9 +141,9 @@
               style="height: 7vh; width: 65vw;">
       </div>
     </div>
-    <hr class="my-5">
-    <h3 class="mt-4 fw-bold">Point</h3>
-    <div class="d-flex ms-2">
+    <div class="my-4" style="border: 0.5rem solid; border-color: #e9e9e9; width: 375px;"></div>
+    <h3 class="mt-4 mb-4 ps-2 fw-bold">Point</h3>
+    <div class="d-flex ms-2 ps-2">
       <div class="form mb-3">
         <input v-model="orderUserInfo.ousedmileage" type="number" class="form-control border-2 border-top-0 border-start-0 border-end-0" 
               style="height: 7vh; width: 65vw;">
@@ -153,13 +153,13 @@
       </div>
     </div>
     <div class="d-flex">
-      <h6 class="ms-2">보유 마일리지</h6>
+      <h6 class="ms-2 ps-2">보유 마일리지</h6>
       <h6 class="ms-2 fw-bold">{{ userInfo[0].mmileage }}</h6>
       <h6 class="ms-2">Point</h6>
     </div>
-    <hr class="my-5">
-    <h3 class="my-4 fw-bold">Coupon</h3>
-    <div class="d-flex mb-4">
+    <div class="my-4" style="border: 0.5rem solid; border-color: #e9e9e9; width: 375px;"></div>
+    <h3 class="my-4 mb-4 fw-bold ps-2">Coupon</h3>
+    <div class="d-flex mb-4 ps-2">
       <select v-model="orderUserInfo.cpid" class="select form-select border-2 border-top-0 border-start-0 border-end-0" aria-label="Default select example" style="width: 250px;">
         <option value="">-</option>
         <option v-for="(coupon, cpidx) in availableCouponList" :key="cpidx" :coupon="coupon" :cpidx="cpidx">{{ coupon.cpid }}</option>
@@ -169,10 +169,10 @@
       </div>
     </div>
     <h6 v-if="getUsedCouponName != 0" class="ms-2 fw-bold">{{ getUsedCouponName }} - {{ getUsedCoupon }} %</h6>
-    <h6 class="ms-2 mt-3 text-muted">* 쿠폰은 중복으로 사용하실 수 없습니다.</h6>
-    <hr class="my-5">
-    <h3 class="my-4 fw-bold">최종 결제금액</h3>
-    <div class="ms-4">
+    <h6 class="ms-2 ps-2 mt-3 text-muted">* 쿠폰은 중복으로 사용하실 수 없습니다.</h6>
+    <div class="my-4" style="border: 0.5rem solid; border-color: #e9e9e9; width: 375px;"></div>
+    <h3 class="my-4 ps-2 fw-bold">최종 결제금액</h3>
+    <div class="ms-4 mt-5">
       <div class="d-flex justify-content-end me-3 mt-4">
         <div class="d-flex col-5">
           <h3>총</h3>
@@ -195,6 +195,7 @@
         <h6 v-if="orderUserInfo.ousedmileage != 0" style="color: #e4beb3;">{{ orderUserInfo.ousedmileage }}  Point 적용</h6>
         <h6 v-if="getUsedCoupon > 0" style="color: #e4beb3;">{{ orderUserInfo.cpid  }} - {{ getUsedCoupon }} % 쿠폰할인</h6>
       </div>
+      <hr>
       <div class="d-flex me-3">
         <div class="d-flex col-5">
           <h5>합계</h5>
@@ -209,27 +210,27 @@
         <h6>Point 적립 (5%)</h6>
       </div>
     </div>
-    <hr>
-    <h3 class="my-4 fw-bold">결제 수단</h3>
+    <div class="my-4" style="border: 0.5rem solid; border-color: #e9e9e9; width: 375px;"></div>
+    <h3 class="my-4 ps-2 fw-bold">결제 수단</h3>
     <div class="d-flex justify-content-center">
       <paymentListItem v-for="(pm, pmidx) in paymentList" :key="`pm + ${pmidx}`" :pm="pm" :pmidx="pmidx" @selectpm="selectpm"/>
     </div>
     <div class="d-flex ms-5 my-4">
       <img src="@/assets/creditcard.png" style="width: 250px;" alt="">
     </div>
-    <hr class="my-5">
-    <div class="form-check">
+    <div class="my-4" style="border: 0.5rem solid; border-color: #e9e9e9; width: 375px;"></div>
+    <div class="form-check ms-2">
       <input class="form-check-input" @click="checkAgreement" type="checkbox" value="" id="agreement" style="width: 20px; height: 20px;">
       <label class="form-check-label" for="agreement">
         <h5 class="ms-1 mt-1 fw-bold">구매자 동의</h5>
       </label>
     </div>
-    <div class="text-muted my-2 ms-2">
+    <div class="text-muted my-2 ms-2 ps-2">
       <h6>주문할 상품의 상품명, 가격 배송정보 등</h6>
       <h6>판매조건을 확인하였으며, 구매진행에 동의합니다.</h6>
       <h6>(전자상거래법 제8조 2항)</h6>
     </div>
-    <div class="d-flex justify-content-center my-4">
+    <div class="d-flex justify-content-center my-4 px-2">
       <button v-if="!agreement" class="btn btn-lg btn-dark col-12 mt-3" disabled>결제하기</button>
       <button v-else-if="orderUserInfo.ozipcode == '' || orderUserInfo.address1 == '' || orderUserInfo.address2 == ''" 
               class="btn btn-lg btn-dark col-12 mt-3" data-bs-toggle="modal" data-bs-target="#addressAlert">결제하기</button>

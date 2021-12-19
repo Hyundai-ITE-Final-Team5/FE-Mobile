@@ -1,35 +1,35 @@
 <template>
   <div>
     <!-- WOMEN -->
-    <div class="mt-5 d-flex justify-content-between" @click="showCategoryWOMENDepth2">
+    <div class="mt-5 d-flex justify-content-between mx-2" @click="showCategoryWOMENDepth2">
       <h1 class="me-5">WOMEN</h1>
       <img src="@/assets/downSmall.png" alt="" class="btn" style="opacity: 0.4; height: 33px;">
     </div>
-    <div id="categoryWOMENDepth2" style="display: none;">
+    <div id="categoryWOMENDepth2" class="mx-2" style="display: none;">
         <indexCategoryWOMENDepth2 v-for="(womenkey, idx) in categoryWOMENKeys" :key="idx" :womenkey="womenkey" :idx="idx"/>
     </div>
     <!-- MEN -->
-    <div class="mt-5 d-flex justify-content-between" @click="showCategoryMENDepth2">
+    <div class="mt-5 d-flex justify-content-between mx-2" @click="showCategoryMENDepth2">
       <h1 class="me-5">MEN</h1>
       <img src="@/assets/downSmall.png" alt="" class="btn" style="opacity: 0.4; height: 33px;">
     </div>
-    <div id="categoryMENDepth2" style="display: none;">
+    <div id="categoryMENDepth2" class="mx-2" style="display: none;">
         <indexCategoryMENDepth2 v-for="(menkey, idx) in categoryMENKeys" :key="idx" :menkey="menkey" :idx="idx"/>
     </div>
     <!-- KIDS -->
-    <div class="mt-5 d-flex justify-content-between" @click="showCategoryKIDSDepth2">
+    <div class="mt-5 d-flex justify-content-between mx-2" @click="showCategoryKIDSDepth2">
       <h1 class="me-5">KIDS</h1>
       <img src="@/assets/downSmall.png" alt="" class="btn" style="opacity: 0.4; height: 33px;">
     </div>
-    <div id="categoryKIDSDepth2" style="display: none;">
+    <div id="categoryKIDSDepth2" class="mx-2" style="display: none;">
         <indexCategoryKIDSDepth2 v-for="(kidskey, idx) in categoryKIDSKeys" :key="idx" :kidskey="kidskey" :idx="idx"/>
     </div>
     <!-- LIFE STYLE -->
-    <div class="mt-5 d-flex justify-content-between" @click="showCategoryLSDepth2">
+    <div class="mt-5 d-flex justify-content-between mx-2" @click="showCategoryLSDepth2">
       <h1 class="me-5">LIFE STYLE</h1>
       <img src="@/assets/downSmall.png" alt="" class="btn" style="opacity: 0.4; height: 33px;">
     </div>
-    <div id="categoryLSDepth2" style="display: none;">
+    <div id="categoryLSDepth2" class="mx-2" style="display: none;">
         <indexCategoryLSDepth2 v-for="(lskey, idx) in categoryLSKeys" :key="idx" :lskey="lskey" :idx="idx"/>
     </div>
   </div>

@@ -164,7 +164,7 @@ export default {
   width: 20px;
 }
 .productListSkelletonUI {
-  animation: 0.7s infinite ease;
+  animation: 0.4s infinite ease;
   animation-direction: alternate;
   animation-name: productListSkelletonUIname;
 }
