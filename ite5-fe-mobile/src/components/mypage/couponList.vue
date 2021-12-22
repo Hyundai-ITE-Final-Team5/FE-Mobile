@@ -4,7 +4,7 @@
       <h3 class="fw-bold">쿠폰 목록</h3>
       <h6 class="text-muted mx-3 mt-1">최근 발급순</h6>
     </div>
-    <div v-if="couponList.length > 0" class="pb-1" style="background-color: #e9e9e9;">
+    <div v-if="couponList.length > 0" class="py-1" style="background-color: #e9e9e9;">
       <couponListItem v-for="(coupon, cpidx) in couponList" :key="cpidx" :coupon="coupon" :cpidx="cpidx" />
     </div>
     <div v-if="couponList.length == 0">
