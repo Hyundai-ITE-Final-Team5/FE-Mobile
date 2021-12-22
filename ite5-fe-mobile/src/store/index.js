@@ -965,7 +965,7 @@ export default new Vuex.Store({
     getHomeImage: function(context) {
       axios({
         method: 'get',
-        url: 'http://kosa1.iptime.org:50215/gethomeorderimg',
+        url: 'http://kosa1.iptime.org:50215/gethomeorderimg/homeorderimg',
       })
         .then((res) => {
           context.commit('GET_HOME_IMAGE', res.data)

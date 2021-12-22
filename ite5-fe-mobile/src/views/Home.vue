@@ -89,7 +89,7 @@
       <h5 class="mt-5">Brands | Category</h5>
       <h5>Find your style,</h5>
       <h5 class="mb-3">Click here to search index.</h5>
-      <div class="me-2 mb-5 d-flex justify-content-between">
+      <div class="me-2 mb-5 px-2 d-flex justify-content-between">
         <form class="d-flex my-3">
           <input
             class="
@@ -377,7 +377,7 @@ export default {
   height: 812px;
   position: relative;
   background-image: url("../assets/brand/brand-pop-2.jpg");
-  filter: brightness(60%);
+  filter: brightness(65%);
   z-index: 10;
 }
 #bg-img2 {
@@ -391,7 +391,7 @@ export default {
   height: 812px;
   position: relative;
   background-image: url("../assets/brand/brand-pop-6.jpg");
-  filter: brightness(65%);
+  filter: brightness(60%);
   z-index: 10;
 }
 .bgcontent1 {

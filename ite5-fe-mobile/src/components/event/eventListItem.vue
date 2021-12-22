@@ -5,8 +5,8 @@
     <img :src="event.eimg" style="width: 100vw;" alt="" class="mt-2">
     <img :src="event.edetailimg" style="width: 100vw;" alt="" class="mb-3">
     <div class="px-2" style="width: 100vw; position: absolute; bottom: 3vh;">
-      <button v-if="decodedJWT != null" class="btn btn-lg btn-dark col-12" data-bs-toggle="modal" data-bs-target="#couponAlert" @click="downloadCoupon">쿠폰 발급받기</button>
-      <button v-if="decodedJWT == null" class="btn btn-lg btn-dark col-12" data-bs-toggle="modal" data-bs-target="#loginAlert">쿠폰 발급받기</button>
+      <button v-if="decodedJWT != null" class="btn btn-lg btn-dark col-12" @click="downloadCoupon">쿠폰 발급받기</button>
+      <button v-if="decodedJWT == null" class="btn btn-lg btn-dark col-12">쿠폰 발급받기</button>
     </div>
     <!-- 로그인 요청 Modal -->
     <div class="modal fade" style="margin-top: 30vh;" id="loginAlert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

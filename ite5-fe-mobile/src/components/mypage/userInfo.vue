@@ -214,7 +214,7 @@
         </div>
       </div>
     </div>
-    <div class="mt-3 px-2 py-1" style="background-color: #fff;">
+    <div class="mt-3 px-3 py-1" style="background-color: #fff;">
       <h3 class="fw-bold mt-3 mb-3">수신여부 동의</h3>
       <h6 class="text-muted">더한섬닷컴에서 제공되는 서비스에 대한 수신동의 여부를 확인해주세요.</h6>
       <h6 class="text-muted">선택 하시면 더한섬닷컴에서 진행하는 공지 및 이벤트 소식을 받아보실 수 있습니다.</h6>

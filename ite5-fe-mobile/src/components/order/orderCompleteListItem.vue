@@ -6,7 +6,7 @@
       </div>
       <div class="col-8 mt-2 ms-2">
         <h5 class="fw-bold">{{ orderitem.bname }}</h5>
-        <h6>{{ orderitem.pname }}</h6>
+        <h6 class="pe-3">{{ orderitem.pname }}</h6>
         <h6>{{ pcprice }}<span> 원</span></h6>
         <div class="d-flex mt-3">
           <div class="d-flex col-5">
