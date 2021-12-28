@@ -48,8 +48,8 @@ export default {
   data: function() {
     return {
       credential: {
-        mid: '',
-        mpassword: '',
+        mid: 'hyundai',
+        mpassword: '123',
       },
     }
   },
