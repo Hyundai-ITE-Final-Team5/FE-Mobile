@@ -172,7 +172,7 @@ hr {
   padding-top: 8px;
   position: relative;
   background-color: white;
-  height: 75px;
+  height: 10vh;
 }
 #footerNavBarBtn {
   position: relative;
@@ -214,7 +214,7 @@ hr {
   transition:transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .showFooterNavBar {
-  transform: translate(0vw, -21vw);
+  transform: translate(0vw, -10vh);
   transition:transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .closeFooterNavBar {

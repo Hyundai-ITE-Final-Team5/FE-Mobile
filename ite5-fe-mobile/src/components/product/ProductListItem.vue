@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="ps-0 mb-5">
-      <img :src="productImg" class="card-img-top upper-image" alt="item" :id="'productImg_' + idx" @click="getProductDetail">
-      <div class="card-body">
+    <div class="ps-0" style="margin-bottom: 6.5vh;">
+      <img :src="productImg" class="card-img-top upper-image" style="height: 67vh;" alt="item" :id="'productImg_' + idx" @click="getProductDetail">
+      <div class="card-body" style="height: 20vh;">
         <div class="d-flex justify-content-between">
           <h5 class="fw-bold">{{ productInfo.bname }}</h5>
           <div class="d-flex">

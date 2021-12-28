@@ -191,9 +191,7 @@ export default {
   name: "Home",
   // data: function() {
   //   return {
-  //     contentHeight1: '',
-  //     contentHeight2: '',
-  //     contentHeight3: '',
+      
   //   }
   // },
   created: function () {
@@ -220,7 +218,8 @@ export default {
   methods: {
     homeScrollUp: function () {
       let position = document.documentElement.scrollTop
-      position -= 812
+      let h = screen.height
+      position -= h
       window.scrollTo(0, position)
       const homePageBar1Id = document.getElementById("homePageBar1")
       const homePageBar2Id = document.getElementById("homePageBar2")
@@ -245,7 +244,8 @@ export default {
     },
     homeScrollDown: function () {
       let position = document.documentElement.scrollTop
-      position += 812
+      let h = screen.height
+      position += h
       window.scrollTo(0, position)
       const homePageBar1Id = document.getElementById("homePageBar1")
       const homePageBar2Id = document.getElementById("homePageBar2")
@@ -374,43 +374,52 @@ export default {
   color: white;
 }
 #bg-img1 {
-  height: 812px;
+  height: 100vh;
+  width: 100vw;
+  background-size: 100vw 100vh;
   position: relative;
   background-image: url("../assets/brand/brand-pop-2.jpg");
+  background-repeat: no-repeat;
   filter: brightness(65%);
   z-index: 10;
 }
 #bg-img2 {
-  height: 812px;
+  height: 100vh;
+  width: 100vw;
+  background-size: 100vw 100vh;
   position: relative;
   background-image: url("../assets/brand/brand-pop-1.jpg");
+  background-repeat: no-repeat;
   filter: brightness(65%);
   z-index: 10;
 }
 #bg-img3 {
-  height: 812px;
+  height: 100vh;
+  width: 100vw;
+  background-size: 100vw 100vh;
   position: relative;
   background-image: url("../assets/brand/brand-pop-6.jpg");
+  background-repeat: no-repeat;
   filter: brightness(60%);
   z-index: 10;
 }
 .bgcontent1 {
   position: absolute;
-  top: 300px;
+  top: 37vh;
   left: 3vw;
   z-index: 100;
   color: #e9e9e9;
 }
 .bgcontent2 {
   position: absolute;
-  top: 1120px;
+  top: 137vh;
   left: 3vw;
   z-index: 100;
   color: #e9e9e9;
 }
 .bgcontent3 {
   position: absolute;
-  top: 1924px;
+  top: 237vh;
   left: 3vw;
   z-index: 100;
   color: #e9e9e9;
@@ -418,14 +427,14 @@ export default {
 .homeRemoteControllUp {
   position: fixed;
   margin-top: 34vh;
-  margin-left: 335px;
+  margin-left: 89vw;
   width: 20px;
   z-index: 1000;
 }
 .homeRemoteControllDown {
   position: fixed;
   margin-top: 49vh;
-  margin-left: 335px;
+  margin-left: 89vw;
   width: 20px;
   z-index: 1000;
 }

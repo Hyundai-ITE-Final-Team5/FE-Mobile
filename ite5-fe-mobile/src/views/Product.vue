@@ -78,17 +78,19 @@ export default {
   methods: {
     scrollUp: function() {
       let position = document.documentElement.scrollTop
-      position -= 777.5
+      let h = screen.height * 0.93
+      position -= h
       window.scrollTo(0, position)
     },
     scrollDown: function() {
       let position = document.documentElement.scrollTop
+      let h = screen.height * 0.93
       let temp = ''
       if (this.categoryCallKey == null) {
         temp += this.brandCallKey
         temp += '?pageNo='
         temp += this.no
-        position += 775.5
+        position += h
         window.scrollTo(0, position)
         if (document.documentElement.scrollHeight - position <= 1000) {
           this.no++
@@ -98,7 +100,7 @@ export default {
         temp += this.categoryCallKey
         temp += '&pageNo='
         temp += this.no
-        position += 775.5
+        position += h
         window.scrollTo(0, position)
         if (document.documentElement.scrollHeight - position <= 1000) {
           this.no++
@@ -159,7 +161,7 @@ export default {
 }
 .remoteControllDown {
   position: fixed;
-  margin-top: 80vh;
+  margin-top: 79vh;
   margin-left: 89vw;
   width: 20px;
 }
